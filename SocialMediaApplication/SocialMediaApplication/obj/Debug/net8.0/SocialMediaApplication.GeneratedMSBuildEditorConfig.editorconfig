@@ -9,51 +9,55 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SocialMediaApplication
 build_property.RootNamespace = SocialMediaApplication
-build_property.ProjectDir = D:\Z-Git\Social-Media-Application\SocialMediaApplication\SocialMediaApplication\
+build_property.ProjectDir = E:\John abbott college\Code\ApplicattionDevelopment2\finalProject\Social-Media-Application\SocialMediaApplication\SocialMediaApplication\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Z-Git\Social-Media-Application\SocialMediaApplication\SocialMediaApplication
+build_property.MSBuildProjectDirectory = E:\John abbott college\Code\ApplicattionDevelopment2\finalProject\Social-Media-Application\SocialMediaApplication\SocialMediaApplication
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Home/Index.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Home/Follow.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb2xsb3cuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Home/Privacy.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/Components/PostsList.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/Components/PostsList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUG9zdHNMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/Components/Post/Default.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/Components/Post/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUG9zdFxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/Error.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/UserPage/Index.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/UserPage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclBhZ2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/_ViewImports.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/_ViewStart.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Z-Git/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/_Layout.cshtml]
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/Social-Media-Application/SocialMediaApplication/SocialMediaApplication/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-sf1t3rmioo

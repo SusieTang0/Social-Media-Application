@@ -1,0 +1,54 @@
+@model SocialMediaApplication.Models.FollowViewModel
+
+@{
+    ViewBag.Title = "Follow System";
+}
+
+<h1>Follow System</h1>
+
+<div id="currentUser">
+    <h2>Current User: @Model.CurrentUser.Name</h2>
+    <h3>Followers:</h3>
+    <ul id="followersList">
+        @foreach (var follower in Model.CurrentUser.Followers)
+        {
+            <li>@follower.Name</li>
+        }
+    </ul>
+    <h3>Following:</h3>
+    <ul id="followingList">
+        @foreach (var following in Model.CurrentUser.Following)
+        {
+            <li>@following.Name</li>
+        }
+    </ul>
+</div>
+
+<div id="usersToFollow">
+    <h2>Users to Follow</h2>
+    @foreach (var user in Model.Users)
+    {
+        <div class="user-card">
+            <h4>@user.Name</h4>
+            <button class="btn @(Model.CurrentUser.Following.Contains(user) ? "unfollow" : "")" 
+                    data-user-id="@user.Id">
+                @(Model.CurrentUser.Following.Contains(user) ? "Unfollow" : "Follow")
+            </button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".btn").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var userId = this.getAttribute("data-user-id");
+                    fetch('/Home/ToggleFollow?userId=' + userId, { method: 'POST' })
+                        .then(response => response.text())
+                        .then(data => location.reload());
+                });
+            });
+        });
+    </script>
+}
