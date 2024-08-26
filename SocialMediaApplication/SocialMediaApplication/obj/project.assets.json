@@ -11733,23 +11733,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\wlill\\.nuget\\packages\\": {},
+    "C:\\Users\\tangs\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\SocialMediaApplication.csproj",
+      "projectUniqueName": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\SocialMediaApplication.csproj",
       "projectName": "SocialMediaApplication",
-      "projectPath": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\SocialMediaApplication.csproj",
-      "packagesPath": "C:\\Users\\wlill\\.nuget\\packages\\",
-      "outputPath": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\obj\\",
+      "projectPath": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\SocialMediaApplication.csproj",
+      "packagesPath": "C:\\Users\\tangs\\.nuget\\packages\\",
+      "outputPath": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\wlill\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tangs\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11826,7 +11826,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400-preview.0.24324.5/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
