@@ -1,0 +1,62 @@
+@{
+    ViewData["Title"] = "Signup";
+}
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+    const firebaseConfig = {
+
+        apiKey: "AIzaSyAz6UbS6Yxuh5Dyp6CEOKcunuQnjOk0q2E",
+        authDomain: "socialmediaapplication-d2ba6.firebaseapp.com",
+        projectId: "socialmediaapplication-d2ba6",
+        storageBucket: "socialmediaapplication-d2ba6.appspot.com",
+        messagingSenderId: "157127959455",
+        appId: "1:157127959455:web:4ea97446e075e55c4893aa"
+
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("signupForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("signupEmail").value;
+        const password = document.getElementById("signupPassword").value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert("Sign up success");
+                window.location.href = "/UserPage"
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+    });
+
+</script>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card text-center py-4" style="width: 100%; max-width: 600px; margin: 0 auto;">
+            <div class="card-body">
+                <h2 class="display-6 mb-4">Sign Up for Cross</h2>
+                <form id="signupForm" class="text-start">
+                    <div class="mb-3">
+                        <label for="signupEmail" class="form-label">Email:</label>
+                        <input type="email" id="signupEmail" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupPassword" class="form-label">Password:</label>
+                        <input type="password" id="signupPassword" class="form-control" required>
+                    </div>
+                    <div class="mb-4">
+                        <button type="submit" class="btn btn-success w-100" style="border-radius:10px;">Create
+                            Account</button>
+                    </div>
+                    <hr class="my-4" />
+                    <p>Already have an account? <a href="/Home/Login" class="text-decoration-underline">Login here</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
