@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+
+    const firebaseConfig = {
+
+        apiKey: "AIzaSyAz6UbS6Yxuh5Dyp6CEOKcunuQnjOk0q2E",
+        authDomain: "socialmediaapplication-d2ba6.firebaseapp.com",
+        projectId: "socialmediaapplication-d2ba6",
+        storageBucket: "socialmediaapplication-d2ba6.appspot.com",
+        messagingSenderId: "157127959455",
+        appId: "1:157127959455:web:4ea97446e075e55c4893aa"
+
+
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert("Login success");
+                window.location.href = "/UserPage"
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+    });
+
+</script>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card text-center py-4" style="width: 100%; max-width: 600px; margin: 0 auto;">
+            <div class="card-body">
+                <h2 class="display-6 mb-4">Login to Cross</h2>
+                <form id="loginForm" class="text-start">
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">Email:</label>
+                        <input type="email" id="loginEmail" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Password:</label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <div class="mb-4">
+                        <button type="submit" class="btn btn-primary w-100" style="border-radius:10px;">Login</button>
+                    </div>
+                    <p class="mb-0">Forgot your password?
+                        <a href="/Home/ResetPassword" class="text-decoration-underline">Click here
+                            to reset it.</a>
+                    </p>
+                </form>
+                <hr class="my-4" />
+                <p>Don't have an account? <a href="/Home/Signup" class="text-decoration-underline">Sign up here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
