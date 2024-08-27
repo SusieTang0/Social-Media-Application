@@ -1,5 +1,7 @@
-﻿@{
+﻿@model SocialMediaApplication.Models.PostList
+@{
     ViewData["Title"] = "User Page";
+    var user = ViewBag.User as SocialMediaApplication.Models.User;
 }
 
 
@@ -52,8 +54,8 @@
             <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/062.webp" class="card-img-top p-2"
                 alt="Chicago Skyscrapers" style="border-radius:50%;" />
             <div class="card-body">
-                <h5 class="card-title text-center">User Name</h5>
-                <p class="card-text">Descriptions.This is the place to add the descriptions</p>
+                <h5 class="card-title text-center">@user.Name</h5>
+                <p class="card-text">@user.Description</p>
             </div>
 
             <!-- These two links bellow is showm for the owner-->
@@ -97,7 +99,6 @@
 
         <!-- this is a list sample for creating user's' post -->
         <div class="card card-body">
-
             <div class="row px-2">
                 <div class="col-md-12 ">
                     <h5 style="color:#5897F5">Create new Post</h5>
@@ -112,7 +113,7 @@
                         </div>
                         <div class="col-md-8">
                             <input class="form-control border rounded-pill" type="type" name="Comment"
-                                value="Comment content" />
+                                   value="Comment content" />
                         </div>
                         <div class="col-md-2">
                             <button class=" btn btn-primary w-100 rounded-pill" type="submit">Post</button>
@@ -120,232 +121,19 @@
                     </div>
                 </form>
             </div>
+           
         </div>
-
-
-        <!-- this is a list sample of all the postd -->
         <div class="card w-100 p-4 my-2">
+
             <!-- This is the title of the list-->
             <div class="col-md-12">
-                <h5 style="color:#5897F5">Newest Posts</h5>
+                <h5 style="color:#5897F5">Posts by Followed</h5>
                 <hr />
             </div>
-            <!-- this is the card for one post-->
-            <div class="card text-center mt-2">
-                <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
-                    <div>
-                        <img src="images/icon-logo.png" alt="Alternate Text" style="width:50px;" />
-                        UserName
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <a asp-action="Follow" class="btn btn-outline-info">Follow +</a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <!-- this is the content of the post-->
-                    <h5 class="card-title">Special title treatment</h5>
-                    < <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-info">Go somewhere</a>
-                </div>
-                <div class="bg-white border border-top-2 py-2">
-                    <!-- this is the button to Like this post-->
-                    <a asp-action="Like"> <img src="images/heart.svg" alt="Alternate Text"
-                            style="width:20px;text-decoration-line:none;" />Like</a>
 
-                    <!-- this is the button to Unlike this post-->
-                    <a asp-action="Dislike"><img src="images/heart-outline.svg" alt="Alternate Text"
-                            style="width:20px;text-decoration-line:none;" />Unlike</a>
+            @Html.Partial("Components/Postlist", Model.MyFollowdPosts)
 
-                    <!-- this is the button to edit this post-->
-                    <a asp-action="Like"> <img src="images/edit.svg" alt="Alternate Text"
-                            style="width:20px;text-decoration-line:none;" />Edit</a>
-
-                    <!-- this is the button to comments page-->
-                    <p class="d-inline-flex gap-1">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseComment1" aria-expanded="false" aria-controls="collapseComment1">
-                            Comments
-                        </button>
-                        </a>
-                    </p>
-                    <!-- this is the component to show comments and add &edit selves cpmments -->
-                    <div class="collapse mt-2" id="collapseComment1">
-                        <!-- this is the component to add comment-->
-                        <div class="card card-body">
-                            <div class="text-center row px-2">
-                                <form action="/" method="post">
-                                    <div class="row d-flex justify-content-between align-items-center py-2">
-                                        <div class="col-md-2 justify-content-center">
-                                            <img src="images/icon-logo.png" alt="Alternate Text" style="width:30px;" />
-                                        </div>
-                                        <div class="col-md-10">
-                                            <input class="form-control border rounded-pill" type="type" name="Comment"
-                                                value="Comment content" />
-                                        </div>
-                                    </div>
-                                    <div class="row d-flex justify-content-end px-2">
-                                        <button class="col-md-2 btn btn-primary w-90 rounded-pill"
-                                            type="submit">Post</button>
-                                    </div>
-                                </form>
-                            </div>
-
-
-                            <!-- this is the button to Like this comment-->
-                            <div class="mt-2">
-                                <div class="row p-1 d-flex justify-content-between">
-                                    <div class="col-md-2">
-                                        <img src="images/icon-logo.png" alt="Alternate Text" style="width:50px;" />
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="row py-2 border border-bottom-1 rounded-top-2">
-                                            <div class="col-md-4  text-start">
-                                                UserName
-                                            </div>
-                                            <div class="col-md-4  text-start">
-                                                TimeStamp
-                                            </div>
-                                            <div class="col-md-2">
-                                                <!-- this is the button to Like this comment-->
-                                                <a asp-action="Like"> <img src="images/heart.svg" alt="Alternate Text"
-                                                        style="width:20px;text-decoration-line:none;" /></a>
-
-                                                <!-- this is the button to Unlike this comment-->
-                                                <a asp-action="Dislike"><img src="images/heart-outline.svg"
-                                                        alt="Alternate Text"
-                                                        style="width:20px;text-decoration-line:none;" /></a>
-                                            </div>
-                                            <div class="col-md-1">
-
-                                                <!-- this is the button to Edit user's' own comment-->
-                                                <a asp-action="Like"> <img src="images/edit.svg" alt="Alternate Text"
-                                                        style="width:20px;text-decoration-line:none;" /></a>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <!-- this is the button to Delete user's' own comment-->
-                                                <a type="button" class="btn-close"></a>
-                                            </div>
-                                        </div>
-                                        <div class="row py-2 text-start border border-1 rounded-bottom-2">
-                                            <p>This is the comments content sample</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end of  the card for one post -->
-
-            <!-- this is the card for one post-->
-            <div class="card text-center mt-2">
-                <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
-                    <div>
-                        <img src="images/icon-logo.png" alt="Alternate Text" style="width:50px;" />
-                        UserName
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <a asp-action="Follow" class="btn btn-outline-info">Follow +</a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <!-- this is the content of the post-->
-                    <h5 class="card-title">Special title treatment</h5>
-                    < <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-info">Go somewhere</a>
-                </div>
-                <div class="bg-white border border-top-2 py-2">
-                    <!-- this is the button to Like this post-->
-                    <a asp-action="Like"> <img src="images/heart.svg" alt="Alternate Text"
-                            style="width:20px;text-decoration-line:none;" />Like</a>
-
-                    <!-- this is the button to Unlike this post-->
-                    <a asp-action="Dislike"><img src="images/heart-outline.svg" alt="Alternate Text"
-                            style="width:20px;text-decoration-line:none;" />Unlike</a>
-
-                    <!-- this is the button to edit this post-->
-                    <a asp-action="Like"> <img src="images/edit.svg" alt="Alternate Text"
-                            style="width:20px;text-decoration-line:none;" />Edit</a>
-
-                    <!-- this is the button to comments page-->
-                    <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
-                        data-bs-toggle="collapse" href="#collapseComment2" role="button" aria-expanded="false"
-                        aria-controls="collapseComment2">
-                        Comments
-                    </a>
-                    <!-- this is the component to show comments and add &edit selves cpmments -->
-                    <div class="collapse mt-2" id="collapseComment2">
-                        <!-- this is the component to add comment-->
-                        <div class="text-center row px-2">
-                            <form action="/" method="post">
-                                <div class="row d-flex justify-content-between align-items-center py-2">
-                                    <div class="col-md-2 justify-content-center">
-                                        <img src="images/icon-logo.png" alt="Alternate Text" style="width:30px;" />
-                                    </div>
-                                    <div class="col-md-10">
-                                        <input class="form-control border rounded-pill" type="type" name="Comment"
-                                            value="Comment content" />
-                                    </div>
-                                </div>
-                                <div class="row d-flex justify-content-end px-2">
-                                    <button class="col-md-2 btn btn-primary w-90 rounded-pill"
-                                        type="submit">Post</button>
-                                </div>
-                            </form>
-
-                        </div>
-
-                        <!-- this is the button to Like this comment-->
-                        <div class="card mt-2">
-                            <div class="card-body">
-                                <div class="row p-1 d-flex justify-content-between">
-                                    <div class="col-md-2">
-                                        <img src="images/icon-logo.png" alt="Alternate Text" style="width:50px;" />
-                                    </div>
-                                    <div class="card col-md-10">
-                                        <div class="row py-2 border border-bottom-1">
-                                            <div class="col-md-4  text-start">
-                                                UserName
-                                            </div>
-                                            <div class="col-md-4  text-start">
-                                                TimeStamp
-                                            </div>
-                                            <div class="col-md-2">
-                                                <!-- this is the button to Like this comment-->
-                                                <a asp-action="Like"> <img src="images/heart.svg" alt="Alternate Text"
-                                                        style="width:20px;text-decoration-line:none;" /></a>
-
-                                                <!-- this is the button to Unlike this comment-->
-                                                <a asp-action="Dislike"><img src="images/heart-outline.svg"
-                                                        alt="Alternate Text"
-                                                        style="width:20px;text-decoration-line:none;" /></a>
-                                            </div>
-                                            <div class="col-md-1">
-
-                                                <!-- this is the button to Edit user's' own comment-->
-                                                <a asp-action="Like"> <img src="images/edit.svg" alt="Alternate Text"
-                                                        style="width:20px;text-decoration-line:none;" /></a>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <!-- this is the button to Delete user's' own comment-->
-                                                <a type="button" class="btn-close"></a>
-                                            </div>
-                                        </div>
-                                        <div class="row py-2 text-start">
-                                            <p>This is the comments content sample</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- end of  the card for one post -->
+            <!-- end of  the cardS for one post -->
             <a class="icon-link icon-link-hover" href="#">
                 See More Posts
                 <svg class="bi" aria-hidden="true">
@@ -354,5 +142,28 @@
             </a>
 
         </div>
+
+        <div class="card w-100 p-4 my-2">
+
+            <!-- This is the title of the list-->
+            <div class="col-md-12">
+                <h5 style="color:#5897F5">My Posts</h5>
+                <hr />
+            </div>
+
+            @Html.Partial("Components/Postlist", Model.MyPosts)
+
+            <!-- end of  the cardS for one post -->
+            <a class="icon-link icon-link-hover" href="#">
+                See More Posts
+                <svg class="bi" aria-hidden="true">
+                    <use xlink:href="#arrow-right"></use>
+                </svg>
+            </a>
+
+        </div>
+       
+       
+        
     </div>
 </div>
