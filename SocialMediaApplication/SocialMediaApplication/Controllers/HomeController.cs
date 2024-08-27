@@ -80,5 +80,17 @@ namespace SocialMediaApplication.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult SignUp()
+        {
+            return View("./Views/Auth/Signup.cshtml");
+        }
+
+        public IActionResult Login()
+        {
+            return View("./Views/Auth/Login.cshtml");
+        }
+
+
     }
 }
