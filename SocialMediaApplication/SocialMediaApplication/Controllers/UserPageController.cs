@@ -4,6 +4,7 @@ using SocialMediaApplication.Data;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Specialized;
+using System.Diagnostics.Metrics;
 
 namespace SocialMediaApplication.Controllers
 {
@@ -14,7 +15,7 @@ namespace SocialMediaApplication.Controllers
         public IActionResult Index()
         {
             var userId = 1;
-            var posts = GetPostlists(userId,2);
+            var posts = GetPostlists(userId,2,);
             ViewBag.Users = ApplicationData.Users;
             ViewBag.User = ApplicationData.Users.FirstOrDefault(x => x.Id == userId);
             return View(posts);
@@ -37,60 +38,81 @@ namespace SocialMediaApplication.Controllers
         }
 
 
-        public PostList GetPostlists(int Id,int numberToShow){
+        public PostList GetPostlists(int id,int numberToShow,string listName){
 
             var thePosts = new PostList();
             thePosts.MyPosts = new List<Post>();
-            thePosts.MyFollowdPosts = new List<Post>();
-            var count1 = 0;
-            var count2 = 0;
-            var follows =new List<int>();
-            if (ApplicationData.Follows != null)
-            {
-                foreach (var follow in ApplicationData.Follows)
-                {
-                    if (follow.FollowerId == Id)
-                    {
-                        follows.Add(follow.FollowedId);
-                    }
-                }
-            }
-
+            thePosts.MyFollowedPosts = new List<Post>();
+  
             
-            if (ApplicationData.Posts != null)
+            if (listName.Equals("My Posts"))
             {
-                for (int i=ApplicationData.Posts.Count-1;i>0;i--)
-                {
-                    var post = ApplicationData.Posts[i];
-                    if (count1 < numberToShow)
-                    {
-                        if (post.AuthorId == Id)
-                        {
-                            thePosts.MyPosts.Add(post);
-                            count1++;
-                        }
-                    }
 
-                    if (count2 < numberToShow)
-                    {
-                        if (follows.Contains(post.AuthorId))
-                        {
-                            thePosts.MyFollowdPosts.Add(post);
-                            count2++;
-                        }
-                    }
-
-                    if((count1 + count1)== (numberToShow *2))
-                    {
-
-                    }
-                }
             }
+
+                    
+            
             
             
             return thePosts;
         }
 
+        public List<Post> FindPostList(int id, int numberToShow, string listName)
+        {
+            var posts = new List<Post>();
+            var count = 0;
+
+           
+
+            if (ApplicationData.Posts != null)
+            {
+                for (int i = ApplicationData.Posts.Count - 1; i > 0; i--)
+                {
+                    var post = ApplicationData.Posts[i];
+                    if (listName.Equals("My Posts"))
+                    {
+                        if (post.AuthorId == id)
+                        {
+                            posts.Add(post);
+                            count++;
+                        }
+                    }
+                    else
+                    {
+                        if (post.AuthorId == id)
+                        {
+                            posts.Add(post);
+                            count++;
+                        }
+                    }
+                    if(count == numberToShow)
+                    {
+                        break;
+                    }
+                    
+                }
+            }
+            return posts;
+        }
+
+        public List<User> GetFollow(int id,string type)
+        {
+            var follows = new List<int>();
+            if (ApplicationData.Follows != null)
+            {
+                foreach (var follow in ApplicationData.Follows)
+                {
+                    if (follow.FollowedId.Equals(id))
+                    {
+
+                    }
+                    if (follow.FollowerId == id)
+                    {
+                        follows.Add(follow.FollowedId);
+                    }
+                }
+            }
+        }
 
 
     }
