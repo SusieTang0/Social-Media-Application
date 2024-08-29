@@ -3,6 +3,6 @@
     public class PostList
     {
         public List<Post> MyPosts { get; set; }
-        public List<Post> MyFollowdPosts { get; set; }
+        public List<Post> MyFollowedPosts { get; set; }
     }
 }
