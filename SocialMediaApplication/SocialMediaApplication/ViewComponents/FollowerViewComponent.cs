@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace SocialMediaApplication.ViewComponents
 {
-    public class FollowingViewComponent : ViewComponent
+    public class FollowerViewComponent : ViewComponent
     {
         private readonly IUserService _userService;
 
-        public FollowingViewComponent(IUserService userService)
+        public FollowerViewComponent(IUserService userService)
         {
             _userService = userService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(int userId)
         {
-            var following = await _userService.GetFollowingAsync(userId);
-            return View(following);
+            var followers = await _userService.GetFollowersAsync(userId);
+            return View(followers);
         }
     }
 }

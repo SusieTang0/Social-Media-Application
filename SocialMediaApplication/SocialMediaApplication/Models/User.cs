@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+
 namespace SocialMediaApplication.Models
+
 {
     public class User
     {
