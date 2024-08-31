@@ -15,7 +15,7 @@ namespace SocialMediaApplication.Controllers
         public IActionResult Index()
         {
             var userId = 1;
-            var posts = GetPostlists(userId,2,);
+            var posts = GetPostlists(userId,2,"My Posts");
             ViewBag.Users = ApplicationData.Users;
             ViewBag.User = ApplicationData.Users.FirstOrDefault(x => x.Id == userId);
             return View(posts);
@@ -47,12 +47,12 @@ namespace SocialMediaApplication.Controllers
             
             if (listName.Equals("My Posts"))
             {
-
+                thePosts.MyPosts = FindPostList(id, numberToShow, "My Post");
             }
-
-                    
-            
-            
+            else if (listName.Equals("My Posts"))
+            {
+                thePosts.MyFollowedPosts = FindPostList(id, numberToShow, "My Post");
+            }
             
             return thePosts;
         }
@@ -97,21 +97,32 @@ namespace SocialMediaApplication.Controllers
 
         public List<User> GetFollow(int id,string type)
         {
-            var follows = new List<int>();
+            var follows = new List<User>();
             if (ApplicationData.Follows != null)
             {
                 foreach (var follow in ApplicationData.Follows)
                 {
-                    if (follow.FollowedId.Equals(id))
+                    if (type.Equals("Follows"))
                     {
-
+                        if (follow.FollowedId.Equals(id))
+                        {
+                            var newUser = ApplicationData.Users[id];
+                            follows.Add(newUser);
+                        }
                     }
-                    if (follow.FollowerId == id)
+                    else
                     {
-                        follows.Add(follow.FollowedId);
+                        if (follow.FollowerId == id)
+                        {
+                            var newUser = ApplicationData.Users[id];
+                            follows.Add(newUser);
+                        }
                     }
+                    
+                    
                 }
             }
+            return follows;
         }
 
 
