@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using SocialMediaApplication.Models;
 using SocialMediaApplication.Data;
 using System.Net;
@@ -128,3 +128,5 @@ namespace SocialMediaApplication.Controllers
 
     }
 }
+
+*/
