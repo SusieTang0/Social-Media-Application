@@ -1,28 +1,29 @@
 ﻿@model SocialMediaApplication.Models.Post
+
 @{
-    var thisUser = ViewBag.User as SocialMediaApplication.Models.User;
-    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User>;
-    if (users == null)
-    {
-        users = new List<User>(); // or handle accordingly if ViewBag.Users is null
-    }
+    var thisUser = ViewBag.Owner as SocialMediaApplication.Models.User;
+    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User> ?? new List<User>();
+    string postIdString = Model.CreatedTime.ToString("yyyyMMddHHmmss");
 }
-<!-- this is the card for one post-->
+@if (Model != null )
+{
 <div class="card text-center mt-2">
     <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
         <div class="d-flex justify-content-between align-items-center">
             @if (Model.AuthorId != thisUser.UserId)
             {
-                <a href="OtherUserPage/{Model.AuthorId}"><img class="p-2" src="Model.AuthorAvatar" alt="Profile Picture" style="width:50px;" /></a>
-                <a class="p-2">Model.AuthorName</a>
+                <a href="OtherUserPage/@Model.AuthorId">
+                    <img class="p-2" src="@Model.AuthorAvatar" alt="Profile Picture" style="width:50px;border-radius:50%;" />
+                </a>
+                <a class="p-2">@Model.AuthorName</a>
             }
             else
             {
-                <a href="UserPage"><img src="Model.AuthorAvatar" alt="Profile Picture" style="width:50px;" /></a>
-                <a class="ps-2" style="text-decoration:none;">Model.AuthorName</a>
+                <a href="UserPage">
+                    <img src="@Model.AuthorAvatar" alt="Profile Picture" style="width:50px;border-radius:50%;" />
+                </a>
+                <a href="UserPage" class="ps-2" style="text-decoration:none;">@Model.AuthorName</a>
             }
-
-
         </div>
         <div>
             @Model.CreatedTime.ToString("MM/dd/yyyy HH:mm")
@@ -41,37 +42,37 @@
         }
     </div>
     <div class="card-body">
-        <!-- this is the content of the post-->
         <p class="card-text text-start">@Model.Content</p>
         <a href="#" class="btn btn-info">Go somewhere</a>
     </div>
     <div class="bg-white border border-top-2 py-2">
-        <!-- this is the button to Like this post-->
-        <a asp-action="Like" asp-route-postId="@Model.Id">
+        <a asp-action="Like" asp-route-postId="@Model.Id" class="mx-3" style="text-decoration:none;">
             <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
         </a>
 
-        <!-- this is the button to Dislike this post-->
-        <a asp-action="Dislike" asp-route-postId="@Model.Id">
+        <a asp-action="Dislike" asp-route-postId="@Model.Id" class="mx-3" style="text-decoration:none;">
             <img src="images/heart-outline.svg" alt="Dislike" style="width:20px;" /> Unlike
         </a>
 
-        <!-- this is the button to edit this post-->
-        <a asp-action="Edit" asp-route-postId="@Model.Id">
+        <a asp-action="Edit" asp-route-postId="@Model.Id" class="mx-3" style="text-decoration:none;">
             <img src="images/edit.svg" alt="Edit" style="width:20px;" /> Edit
         </a>
 
-        <!-- this is the button to show comments -->
-        <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
-           data-bs-toggle="collapse" href="#collapseComment@Model.Id" role="button" aria-expanded="false"
-           aria-controls="collapseComment@Model.Id">
+        <!-- Comments Toggle Button -->
+        <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2 mx-3"
+           data-bs-toggle="collapse" href="#collapseComment@(postIdString)" role="button" aria-expanded="false"
+           aria-controls="collapseComment@(postIdString)" style="text-decoration:none;">
             Comments
         </a>
-        <!-- this is the component to show comments and add & edit comments -->
-        <div class="collapse mt-2" id="collapseComment@Model.Id">
-            @Html.Partial("Components/_CommentSection", Model.Comments)
+
+        <!-- Comments Section -->
+        <div class="collapse mt-2" id="collapseComment@(postIdString)">
+            @Html.Partial("Components/Comments", Model.Comments)
         </div>
     </div>
 </div>
-<!-- This is the end of the card for one post -->
-    }
+}
+else
+{
+    <p>Post is not available.</p>
+}

@@ -8,8 +8,8 @@ namespace SocialMediaApplication.Models
         public required string AuthorName { get; set; }
         public required string AuthorAvatar { get; set; }
        
-        public List<Comment> Comments { get; set; }
-        public List<Like> Likes { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<Like> Likes { get; set; }
         public DateTime CreatedTime { get; set; }
 
     }

@@ -3,132 +3,111 @@
 @{
     ViewData["Title"] = "User Page";
     var user = ViewBag.User as SocialMediaApplication.Models.User;
+    var owner = ViewBag.Owner as SocialMediaApplication.Models.User;
 }
 
+@if (Model != null)
+{
+    <div class="row">
+        <!-- Profile Card -->
+        <div class="col-lg-3 col-md-4">
+            <!-- User's Profile Card -->
+            <div class="card px-2 py-3">
+                <div class="card-img-top p-2 d-flex justify-content-center">
+                    <img src="@owner?.ProfilePictureUrl" alt="Profile Picture" style="width:200px;border-radius:50%;" />
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">@owner?.Name</h5>
+                    <p class="card-text">@owner?.Bio</p>
+                </div>
 
-<div class="row">
+                @if (ViewBag.IsOwner != null && (bool)ViewBag.IsOwner)
+                {
+                    <!-- Links for other users visiting the profile -->
+                    <div class="card-body d-flex justify-content-center">
+                        <a asp-action="Follow" asp-route-userId="@owner?.UserId" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</a>
+                    </div>
+                    <div class="card-body d-flex justify-content-center">
+                        <a asp-action="CancelFollow" asp-route-userId="@owner?.UserId" class="btn btn-outline-danger w-100" style="border-radius:10px;">Cancel Follow</a>
+                    </div>
+                }
+                else
+                {
+                    <!-- Links for the profile owner -->
+                    <div class="card-body d-flex justify-content-center">
+                        <a href="/Account/Profile" class="btn btn-primary w-100" style="border-radius:10px;">Manage My Profile</a>
+                    </div>
+                }
 
-    <!-- Profile Card -->
-    <div class="col-lg-3 col-md-4">
-        <!-- this is a sample for creating user's' profile card -->
-        <div class="card px-2 py-3 ">
-            <div class="card-img-top p-2 d-flex justify-content-center ">
-                <img src="@user.ProfilePictureUrl"
-                     alt="Chicago Skyscrapers" style="width:200px;border-radius:50%;" />
-           </div>
-            
-           
-            
-            <div class="card-body">
-                <h5 class="card-title text-center">@user.Name</h5>
-                <p class="card-text">@user.Bio</p>
+                <!-- Back to Homepage -->
+                <div class="col-md-12 d-flex justify-content-center mt-3"></div>
+
+                <!-- Follows and Followers Links -->
+                <div class="card-body row d-flex justify-content-center">
+                    <a href="/FollowsList" class="col-lg-5 m-1 w-45 text-center" style="text-decoration-line:none">Follows</a>
+                    <a href="/FollowersList" class="col-lg-5 m-1 w-45 text-center" style="text-decoration-line:none">Followers</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Lists Area -->
+        <div class="col-md-8">
+            <!-- Create New Post -->
+            <div class="card card-body">
+                <div class="row px-2">
+                    <div class="col-md-12">
+                        <h5 style="color:#5897F5">Create new Post</h5>
+                        <hr />
+                    </div>
+                    <form asp-action="CreatePost" method="post">
+                        <div class="row d-flex justify-content-center align-items-center py-2">
+                            <div class="col-md-1 justify-content-end">
+                                <img src="@owner?.ProfilePictureUrl" alt="Profile Picture" style="width:50px;border-radius:50%;" />
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control border rounded-pill" type="text" name="content" placeholder="Post content" />
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary w-100 rounded-pill" type="submit">Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-            <!-- These two links bellow is showm for the owner-->
-            <div class="card-body d-flex justify-content-center">
-                <!-- This link is to follow the owener of this homepage -->
-                <a href="/Account/Profile" class="btn btn-primary w-100 col-lg-12" style="border-radius:10px;">Manage My
-                Profile</a>
+            <!-- Posts by Followed -->
+            <div class="card w-100 p-4 my-2">
+                <div class="col-md-12">
+                    <h5 style="color:#5897F5">Posts by Followed</h5>
+                    <hr />
+                </div>
+                @Html.Partial("Components/Postlist", Model?.MyFollowedPosts)
+                <a class="icon-link icon-link-hover" href="#">
+                    See More Posts
+                    <svg class="bi" aria-hidden="true">
+                        <use xlink:href="#arrow-right"></use>
+                    </svg>
+                </a>
             </div>
 
-            <!-- These two links bellow is showm for others users except owner-->
-            <div class="card-body d-flex justify-content-center">
-                <!-- This link is to follow the owener of this homepage -->
-                <a asp-action="Follow" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</a>
-             </div>
-
-            <div class="card-body d-flex justify-content-center">
-                <!-- This link is to canel your follow to owener of this page-->
-            <a asp-action="CancelFollow" class="btn btn-outline-danger w-100" style="border-radius:10px;">Follow
-            Cancel</a>
-            </div>
-
-            <div class="col-md-12 d-flex justify-content-center mt-3">
-                <button id="logoutButton" class="btn btn-danger w-100" style="border-radius:10px;">Log Out</button>
-            </div>
-
-
-            <div class="card-body row d-flex justify-content-center">
-                <!-- This link links to Follow Page, to see all the follows of this user-->
-                <a href="/FollowsList" class="col-lg-5 m-1 w-45 text-center"
-                style="text-decoration-line:none">Follows</a>
-                <!-- This link links to Follower Page ,to see all the followers of this user-->
-                <a href="/FollowersList" class="col-lg-5 m-1 w-45 text-center"
-                style="text-decoration-line:none">Followers</a>
+            <!-- My Posts -->
+            <div class="card w-100 p-4 my-2">
+                <div class="col-md-12">
+                    <h5 style="color:#5897F5">My Posts</h5>
+                    <hr />
+                </div>
+                @Html.Partial("Components/Postlist", Model?.MyPosts)
+                <a class="icon-link icon-link-hover" href="#">
+                    See More Posts
+                    <svg class="bi" aria-hidden="true">
+                        <use xlink:href="#arrow-right"></use>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
-
-    <!-- Postlists Area -->
-    <div class="col-md-8">
-        <!-- this is a list sample for creating user's' post -->
-        <div class="card card-body">
-            <div class="row px-2">
-                <div class="col-md-12 ">
-                <h5 style="color:#5897F5">Create new Post</h5>
-                <hr />
-                </div>
-
-                <form asp-action="CreatePost" method="post">
-                    <div class="row d-flex justify-content-center align-items-center py-2">
-
-                        <div class="col-md-1 justify-content-end">
-                            <img src="@user.ProfilePictureUrl" alt="Alternate Text" style="width:50px;border-radius:50%;" />
-                        </div>
-                        <div class="col-md-8">
-                            <input class="form-control border rounded-pill" type="text" name="content" placeholder="Post content" />
-                        </div>
-                        <div class="col-md-2">
-                            <button class=" btn btn-primary w-100 rounded-pill" type="submit">Post</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-
-        <!-- this is a list sample for user's postlist -->
-        <div class="card w-100 p-4 my-2">
-
-            <!-- This is the title of the list-->
-            <div class="col-md-12">
-                <h5 style="color:#5897F5">Posts by Followed</h5>
-                <hr />
-            </div>
-
-            @Html.Partial("Components/Postlist", Model.MyFollowedPosts)
-
-            <!-- end of the cardS for one post -->
-            <a class="icon-link icon-link-hover" href="#">
-            See More Posts
-                <svg class="bi" aria-hidden="true">
-                <use xlink:href="#arrow-right"></use>
-                </svg>
-            </a>
-
-        </div>
-
-        <div class="card w-100 p-4 my-2">
-            <!-- This is the title of the list-->
-            <div class="col-md-12">
-                <h5 style="color:#5897F5">My Posts</h5>
-                <hr />
-            </div>
-
-            @Html.Partial("Components/Postlist", Model.MyPosts)
-
-            <!-- end of the cardS for one post -->
-            <a class="icon-link icon-link-hover" href="#">
-            See More Posts
-                <svg class="bi" aria-hidden="true">
-                <use xlink:href="#arrow-right"></use>
-                </svg>
-            </a>
-        </div>
-
-
-
-</div>
-</div>
-
-
+}
+else
+{
+    <p>No data available.</p>
+}
