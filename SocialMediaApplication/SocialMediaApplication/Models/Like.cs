@@ -7,6 +7,5 @@ namespace SocialMediaApplication.Models
         public string? CommentId { get; set; }
         public required string UserId { get; set; }
         public DateTime CreatedTime { get; set; }
-
     }
 }

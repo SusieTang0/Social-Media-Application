@@ -83,15 +83,9 @@ public class FirebaseService2
         var response = await _firebaseClient.PushAsync($"posts/{postId}/comments/{commentId}",comment);
     }
 
-    public async Task DeleteComment(string postId,string userId)
-    {
-        var commentNode = await _firebaseClient.GetAsync($"posts/{postId}/comments");
-        var comments = commentNode.ResultAs<Dictionary<string,Comment>>();
-
-        var commentId = comments?.FirstOrDefault(x => x.Value.UserId == userId).Key;
-        if(commentId != null){
+    public async Task DeleteComment(string postId,string commentId)
+    {   
             await _firebaseClient.DeleteAsync($"posts/{postId}/comments/{commentId}");
-        }
     }
     public async Task<List<dynamic>> GetComments(string postId)
     {

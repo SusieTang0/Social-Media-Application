@@ -1,0 +1,14 @@
+@model List<dynamic>
+
+    <div>
+        <h3>Likes</h3>
+        <p>Total Likes: @Model.LikesCount</p>
+        <ul>
+            @foreach (var userId in Model.Likes)
+            {
+                <li>
+                    @userId
+                </li>
+            }
+        </ul>
+    </div>  
