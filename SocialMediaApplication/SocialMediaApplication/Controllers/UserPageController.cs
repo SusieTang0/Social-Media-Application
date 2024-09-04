@@ -39,27 +39,35 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> CreatePost(string content)
         {
             string userId = HttpContext.Session.GetString("userId");
+            User thisUser = await _postService.GetUserProfileAsync(userId);
 
             if (!string.IsNullOrEmpty(userId))
             {
-                await _postService.AddPost(userId, content);
+                await _postService.AddPost(userId, content, thisUser.Name, thisUser.ProfilePictureUrl);
             }
             return RedirectToAction("Index");
         }
 
-
         [HttpPost]
         public async Task<IActionResult> UpdatePost(string postId, string userId, string content)
         {
-            
-            Post post = new SocialMediaApplication.Models.Post
+            var existingPost = await _postService.GetPostByPostIdAsync(postId);
+
+            if (existingPost == null)
+            {
+                return NotFound(); 
+            }
+
+            var updatedPost = new SocialMediaApplication.Models.Post
             {
                 Id = postId,
                 Content = content,
-                AuthorId = userId,
-                CreatedTime = DateTime.Now,
+                AuthorId = existingPost.AuthorId,
+                AuthorName = existingPost.AuthorName,
+                AuthorAvatar = existingPost.AuthorAvatar,
+                CreatedTime = DateTime.UtcNow
             };
-            await _postService.SavePostAsync(postId, post);
+            await _postService.SavePostAsync(postId, updatedPost);
             return RedirectToAction("Index");
         }
 

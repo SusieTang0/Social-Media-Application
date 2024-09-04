@@ -82,12 +82,14 @@ namespace SocialMediaApplication.Services
 
         // Post
 
-        public async Task AddPost(string userId, string content)
+        public async Task AddPost(string userId, string content,string userName,string pictureUrl)
         {
             var post = new
             {
-                AuthorId = userId,
                 Content = content,
+                AuthorId = userId,
+                AuthorName = userName,
+                AuthorAvatar = pictureUrl,
                 CreatedTime = DateTime.UtcNow
             };
 
@@ -114,16 +116,33 @@ namespace SocialMediaApplication.Services
 
         public async Task<List<SocialMediaApplication.Models.Post>> GetPostsByUserIdAsync(string userId)
         {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"posts/{userId}");
-
-            var userPostsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Post>>();
-
-            if (userPostsDictionary != null)
+            try
             {
-                return userPostsDictionary.Values.ToList();
-            }
+                FirebaseResponse response = await _firebaseClient.GetAsync($"posts/{userId}");
 
-            return new List<SocialMediaApplication.Models.Post>();
+                var userPostsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Post>>();
+
+                return userPostsDictionary != null ? userPostsDictionary.Values.ToList() : new List<SocialMediaApplication.Models.Post>();
+            }
+            catch (Exception ex)
+            {
+                return new List<SocialMediaApplication.Models.Post>();
+            }
+        }
+
+        public async Task<SocialMediaApplication.Models.Post> GetPostByPostIdAsync(string postId)
+        {
+            try
+            {
+                FirebaseResponse response = await _firebaseClient.GetAsync($"posts/{postId}");
+                var post = response.ResultAs<SocialMediaApplication.Models.Post>();
+                return post;
+            }
+            catch (Exception ex)
+            {
+               
+                return null;
+            }
         }
 
         public async Task<FirebaseResponse> SavePostAsync(string postId, SocialMediaApplication.Models.Post post)
