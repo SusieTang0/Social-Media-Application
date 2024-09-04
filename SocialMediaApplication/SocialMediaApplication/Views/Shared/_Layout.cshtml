@@ -14,25 +14,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SocialMediaApplication.styles.css" asp-append-version="true" />
-    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
-    <script>
-
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-        import { getauth } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAz6UbS6Yxuh5Dyp6CEOKcunuQnjOk0q2E",
-            authDomain: "socialmediaapplication-d2ba6.firebaseapp.com",
-            projectId: "socialmediaapplication-d2ba6",
-            storageBucket: "socialmediaapplication-d2ba6.appspot.com",
-            messagingSenderId: "157127959455",
-            appId: "1:157127959455:web:4ea97446e075e55c4893aa"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getauth(app);
-    </script>
 </head>
 
 <body>
@@ -41,7 +22,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand align-items-center" asp-area="" asp-controller="Home" asp-action="Index"
                     style="font-size:xx-large; font-weight:bolder;color:#5897F5">
-                    <img src="images/logo150.png" alt="Logo" style="width:50px;" />
+                    <img src="~/images/logo150.png" alt="Logo" style="width:50px;" />
                     Cross
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -51,11 +32,11 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserPage" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
-                                asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PostSquare"
+                               asp-action="Index">Square</a>
                         </li>
                     </ul>
                 </div>

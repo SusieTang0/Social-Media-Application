@@ -2,10 +2,11 @@ namespace SocialMediaApplication.Models
 {
     public class Like
     {
-        public int Id { get; set; }
-        public int PostId { get; set; }
-        public int CommentId { get; set; }
-        public int AuthorId { get; set; }
+        public string Id { get; set; }
+        public string? PostId { get; set; }
+        public string? CommentId { get; set; }
+        public required string UserId { get; set; }
         public DateTime CreatedTime { get; set; }
+
     }
 }

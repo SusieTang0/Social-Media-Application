@@ -1,83 +1,50 @@
 ﻿@model SocialMediaApplication.Models.PostList
+
 @{
     ViewData["Title"] = "User Page";
     var user = ViewBag.User as SocialMediaApplication.Models.User;
 }
 
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
-    // Initialize Firebase
-    const firebaseConfig = {
-        apiKey: "your-api-key",
-        authDomain: "your-auth-domain",
-        projectId: "your-project-id",
-        storageBucket: "your-storage-bucket",
-        messagingSenderId: "your-messaging-sender-id",
-        appId: "your-app-id"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-
-    // Monitor authentication state
-    //auth.onAuthStateChanged((user) => {
-    //if (user && window.location.pathname === '/Home/Login') {
-    // User is signed in and on the index page, redirect to UserPage
-    //window.location.href = '/Home/UserPage';
-    //} else if (!user && window.location.pathname !== '/Home/UserPage') {
-    // No user is signed in, redirect to the index page if not already there
-    //window.location.href = '/Home/Index';
-    //}
-    //});
-
-    // Function to handle logout
-    const logoutButton = document.getElementById('logoutButton')
-    logoutButton.addEventListener('click', () => {
-        signOut(auth)
-            .then(() => {
-                console.log('the user signed out');
-                window.location.href = "/Home/Index";
-            })
-            .catch((err) => {
-                console.log(err.message)
-            });
-    });
-</script>
-
 <div class="row">
+
+    <!-- Profile Card -->
     <div class="col-lg-3 col-md-4">
-      <!-- this is a sample for creating user's' profile card -->
-        <div class="card px-2 py-3">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/062.webp" class="card-img-top p-2"
-                alt="Chicago Skyscrapers" style="border-radius:50%;" />
+        <!-- this is a sample for creating user's' profile card -->
+        <div class="card px-2 py-3 ">
+            <div class="card-img-top p-2 d-flex justify-content-center ">
+                <img src="@user.ProfilePictureUrl" alt="Chicago Skyscrapers" style="width:200px;border-radius:50%;" />
+            </div>
+
+
+
             <div class="card-body">
                 <h5 class="card-title text-center">@user.Name</h5>
-                <p class="card-text">@user.Description</p>
+                <p class="card-text">@user.Bio</p>
             </div>
 
             <!-- These two links bellow is showm for the owner-->
             <div class="card-body d-flex justify-content-center">
                 <!-- This link is to follow the owener of this homepage -->
-                <a asp-action="Follow" class="btn btn-primary w-100 col-lg-12" style="border-radius:10px;">Edit My
+                <a href="/Account/Profile" class="btn btn-primary w-100 col-lg-12" style="border-radius:10px;">Manage My
                     Profile</a>
             </div>
 
             <!-- These two links bellow is showm for others users except owner-->
             <div class="card-body d-flex justify-content-center">
-
                 <!-- This link is to follow the owener of this homepage -->
                 <a asp-action="Follow" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</a>
             </div>
+
             <div class="card-body d-flex justify-content-center">
                 <!-- This link is to canel your follow to owener of this page-->
                 <a asp-action="CancelFollow" class="btn btn-outline-danger w-100" style="border-radius:10px;">Follow
                     Cancel</a>
             </div>
+
             <div class="col-md-12 d-flex justify-content-center mt-3">
-                <button id="logoutButton" class="btn btn-danger w-100" style="border-radius:10px;">Log Out</button>
+                <a href="@Url.Action("Login", "Account")" id="logoutButton" class="btn btn-danger"
+                    style="border-radius:10px; width: 255px;">Log Out</a>
             </div>
 
 
@@ -92,11 +59,8 @@
         </div>
     </div>
 
-
-
-
+    <!-- Postlists Area -->
     <div class="col-md-8">
-
         <!-- this is a list sample for creating user's' post -->
         <div class="card card-body">
             <div class="row px-2">
@@ -105,15 +69,16 @@
                     <hr />
                 </div>
 
-                <form action="/" method="post">
-                    <div class="row d-flex justify-content-between align-items-center py-2">
+                <form asp-action="CreatePost" method="post">
+                    <div class="row d-flex justify-content-center align-items-center py-2">
 
-                        <div class="col-md-2 justify-content-center">
-                            <img src="images/icon-logo.png" alt="Alternate Text" style="width:30px;" />
+                        <div class="col-md-1 justify-content-end">
+                            <img src="@user.ProfilePictureUrl" alt="Alternate Text"
+                                style="width:50px;border-radius:50%;" />
                         </div>
                         <div class="col-md-8">
-                            <input class="form-control border rounded-pill" type="type" name="Comment"
-                                   value="Comment content" />
+                            <input class="form-control border rounded-pill" type="text" name="content"
+                                placeholder="Post content" />
                         </div>
                         <div class="col-md-2">
                             <button class=" btn btn-primary w-100 rounded-pill" type="submit">Post</button>
@@ -121,8 +86,10 @@
                     </div>
                 </form>
             </div>
-           
         </div>
+
+
+        <!-- this is a list sample for user's postlist -->
         <div class="card w-100 p-4 my-2">
 
             <!-- This is the title of the list-->
@@ -133,7 +100,7 @@
 
             @Html.Partial("Components/Postlist", Model.MyFollowedPosts)
 
-            <!-- end of  the cardS for one post -->
+            <!-- end of the cardS for one post -->
             <a class="icon-link icon-link-hover" href="#">
                 See More Posts
                 <svg class="bi" aria-hidden="true">
@@ -144,7 +111,6 @@
         </div>
 
         <div class="card w-100 p-4 my-2">
-
             <!-- This is the title of the list-->
             <div class="col-md-12">
                 <h5 style="color:#5897F5">My Posts</h5>
@@ -153,17 +119,16 @@
 
             @Html.Partial("Components/Postlist", Model.MyPosts)
 
-            <!-- end of  the cardS for one post -->
+            <!-- end of the cardS for one post -->
             <a class="icon-link icon-link-hover" href="#">
                 See More Posts
                 <svg class="bi" aria-hidden="true">
                     <use xlink:href="#arrow-right"></use>
                 </svg>
             </a>
-
         </div>
-       
-       
-        
+
+
+
     </div>
 </div>

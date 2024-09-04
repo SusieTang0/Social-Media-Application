@@ -1,179 +1,160 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialMediaApplication.Models;
-using SocialMediaApplication.Data;
-using System.Net;
-using Microsoft.EntityFrameworkCore;
+using SocialMediaApplication.Services;
 using System.Collections.Specialized;
+using System.ComponentModel.Design;
+using System.Diagnostics.Eventing.Reader;
 using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialMediaApplication.Controllers
 {
     public class UserPageController:Controller
     {
-      
-     
-        public IActionResult Index()
+        private readonly PostService _postService;
+
+        public UserPageController(PostService postService)
         {
-            var userId = 1;
-            var posts = GetPostlists(userId,2,"My Posts");
-            ViewBag.Users = ApplicationData.Users;
-            ViewBag.User = ApplicationData.Users.FirstOrDefault(x => x.Id == userId);
+            _postService = postService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = HttpContext.Session.GetString("userId");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            PostList posts = await GetPostlistsAsync(userId);
+            ViewBag.Users = await _postService.GetUsersAsync();
+            ViewBag.User = await _postService.GetUserProfileAsync(userId);
+           
             return View(posts);
         }
 
-        public IActionResult GetComments(int postId)
+        [HttpPost]
+        public async Task<IActionResult> CreatePost(string content)
         {
-            var comments = ApplicationData.Comments
-                                   .Where(c => c.PostId == postId)
-                                   .OrderBy(c => c.CreatedTime) // Optional: Order by timestamp
-                                   .ToList();
+            string userId = HttpContext.Session.GetString("userId");
+            User thisUser = await _postService.GetUserProfileAsync(userId);
 
-            return PartialView("_CommentsPartial", comments);
-        }
-
-        public User GetUserFromList(int userId)
-        {
-             var user =  ApplicationData.Users.FirstOrDefault(x => x.Id == userId);
-             return user;
-        }
-
-
-        public PostList GetPostlists(int id,int numberToShow,string listName){
-
-            var thePosts = new PostList();
-            thePosts.MyPosts = new List<Post>();
-            thePosts.MyFollowedPosts = new List<Post>();
-  
-            
-            if (listName.Equals("My Posts"))
+            if (!string.IsNullOrEmpty(userId))
             {
-                thePosts.MyPosts = FindPostList(id, numberToShow, "My Post");
+                await _postService.AddPost(userId, content, thisUser.Name, thisUser.ProfilePictureUrl);
             }
-            else if (listName.Equals("My Posts"))
-            {
-                thePosts.MyFollowedPosts = FindPostList(id, numberToShow, "My Post");
-            }
-            
-            return thePosts;
-        }
-
-        public List<Post> FindPostList(int id, int numberToShow, string listName)
-        {
-            var posts = new List<Post>();
-            var count = 0;
-
-           
-
-            if (ApplicationData.Posts != null)
-            {
-                for (int i = ApplicationData.Posts.Count - 1; i > 0; i--)
-                {
-                    var post = ApplicationData.Posts[i];
-                    if (listName.Equals("My Posts"))
-                    {
-                        if (post.AuthorId == id)
-                        {
-                            posts.Add(post);
-                            count++;
-                        }
-                    }
-                    else
-                    {
-                        if (post.AuthorId == id)
-                        {
-                            posts.Add(post);
-                            count++;
-                        }
-                    }
-                    if(count == numberToShow)
-                    {
-                        break;
-                    }
-                    
-                }
-            }
-            return posts;
-        }
-
-        public List<User> GetFollow(int id,string type)
-        {
-            var follows = new List<User>();
-            if (ApplicationData.Follows != null)
-            {
-                foreach (var follow in ApplicationData.Follows)
-                {
-                    if (type.Equals("Follows"))
-                    {
-                        if (follow.FollowedId.Equals(id))
-                        {
-                            var newUser = ApplicationData.Users[id];
-                            follows.Add(newUser);
-                        }
-                    }
-                    else
-                    {
-                        if (follow.FollowerId == id)
-                        {
-                            var newUser = ApplicationData.Users[id];
-                            follows.Add(newUser);
-                        }
-                    }
-                    
-                    
-                }
-            }
-            return follows;
-        }
-
-
-
-        private static User _currentUser = new User
-        {
-            Id = "currentUser",
-            Name = "John Doe",
-            Followers = new List<User>(),
-            Following = new List<User>()
-        };
-
-        private static List<User> _users = new List<User>
-        {
-            new User { Id = "user1", Name = "Alice" },
-            new User { Id = "user2", Name = "Bob" },
-            new User { Id = "user3", Name = "Charlie" }
-        };
-
-
-        public IActionResult Follow()
-        { 
-            var model = new FollowViewModel
-            {
-                CurrentUser = _currentUser,
-                Users = _users
-            };
-
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult ToggleFollow(string userId)
+        public async Task<IActionResult> UpdatePost(string postId, string userId, string content)
         {
-            var user = _users.FirstOrDefault(u => u.Id == userId);
+            var existingPost = await _postService.GetPostByPostIdAsync(postId);
 
-            if (user != null)
+            if (existingPost == null)
             {
-                if (_currentUser.Following.Contains(user))
+                return NotFound(); 
+            }
+
+            var updatedPost = new SocialMediaApplication.Models.Post
+            {
+                Id = postId,
+                Content = content,
+                AuthorId = existingPost.AuthorId,
+                AuthorName = existingPost.AuthorName,
+                AuthorAvatar = existingPost.AuthorAvatar,
+                CreatedTime = DateTime.UtcNow
+            };
+            await _postService.SavePostAsync(postId, updatedPost);
+            return RedirectToAction("Index");
+        }
+
+
+        public async Task<PostList> GetPostlistsAsync(string id)
+        {
+            var thePosts = new PostList
+            {
+                MyPosts = await FindPostListAsync(id, 2), 
+                MyFollowedPosts = await FindFollowedPostsAsync(id, 2) 
+            };
+            Console.WriteLine(thePosts);
+            return thePosts;
+        }
+
+        public async Task<List<Post>> FindPostListAsync(string id, int numberToShow)
+        {
+            var posts = new List<Post>();
+
+            var thePosts = await _postService.GetPostsAsync();
+
+            if (thePosts != null)
+            {
+                int count = 0;
+                for (int i = thePosts.Count - 1; i >= 0; i--)
                 {
-                    _currentUser.Following.Remove(user);
-                    user.Followers.Remove(_currentUser);
-                }
-                else
-                {
-                    _currentUser.Following.Add(user);
-                    user.Followers.Add(_currentUser);
+                    var post = thePosts[i];
+
+                    if (post.AuthorId == id)
+                    {
+                        posts.Add(post);
+                        count++;
+                    }
+
+                    if (count >= numberToShow)
+                    {
+                        break;
+                    }
                 }
             }
 
-            return Content("Success");
+            return posts;
         }
+
+
+        public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
+        {
+            var posts = new List<Post>();
+            var followedUsers = await _postService.GetFollowedIdsAsync(userId);
+            var followedIds = new HashSet<string>(followedUsers.Select(f => f.FollowedId));
+            var allPosts = await _postService.GetPostsAsync();
+
+            if (allPosts != null && followedIds.Count > 0)
+            {
+                int count = 0;
+                for (int i = allPosts.Count - 1; i >= 0; i--)
+                {
+                    var post = allPosts[i];
+
+                    if (followedIds.Contains(post.AuthorId))
+                    {
+                        posts.Add(post);
+                        count++;
+                    }
+
+                    if (count >= numberToShow)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return posts;
+        }
+
+
+        /*public IActionResult GetComments(int postId)
+       {
+           var comments = ApplicationData.Comments
+                                  .Where(c => c.PostId == postId)
+                                  .OrderBy(c => c.CreatedTime) // Optional: Order by timestamp
+                                  .ToList();
+
+           return PartialView("_CommentsPartial", comments);
+       }
+
+      */
     }
 }
+

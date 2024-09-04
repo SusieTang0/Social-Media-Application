@@ -19,6 +19,12 @@ namespace SocialMediaApplication.Controllers
 
         public IActionResult Index()
         {
+            string userId = HttpContext.Session.GetString("userId");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Home", "Account");
+            }
             return View();
         }
 
@@ -35,12 +41,12 @@ namespace SocialMediaApplication.Controllers
 
         public IActionResult SignUp()
         {
-            return View("./Views/Auth/Signup.cshtml");
+            return View("./Views/Account/Register.cshtml");
         }
 
         public IActionResult Login()
         {
-            return View("./Views/Auth/Login.cshtml");
+            return View("./Views/Account/Login.cshtml");
         }
 
 
