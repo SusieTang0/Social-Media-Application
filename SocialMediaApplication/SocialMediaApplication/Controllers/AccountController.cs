@@ -151,7 +151,7 @@ namespace SocialMediaApplication.Services
             HttpContext.Session.Clear();
 
             // Sign out the user from the authentication system
-            await HttpContext.SignOutAsync("Identity.Application");
+            await HttpContext.SignOutAsync();
 
             // Redirect to the Home/Index page
             return RedirectToAction("Index", "Home");
