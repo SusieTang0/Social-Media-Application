@@ -5,6 +5,26 @@
       "PackagePath": "staticwebassets\\SocialMediaApplication.bundle.scp.css"
     },
     {
+      "Id": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\avatars\\femaile1.jpg",
+      "PackagePath": "staticwebassets\\avatars\\femaile1.jpg"
+    },
+    {
+      "Id": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\avatars\\female2.jpg",
+      "PackagePath": "staticwebassets\\avatars\\female2.jpg"
+    },
+    {
+      "Id": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\avatars\\male1.jpg",
+      "PackagePath": "staticwebassets\\avatars\\male1.jpg"
+    },
+    {
+      "Id": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\avatars\\male2.jpg",
+      "PackagePath": "staticwebassets\\avatars\\male2.jpg"
+    },
+    {
+      "Id": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\avatars\\test.txt",
+      "PackagePath": "staticwebassets\\avatars\\test.txt"
+    },
+    {
       "Id": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

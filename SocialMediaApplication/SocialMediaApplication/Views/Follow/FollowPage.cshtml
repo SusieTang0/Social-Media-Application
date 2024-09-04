@@ -14,6 +14,8 @@
         {
             <li>
                 <img src="@user.FollowerAvatar" alt="@user.FollowerName" width="50" height="50" />
+
+                @* <img src="@Url.Content(user.FollowerAvatar)" alt="@user.FollowerName" width="50" height="50" />*@
                 @user.FollowerName
                 <button class="btn btn-primary toggle-follow" data-user-id="@user.FollowerId">
                     Follow
@@ -29,9 +31,9 @@
 <h2>Your Followers:</h2>
 @if (Model.CurrentUser?.Followers != null && Model.CurrentUser.Followers.Any())
 {
-    @await Component.InvokeAsync("FollowerViewComponent", new { userId = Model.CurrentUser.UserId })
+    <!-- @await Component.InvokeAsync("FollowerViewComponent", new { userId = Model.CurrentUser.UserId }) -->
 
-    <!-- <ul>
+    <ul>
         @foreach (var follower in Model.CurrentUser.Followers)
         {
             <li>
@@ -39,7 +41,7 @@
                 @follower.FollowerName
             </li>
         }
-    </ul> -->
+    </ul>
 }else
 {
     <p>You have no followers.</p>
@@ -48,11 +50,11 @@
 <h2>People You Follow:</h2>
 @if (Model.CurrentUser?.Following != null && Model.CurrentUser.Following.Any())
 {
-    @await Component.InvokeAsync("FollowingViewComponent", new { userId = Model.CurrentUser.UserId })
+    <!-- @await Component.InvokeAsync("FollowingViewComponent", new { userId = Model.CurrentUser.UserId }) -->
 
-    <!-- <ul>
+    <ul>
         @foreach (var following in Model.CurrentUser.Following)
-        {
+        {   
             <li>
                 <img src="@following.FollowingAvatar" alt="@following.FollowingName" width="50" height="50" />
                 @following.FollowingName
@@ -61,7 +63,7 @@
                 </button>
             </li>
         }
-    </ul> -->
+    </ul>
 }else
 {
     <p>You are not following anyone.</p>
@@ -95,3 +97,6 @@
         });
     </script>
 }
+
+
+

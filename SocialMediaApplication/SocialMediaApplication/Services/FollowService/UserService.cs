@@ -15,10 +15,11 @@ namespace SocialMediaApplication.Services.FollowService
         {
             _users = new List<UserFollow>
             {
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Alice", AvatarUrl = "https://example.com/avatars/alice.png" },
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Bob", AvatarUrl = "https://example.com/avatars/bob.png" },
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Charlie", AvatarUrl = "https://example.com/avatars/charlie.png" },
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Diana", AvatarUrl = "https://example.com/avatars/diana.png" }
+                new UserFollow { UserId = Guid.NewGuid(), UserName = "Alice", AvatarUrl = "/avatars/femail1.jpg" },
+                new UserFollow { UserId = Guid.NewGuid(), UserName = "Bob", AvatarUrl = "/avatars/male1.jpg" },
+             /* new UserFollow { UserId = Guid.NewGuid(), UserName = "Bob", AvatarUrl = "/SocialMediaApplication/SocialMediaApplication/wwwroot/avatars/male1.jpg" },*/
+                new UserFollow { UserId = Guid.NewGuid(), UserName = "Charlie", AvatarUrl = "/avatars/male2.jpg" },
+                new UserFollow { UserId = Guid.NewGuid(), UserName = "Diana", AvatarUrl = "/avatars/female2.jpg" }
             };
            // Set the current user (for example purposes)
             _currentUser = _users.First();

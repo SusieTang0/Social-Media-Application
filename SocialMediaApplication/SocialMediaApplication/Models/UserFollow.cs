@@ -8,8 +8,8 @@ namespace SocialMediaApplication.Models
     {
       // User details
         public Guid UserId { get; set; } = Guid.NewGuid();
-        public string UserName { get; set; }
-        public string AvatarUrl { get; set; }
+        public string UserName { get; set; } = string.Empty;
+        public string AvatarUrl { get; set; } = string.Empty;
 
         // Followers and Following
         public List<UserFollow> Followers { get; set; } = new List<UserFollow>();
@@ -19,19 +19,19 @@ namespace SocialMediaApplication.Models
         public Guid FollowerId { get; set; }
 
         // The name of the user who is following
-        public string FollowerName { get; set; }
+        public string FollowerName { get; set; } = string.Empty;
 
         // The avatar of the user who is following
-        public string FollowerAvatar { get; set; }
+        public string FollowerAvatar { get; set; } = string.Empty;
 
         // The ID of the user being followed by current user
-          public Guid FollowingId { get; set; }
+        public Guid FollowingId { get; set; }
 
         // The name of the user being followed
-        public string FollowingName { get; set; }
+        public string FollowingName { get; set; } = string.Empty;
 
         // The avatar of the user being followed
-        public string FollowingAvatar { get; set; }
+        public string FollowingAvatar { get; set; } = string.Empty;
 
         // Timestamp of when the follow action occurred
         public DateTime FollowedOn { get; set; } = DateTime.UtcNow;
