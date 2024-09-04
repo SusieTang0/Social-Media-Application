@@ -23,7 +23,8 @@ namespace SocialMediaApplication.Controllers
 
             if (string.IsNullOrEmpty(userId))
             {
-                return RedirectToAction("Home", "Account");
+                // return RedirectToAction("Home", "Account");
+                return RedirectToAction("Login", "Account");
             }
             return View();
         }
