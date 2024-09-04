@@ -23,9 +23,9 @@ namespace SocialMediaApplication.Controllers
 
             if (string.IsNullOrEmpty(userId))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Home", "Account");
             }
-            return View("Index", "UserPage");
+            return View();
         }
 
         public IActionResult Privacy()

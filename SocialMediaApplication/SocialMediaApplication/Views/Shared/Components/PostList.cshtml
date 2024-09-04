@@ -1,15 +1,10 @@
-﻿@model IEnumerable<SocialMediaApplication.Models.Post>
+@model IEnumerable<SocialMediaApplication.Models.Post>
 
 @{
-    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User>;
-    if (users == null)
-    {
-        users = new List<User>(); // or handle accordingly if ViewBag.Users is null
-    }
+   
 }
 
 <!-- this is a list sample of all the posts -->
-
 @if (Model != null)
 {
     @foreach (var post in Model)
