@@ -19,15 +19,33 @@
             </div>
 
             <!-- These two links bellow is showm for others users except owner-->
-            <div class="card-body d-flex justify-content-center">
-
-                <!-- This link is to follow the owener of this homepage -->
+             <!--<div class="card-body d-flex justify-content-center">          
                 <a asp-action="Follow" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</a>
-            </div>
+            </div> 
+
             <div class="card-body d-flex justify-content-center">
-                <!-- This link is to canel your follow to owener of this page-->
                 <a asp-action="CancelFollow" class="btn btn-outline-danger w-100" style="border-radius:10px;">Follow Cancel</a>
             </div>
+            -->
+            
+            @if (Model.IsFollowing)
+            {
+                <div class="card-body d-flex justify-content-center">
+                    <form asp-action="CancelFollow" method="post">
+                        <input type="hidden" name="userId" value="@Model.UserId" />
+                        <button type="submit" class="btn btn-outline-danger w-100" style="border-radius:10px;">Follow Cancel</button>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="card-body d-flex justify-content-center">
+                    <form asp-action="Follow" method="post">
+                        <input type="hidden" name="userId" value="@Model.UserId" />
+                        <button type="submit" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</button>
+                    </form>
+                </div>
+            }
 
 
             <div class="card-body row d-flex justify-content-center">

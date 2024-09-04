@@ -18,12 +18,32 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = E:\John abbott college\Code\ApplicattionDevelopment2\finalProject\SocialMediaApplication\SocialMediaApplication
 build_property._RazorSourceGeneratorDebug = 
 
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Follow/FollowerList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9sbG93XEZvbGxvd2VyTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Follow/FollowingList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9sbG93XEZvbGxvd2luZ0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Follow/FollowPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9sbG93XEZvbGxvd1BhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Shared/Components/Follower/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRm9sbG93ZXJcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Shared/Components/Following/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRm9sbG93aW5nXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Shared/Components/PostsList.cshtml]
@@ -40,10 +60,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/UserPage/Follow.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclBhZ2VcRm9sbG93LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/John abbott college/Code/ApplicattionDevelopment2/finalProject/SocialMediaApplication/SocialMediaApplication/Views/UserPage/Index.cshtml]

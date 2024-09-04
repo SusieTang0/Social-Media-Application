@@ -1,0 +1,11 @@
+@model IEnumerable<SocialMediaApplication.Models.UserFollow>
+
+<div class="following-list">
+    <h3>Following</h3>
+    <ul>
+        @foreach (var following in Model)
+        {
+            <li>@following.FollowingName</li>
+        }
+    </ul>
+</div>

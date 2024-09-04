@@ -1,7 +1,7 @@
+// displaying follower/following lists on the UI.
 using Microsoft.AspNetCore.Mvc;
 using SocialMediaApplication.Models;
-using System.Collections.Generic;
-using System.Linq;
+using SocialMediaApplication.Services.FollowService;
 using System.Threading.Tasks;
 
 namespace SocialMediaApplication.ViewComponents
@@ -15,10 +15,15 @@ namespace SocialMediaApplication.ViewComponents
             _userService = userService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int userId)
+        public async Task<IViewComponentResult> InvokeAsync(Guid userId)
         {
             var following = await _userService.GetFollowingAsync(userId);
-            return View(following);
-        }
-    }
+            if (following == null)
+                {
+                    following = new List<UserFollow>(); // Ensure the list is never null
+                }
+                return View(following);
+                        return View(following);
+                    }
+                }
 }

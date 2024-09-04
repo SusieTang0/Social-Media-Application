@@ -1,6 +1,6 @@
-﻿namespace SocialMediaApplication.ViewComponents
-{
-    public class PostViewComponent
-    {
-    }
-}
+﻿// namespace SocialMediaApplication.ViewComponents
+// {
+//     public class PostViewComponent
+//     {
+//     }
+// }

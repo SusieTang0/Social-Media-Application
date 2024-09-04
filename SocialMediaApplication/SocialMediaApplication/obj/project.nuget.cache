@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZDSZcqafaTM=",
+  "dgSpecHash": "CUJUc4satNc=",
   "success": true,
-  "projectFilePath": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\SocialMediaApplication.csproj",
+  "projectFilePath": "E:\\John abbott college\\Code\\ApplicattionDevelopment2\\finalProject\\SocialMediaApplication\\SocialMediaApplication\\SocialMediaApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wlill\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\wlill\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

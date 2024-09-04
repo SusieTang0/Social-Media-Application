@@ -15,8 +15,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0-preview.4.23259.3" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <Folder Include="wwwroot\" />
-  </ItemGroup>
+  </ItemGroup> -->
 
 </Project>
