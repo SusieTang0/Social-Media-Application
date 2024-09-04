@@ -1,90 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\models\\followviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\models\\followviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\userpage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\userpage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\images\\edit.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\images\\edit.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\images\\edit.svg||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\images\\edit.svg||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\images\\heart-outline.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\images\\heart-outline.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\images\\heart.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\images\\heart.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\images\\heart-outline.svg||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\images\\heart-outline.svg||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\images\\heart.svg||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\images\\heart.svg||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\shared\\components\\postslist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\shared\\components\\postslist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\shared\\components\\post\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\shared\\components\\post\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\viewcomponents\\postviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\viewcomponents\\postviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\userpagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\userpagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\userpagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\postsquarecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\postsquarecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\shared\\components\\postlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\shared\\components\\postlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\shared\\components\\_commentsection.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\shared\\components\\_commentsection.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|d:\\z-git\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -93,281 +41,148 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 47,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
           "Children": [
             {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PostSquareController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T21:21:16.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Models\\Comment.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\Comment.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Models\\Comment.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T21:19:45.503Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\User.cs",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Models\\User.cs",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\User.cs",
-              "RelativeToolTip": "SocialMediaApplication\\Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-25T23:47:20.664Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FollowViewModel.cs",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\FollowViewModel.cs",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Models\\FollowViewModel.cs",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\FollowViewModel.cs",
-              "RelativeToolTip": "SocialMediaApplication\\Models\\FollowViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "Post.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\Post.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Models\\Post.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\Post.cs*",
+              "RelativeToolTip": "SocialMediaApplication\\Models\\Post.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-25T23:47:12.472Z",
+              "WhenOpened": "2024-09-04T21:15:29.81Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "site.js",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\js\\site.js",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\js\\site.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-08-22T04:27:26.854Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "edit.svg",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAGAAAA",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
-              "WhenOpened": "2024-08-22T03:43:29.766Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "edit.svg",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\images\\edit.svg",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAGAAAA",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
-              "WhenOpened": "2024-08-22T03:41:46.966Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "heart-outline.svg",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAGAAAA",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
-              "WhenOpened": "2024-08-22T03:06:08.097Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "heart-outline.svg",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\images\\heart-outline.svg",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAGAAAA",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
-              "WhenOpened": "2024-08-22T03:04:21.842Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "heart.svg",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAADhAAAA",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
-              "WhenOpened": "2024-08-22T03:01:35.428Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "heart.svg",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\images\\heart.svg",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAGAgAA",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
-              "WhenOpened": "2024-08-22T02:56:17.341Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PostsList.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\PostsList.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Shared\\Components\\PostsList.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\PostsList.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\Shared\\Components\\PostsList.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Title": "_CommentSection.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml",
+              "RelativeToolTip": "SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-22T02:29:07.308Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Default.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\Post\\Default.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Shared\\Components\\Post\\Default.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\Post\\Default.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\Shared\\Components\\Post\\Default.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-22T02:28:44.418Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "PostViewComponent.cs",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\ViewComponents\\PostViewComponent.cs",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\ViewComponents\\PostViewComponent.cs",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\ViewComponents\\PostViewComponent.cs",
-              "RelativeToolTip": "SocialMediaApplication\\ViewComponents\\PostViewComponent.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-22T02:27:26.786Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "SocialMediaApplication\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-22T01:42:33.484Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "UserPageController.cs",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\UserPageController.cs",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\UserPageController.cs",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\UserPageController.cs",
-              "RelativeToolTip": "SocialMediaApplication\\Controllers\\UserPageController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-22T01:42:30.454Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\UserPage\\Index.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\UserPage\\Index.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\UserPage\\Index.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\UserPage\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEMAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-22T00:45:11.225Z",
+              "WhenOpened": "2024-09-04T21:03:15.289Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Privacy.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Home\\Privacy.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Home\\Privacy.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Home\\Privacy.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\Home\\Privacy.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-20T21:42:42.074Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "site.css",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\wwwroot\\css\\site.css",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "SocialMediaApplication\\wwwroot\\css\\site.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-08-20T21:41:59.44Z"
+              "DocumentIndex": 0,
+              "Title": "UserPageController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "ViewState": "AQIAAFUAAAAAAAAAAAAcwGoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T20:49:40.275Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAADYAAAAAAAAA",
+              "Title": "PostList.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "RelativeToolTip": "SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAA8AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-20T21:40:32.019Z"
+              "WhenOpened": "2024-09-04T20:43:03.749Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-20T15:53:57.675Z"
+              "DocumentIndex": 1,
+              "Title": "PostService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Services\\PostService.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Services\\PostService.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Services\\PostService.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Services\\PostService.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAA4wFsAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T20:41:13.507Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\_ViewImports.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\_ViewImports.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-20T15:53:54.13Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\_ViewStart.cshtml",
-              "ToolTip": "D:\\Z-Git\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "SocialMediaApplication\\Views\\_ViewStart.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-20T15:53:47.569Z"
+              "DocumentIndex": 7,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\CommentController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Controllers\\CommentController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T19:07:48.912Z",
+              "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 47,
+          "DockedWidth": 4,
           "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 4,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }

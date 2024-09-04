@@ -97,7 +97,7 @@ namespace SocialMediaApplication.Services
 
 
 
-        public async Task<List<SocialMediaApplication.Models.Post>> GetPostsAsync()
+       /* public async Task<List<SocialMediaApplication.Models.Post>> GetPostsAsync()
         {
             FirebaseResponse response = await _firebaseClient.GetAsync("posts");
 
@@ -110,6 +110,12 @@ namespace SocialMediaApplication.Services
             }
 
             return new List<SocialMediaApplication.Models.Post>();
+        }*/
+        public async Task<Dictionary<string, Post>> GetPostsAsync()
+        {
+            var response = await _firebaseClient.GetAsync("posts");
+            var posts = response.ResultAs<Dictionary<string, Post>>();
+            return posts;
         }
 
         public async Task<List<SocialMediaApplication.Models.Post>> GetPostsByUserIdAsync(string userId)

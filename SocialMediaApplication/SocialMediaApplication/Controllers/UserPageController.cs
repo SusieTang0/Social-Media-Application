@@ -75,7 +75,7 @@ namespace SocialMediaApplication.Controllers
             return thePosts;
         }
 
-        public async Task<List<Post>> FindPostListAsync(string id, int numberToShow)
+        /*public async Task<List<Post>> FindPostListAsync(string id, int numberToShow)
         {
             var posts = new List<Post>();
 
@@ -102,40 +102,99 @@ namespace SocialMediaApplication.Controllers
             }
 
             return posts;
-        }
-
-
-        public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
+        }*/
+        public async Task<List<Post>> FindPostListAsync(string authorId, int numberToShow)
         {
             var posts = new List<Post>();
-            var followedUsers = await _postService.GetFollowedIdsAsync(userId);
-            var followedIds = new HashSet<string>(followedUsers.Select(f => f.FollowedId));
-            var allPosts = await _postService.GetPostsAsync();
 
-            if (allPosts != null && followedIds.Count > 0)
+            // Fetch posts from the service
+            var postsDict = await _postService.GetPostsAsync();
+
+            // Convert dictionary to a list of posts and filter by authorId
+            if (postsDict != null)
             {
-                int count = 0;
-                for (int i = allPosts.Count - 1; i >= 0; i--)
-                {
-                    var post = allPosts[i];
-
-                    if (followedIds.Contains(post.AuthorId))
+                var filteredPosts = postsDict
+                    .Where(kvp => kvp.Value.AuthorId == authorId)
+                    .Select(kvp => new Post
                     {
-                        posts.Add(post);
-                        count++;
-                    }
+                        Id = kvp.Key,  // Assuming key is the post ID
+                        AuthorId = kvp.Value.AuthorId,
+                        Content = kvp.Value.Content,
+                        CreatedTime = kvp.Value.CreatedTime
+                    })
+                    .OrderByDescending(post => post.CreatedTime)  // Sort by creation time descending
+                    .Take(numberToShow)  // Take the specified number of posts
+                    .ToList();
 
-                    if (count >= numberToShow)
-                    {
-                        break;
-                    }
-                }
+                posts.AddRange(filteredPosts);
             }
 
             return posts;
         }
 
 
+        /* public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
+         {
+             var posts = new List<Post>();
+             var followedUsers = await _postService.GetFollowedIdsAsync(userId);
+             var followedIds = new HashSet<string>(followedUsers.Select(f => f.FollowedId));
+             var allPosts = await _postService.GetPostsAsync();
+
+             if (allPosts != null && followedIds.Count > 0)
+             {
+                 int count = 0;
+                 for (int i = allPosts.Count - 1; i >= 0; i--)
+                 {
+                     var post = allPosts[i];
+
+                     if (followedIds.Contains(post.AuthorId))
+                     {
+                         posts.Add(post);
+                         count++;
+                     }
+
+                     if (count >= numberToShow)
+                     {
+                         break;
+                     }
+                 }
+             }
+
+             return posts;
+         }*/
+
+        public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
+        {
+            var posts = new List<Post>();
+
+            // Get followed users
+            var followedUsers = await _postService.GetFollowedIdsAsync(userId);
+            var followedIds = new HashSet<string>(followedUsers.Select(f => f.FollowedId));
+
+            // Get all posts
+            var allPostsDict = await _postService.GetPostsAsync();
+
+            if (allPostsDict != null && followedIds.Count > 0)
+            {
+                // Convert dictionary to list of posts
+                var allPosts = allPostsDict
+                    .Select(kvp => new Post
+                    {
+                        Id = kvp.Key,
+                        AuthorId = kvp.Value.AuthorId,
+                        Content = kvp.Value.Content,
+                        CreatedTime = kvp.Value.CreatedTime
+                    })
+                    .Where(post => followedIds.Contains(post.AuthorId))
+                    .OrderByDescending(post => post.CreatedTime) // Sort posts by creation time
+                    .Take(numberToShow) // Limit number of posts
+                    .ToList();
+
+                posts.AddRange(allPosts);
+            }
+
+            return posts;
+        }
         /*public IActionResult GetComments(int postId)
        {
            var comments = ApplicationData.Comments

@@ -17,12 +17,21 @@ namespace SocialMediaApplication.Controllers
         {
             string userId = HttpContext.Session.GetString("userId");
 
-            if (string.IsNullOrEmpty(userId))
+            /*if (string.IsNullOrEmpty(userId))
             {
                 return RedirectToAction("Login", "Account");
-            }
+            }*/
 
-            List<Post> posts = await _postService.GetPostsAsync();
+            //List<Post> posts = await _postService.GetPostsAsync();
+            var postsWithIds = await _postService.GetPostsAsync();
+            var posts = postsWithIds.Select(p => new Post
+            {
+                Id = p.Key,
+                AuthorId = p.Value.AuthorId,
+                Content = p.Value.Content,
+                CreatedTime = p.Value.CreatedTime,
+            }).ToList();
+
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
 

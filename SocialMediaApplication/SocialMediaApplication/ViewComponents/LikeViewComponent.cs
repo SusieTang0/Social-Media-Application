@@ -27,7 +27,7 @@ namespace SocialMediaApplication.ViewComponents
 
         public class LikeViewModel
         {
-            public List<SocialMediaApplication.Models.Like> Likes {get;set;}
+            public List<Like> Likes {get;set;}
             public int LikesCount {get;set;}
         }
     }

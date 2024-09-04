@@ -75,7 +75,7 @@
                 </a>
                 <!-- this is the component to show comments and add & edit comments -->
                 <div class="collapse mt-2" id="collapseComment@post.Id">
-                    @Html.Partial("Components/_CommentSection", post)
+                    @await Html.PartialAsync("Components/_CommentSection", post)
                 </div>
             </div>
         </div>
