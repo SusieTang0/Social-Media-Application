@@ -19,7 +19,13 @@ namespace SocialMediaApplication.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            string userId = HttpContext.Session.GetString("userId");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return View("Index", "UserPage");
         }
 
         public IActionResult Privacy()

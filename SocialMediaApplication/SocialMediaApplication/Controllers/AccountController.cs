@@ -39,7 +39,7 @@ namespace SocialMediaApplication.Services
                 Email = email,
                 Name = email,
                 Bio = "This is your bio. You can update it later.",
-                ProfilePictureUrl = imageUrl ?? "https://example.com/images/default-avatar.png" // Fallback to default avatar if no picture uploaded
+                ProfilePictureUrl = imageUrl ?? "~/images/logo150.png" // Fallback to default avatar if no picture uploaded
             };
 
             await _firebaseService.SaveUserProfileAsync(authLink.User.LocalId, userProfile);

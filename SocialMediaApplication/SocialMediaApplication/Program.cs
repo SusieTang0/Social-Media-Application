@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SocialMediaApplication.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 
 // Register FirebaseService as a singleton
 builder.Services.AddSingleton<FirebaseService>();
+builder.Services.AddScoped<PostService>();
 
 // Add session support (if needed)
 builder.Services.AddDistributedMemoryCache();
