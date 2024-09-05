@@ -22,6 +22,7 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> Index()
         {
             string userId = HttpContext.Session.GetString("userId");
+            ViewBag.UserId = userId;
 
             if (string.IsNullOrEmpty(userId))
             {
@@ -129,7 +130,8 @@ namespace SocialMediaApplication.Controllers
                         AuthorAvatar = kvp.Value.AuthorAvatar,
                         Content = kvp.Value.Content,
                         CreatedTime = kvp.Value.CreatedTime,
-                        Comments = kvp.Value.Comments
+                        Comments = kvp.Value.Comments,
+                        Likes = kvp.Value.Likes
                     })
                     .OrderByDescending(post => post.CreatedTime) 
                     .Take(numberToShow)  
@@ -195,7 +197,8 @@ namespace SocialMediaApplication.Controllers
                         AuthorAvatar = kvp.Value.AuthorAvatar,
                         Content = kvp.Value.Content,
                         CreatedTime = kvp.Value.CreatedTime,
-                        Comments = kvp.Value.Comments
+                        Comments = kvp.Value.Comments,
+                        Likes = kvp.Value.Likes
                     })
                     .Where(post => followedIds.Contains(post.AuthorId))
                     .OrderByDescending(post => post.CreatedTime) // Sort posts by creation time

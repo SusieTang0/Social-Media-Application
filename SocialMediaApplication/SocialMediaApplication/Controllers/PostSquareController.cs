@@ -16,6 +16,7 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> Index()
         {
             string userId = HttpContext.Session.GetString("userId");
+            ViewBag.UserId = userId;
 
             /*if (string.IsNullOrEmpty(userId))
             {
@@ -32,7 +33,8 @@ namespace SocialMediaApplication.Controllers
                 AuthorAvatar = p.Value.AuthorAvatar,
                 Content = p.Value.Content,
                 CreatedTime = p.Value.CreatedTime,
-                Comments = p.Value.Comments
+                Comments = p.Value.Comments,
+                Likes = p.Value.Likes
             }).ToList();
 
             ViewBag.Users = await _postService.GetUsersAsync();

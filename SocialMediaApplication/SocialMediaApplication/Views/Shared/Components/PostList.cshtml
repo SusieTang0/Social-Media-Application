@@ -6,12 +6,13 @@
     {
         users = new List<User>(); // or handle accordingly if ViewBag.Users is null
     }
+   
 }
 
 <!-- this is a list sample of all the posts -->
 @if (Model != null)
 {
-    @foreach (var post in Model)
+    foreach (var post in Model)
     {
         <!-- this is the card for one post-->
         <div class="card text-center mt-2">
@@ -51,32 +52,63 @@
                 <a href="#" class="btn btn-info">Go somewhere</a>
             </div>
             <div class="bg-white border border-top-2 py-2">
-                <!-- this is the button to Like this post-->
-                <a asp-action="LikePost" asp-controller="Like" asp-route-postId="@post.Id">
-                    <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
-                </a>
-                <form asp-action="LikePost" asp-controller="Like" method="post">
-                    <input type="hidden" name="postId" value="@post.Id"/>
-                    <button type="submit">
-                        <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
-                    </button>
-                </form>
+                @{
+                    var Liked = post.Likes != null && post.Likes.Any(l => l.Value.UserId == ViewBag.UserId);
+                }
 
-                <!-- this is the button to Dislike this post-->
-                <a asp-action="Dislike" asp-route-postId="@post.Id">
-                    <img src="images/heart-outline.svg" alt="Dislike" style="width:20px;" /> Unlike
-                </a>
-
+                @if (Liked)
+                {
+                    <!-- this is the button to Unlike this post-->
+                    <form asp-action="UnlikePost" asp-controller="Like" method="post">
+                        <input type="hidden" name="postId" value="@post.Id" />
+                        <button type="submit">
+                            <img src="images/heart-outline.svg" alt="Unlike" style="width:20px;" /> Unlike
+                        </button>
+                    </form>
+                }
+                else 
+                {
+                    <!-- this is the button to Like this post-->
+                    <form asp-action="LikePost" asp-controller="Like" method="post">
+                        <input type="hidden" name="postId" value="@post.Id" />
+                        <button type="submit">
+                            <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
+                        </button>
+                    </form>
+                }
                 <!-- this is the button to edit this post-->
                 <a asp-action="Edit" asp-route-postId="@post.Id">
                     <img src="images/edit.svg" alt="Edit" style="width:20px;" /> Edit
                 </a>
+                <!-- this is the button to show likes -->
+                <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
+                   data-bs-toggle="collapse" href="#collapseLike@post.Id" role="button" aria-expanded="false"
+                   aria-controls="collapseLike@post.Id">
+                    Likes @post.Likes.Count
+                </a>
+                <div class="collapse mt-2" id="collapseLike@post.Id">
+                  @if (post.Likes != null && post.Likes.Count > 0)
+                    {
+                    <div>
+                        <ul class="list-unstyled">
+                        @foreach(var like in post.Likes.Values)
+                        {
+                                <li>@like.UserName</li>
+                        }
+                        </ul>
+                    </div>
+                    }
+                    else
+                    {
+                    <p>No likes yet.</p>
+                    }
+                </div>
 
                 <!-- this is the button to show comments -->
                 <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
                    data-bs-toggle="collapse" href="#collapseComment@post.Id" role="button" aria-expanded="false"
                    aria-controls="collapseComment@post.Id">
-                    Comments
+                    Comments @post.Comments.Count
                 </a>
                 <!-- this is the component to show comments and add & edit comments -->
                 <div class="collapse mt-2" id="collapseComment@post.Id">

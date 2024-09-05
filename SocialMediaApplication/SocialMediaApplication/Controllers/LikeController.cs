@@ -27,7 +27,7 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> UnlikePost(string postId){
             string userId = HttpContext.Session.GetString("userId");
             await _firebaseService.UnlikePost(postId, userId);
-            return RedirectToAction("PostDetails",new {postId});
+            return RedirectToAction("Index", "UserPage");
         }
 
         [HttpPost]
@@ -36,14 +36,14 @@ namespace SocialMediaApplication.Controllers
             var user = await _firebaseService.GetUserProfileAsync(userId);
             string userName = user.Name;
             await _firebaseService.LikeComment(postId, commentId, userId,userName);
-            return RedirectToAction("PostDetails",new {postId});
+            return RedirectToAction("Index", "UserPage");
         }
 
         [HttpPost]
         public async Task<IActionResult> UnlikeComment(string postId, string commentId){
             string userId = HttpContext.Session.GetString("userId");
             await _firebaseService.UnlikeComment(postId, commentId, userId);
-            return RedirectToAction("PostDetails",new {postId});
+            return RedirectToAction("Index", "UserPage");
         }
     }
 

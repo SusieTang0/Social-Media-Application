@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SocialMediaApplication.Models;
 using Microsoft.AspNetCore.Authorization;
+using Firebase.Auth;
 
 namespace SocialMediaApplication.Controllers
 {
@@ -18,7 +19,8 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> AddComment(string postId, string content)
         {
             string authorId = HttpContext.Session.GetString("userId");
-            string authorName = ViewBag.User.Name;
+            var author = await _firebaseService.GetUserProfileAsync(authorId);
+            string authorName = author.Name;
             await _firebaseService.AddComment(postId, authorId, authorName, content);
             return RedirectToAction("Index","UserPage");
         }

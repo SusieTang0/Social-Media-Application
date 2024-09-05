@@ -1,7 +1,44 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\shared\\components\\postlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\shared\\components\\postlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\views\\shared\\components\\_commentsection.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\views\\shared\\components\\_commentsection.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\likecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\likecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\userpagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\userpagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\postsquarecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\postsquarecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\services\\firebaseservice2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\services\\firebaseservice2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|c:\\users\\user\\documents\\github\\social-media-application\\socialmediaapplication\\socialmediaapplication\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE7A0DD3-F6F5-48BB-A5B1-4965C00B11F0}|SocialMediaApplication\\SocialMediaApplication.csproj|solutionrelative:socialmediaapplication\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -21,7 +58,124 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PostService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Services\\PostService.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Services\\PostService.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Services\\PostService.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Services\\PostService.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAJEAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T21:00:07.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FirebaseService2.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Services\\FirebaseService2.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Services\\FirebaseService2.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Services\\FirebaseService2.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Services\\FirebaseService2.cs",
+              "ViewState": "AQIAAFMAAAAAAAAAAAAuwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T19:46:19.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Models\\Comment.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Models\\Comment.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Models\\Comment.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T19:26:42.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\CommentController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Controllers\\CommentController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T19:21:57.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserPageController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Controllers\\UserPageController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T19:14:56.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PostSquareController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Controllers\\PostSquareController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T19:02:26.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LikeController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\LikeController.cs",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Controllers\\LikeController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Controllers\\LikeController.cs",
+              "RelativeToolTip": "SocialMediaApplication\\Controllers\\LikeController.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwCEAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T17:42:56.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PostList.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "RelativeToolTip": "SocialMediaApplication\\Views\\Shared\\Components\\PostList.cshtml",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAAAGgAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-05T17:29:34.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_CommentSection.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml",
+              "RelativeDocumentMoniker": "SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Social-Media-Application\\SocialMediaApplication\\SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml*",
+              "RelativeToolTip": "SocialMediaApplication\\Views\\Shared\\Components\\_CommentSection.cshtml*",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAADEAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-05T19:29:39.232Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -32,6 +186,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             }
           ]
         },

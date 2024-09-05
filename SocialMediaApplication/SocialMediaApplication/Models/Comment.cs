@@ -9,6 +9,6 @@ namespace SocialMediaApplication.Models
         public required string Content { get; set; }
         public DateTime CreatedTime { get; set; }
 
-        public List<Like> Likes {get;set;} = new List<Like>();
+        public Dictionary<string, Like> Likes { get; set; } = new Dictionary<string, Like>();
     }
 }

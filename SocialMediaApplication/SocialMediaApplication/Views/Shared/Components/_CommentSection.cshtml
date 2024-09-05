@@ -45,18 +45,52 @@
                                 @comment.CreatedTime.ToString("f")
                     </div>
                     <div class="col-md-2">
-                        <!-- this is the button to Like this comment-->
-                        <a asp-action="Like">
-                            <img src="images/heart.svg" alt="Alternate Text"
-                                 style="width:20px;text-decoration-line:none;" />
-                        </a>
-
-                        <!-- this is the button to Unlike this comment-->
-                        <a asp-action="Dislike">
-                            <img src="images/heart-outline.svg"
-                                 alt="Alternate Text"
-                                 style="width:20px;text-decoration-line:none;" />
-                        </a>
+                    @{
+                        var Liked = comment.Likes != null && comment.Likes.Any(l => l.Value.UserId == ViewBag.UserId);
+                    }
+                    @if (Liked)
+                    {
+                      <!-- this is the button to Unlike this comment-->
+                        <form asp-action="UnlikeComment" asp-controller="Like" method="post">
+                        <input type="hidden" name="postId" value="@Model.Id" />
+                        <input type="hidden" name="commentId" value="@comment.Id" />
+                        <button type="submit">
+                            <img src="images/heart-outline.svg" alt="Unlike" style="width:20px;" />
+                        </button>
+                    </form>             
+                    }else
+                    {
+                      <!-- this is the button to Like this comment-->
+                        <form asp-action="LikeComment" asp-controller="Like" method="post">
+                        <input type="hidden" name="postId" value="@Model.Id" />
+                        <input type="hidden" name="commentId" value="@comment.Id" />
+                        <button type="submit">
+                            <img src="images/heart.svg" alt="Like" style="width:20px;" /> 
+                        </button>
+                    </form>
+                    }
+                     <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
+                   data-bs-toggle="collapse" href="#collapseLike@post.Id" role="button" aria-expanded="false"
+                   aria-controls="collapseLike@post.Id">
+                    Likes @comment.Likes.Count
+                </a>
+                <div class="collapse mt-2" id="collapseLike@post.Id">
+                  @if (comment.Likes != null && comment.Likes.Count > 0)
+                    {
+                    <div>
+                        <ul class="list-unstyled">
+                        @foreach(var like in comment.Likes.Values)
+                        {
+                                <li>@like.UserName</li>
+                        }
+                        </ul>
+                    </div>
+                    }
+                    else
+                    {
+                    <p>No likes yet.</p>
+                    }
+                </div>
                     </div>
                     <div class="col-md-1">
 

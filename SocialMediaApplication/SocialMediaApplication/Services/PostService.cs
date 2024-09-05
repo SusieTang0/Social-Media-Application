@@ -129,13 +129,22 @@ namespace SocialMediaApplication.Services
 
                     post.Comments = comments ?? new Dictionary<string, Comment>();
 
-                    if (post.Comments != null && post.Comments.Any())
+                   
+                    //Fetch likes for posts
+                    var likesResponse = await _firebaseClient.GetAsync($"posts/{postId}/likes");
+                    var likes = likesResponse.ResultAs<Dictionary<string, Like>>();
+
+                    post.Likes = likes ?? new Dictionary<string, Like>();
+
+                    //Fetch likes for comments
+                    foreach(var commentId in post.Comments.Keys.ToList())
                     {
-                        Console.WriteLine($"Post {postId} has {post.Comments.Count} comments.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Post {postId} has no comments.");
+                        var comment = post.Comments[commentId];
+
+                        var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{commentId}/likes");
+                        var clikes = clikesResponse.ResultAs<Dictionary<string, Like>>();
+                        
+                        comment.Likes = likes ?? new Dictionary<string, Like>();
                     }
                 }
             }
