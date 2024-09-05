@@ -54,74 +54,46 @@ namespace SocialMediaApplication.Services
 
 
         //Follow
-        public async Task<List<SocialMediaApplication.Models.User>> GetFollowedIdsAsync(string userId)
+        public async Task<List<SocialMediaApplication.Models.Follow>> GetFollowsAsync()
         {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followings");
-            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
-            var users = await GetUsersAsync();
-            var allFollowings = followedDictionary.Values.ToList();
-            var followings = new List<Models.User>();
-            if (followedDictionary != null)
+            FirebaseResponse response = await _firebaseClient.GetAsync("follows");
+
+
+            var followsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
+
+            if (followsDictionary != null)
             {
-                if (users != null && allFollowings != null)
-                {
-                    foreach (var following in allFollowings)
-                    {
-                        if (users.TryGetValue(following.UserId, out var user))
-                        {
-                            var theUser = new SocialMediaApplication.Models.User
-                            {
-                                UserId = following.UserId,
-                                Name = user.Name,
-                                Email = user.Email,
-                                ProfilePictureUrl = user.ProfilePictureUrl,
-                                Bio = user.Bio,
-                                Password = ""
-                            };
-
-                            followings.Add(theUser);
-
-                        }
-                        await _firebaseClient.SetAsync($"users/{userId}/followers/{following.UserId}", following);
-                    }
-
-                    return followings;
-                }
-
-
+                return followsDictionary.Values.ToList();
             }
 
-            return new List<SocialMediaApplication.Models.User>();
+            return new List<Follow>();
         }
-        public async Task<List<SocialMediaApplication.Models.User>> GetFollowedsAsync(string userId)
-        {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followings");
-            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
-            var users = await GetUsersAsync();
-            var followings = followedDictionary.Values.ToList();
-            if (followedDictionary != null)
-            {
-                if (users != null && followings != null)
-                {
-                    foreach (var following in followings)
-                    {
-                        if (users.TryGetValue(following.UserId, out var user))
-                        {
-                            following.Name = user.Name;
-                            following.Email = user.Email;
-                            following.ProfilePictureUrl = user.ProfilePictureUrl;
-                            following.Bio = user.Bio;
-                            following.Password = "";
-                        }
-                        await _firebaseClient.SetAsync($"users/{userId}/followers/{following.UserId}", following);
-                    }
 
-                    return followings;
+      
+        public async Task<Dictionary<string,SocialMediaApplication.Models.User>> GetFollowedsUserAsync(string userId)
+        {
+            var users = await GetUsersAsync();
+            var result = new Dictionary<string,SocialMediaApplication.Models.User>();
+            var followings = await GetFollowsAsync();
+            
+            if (users != null && followings != null)
+            {
+                foreach (var following in followings)
+                {
+                    if (users.TryGetValue(following.FollowerId, out var user))
+                    {
+
+                        result.Add(following.FollowerId, user);
+                      
+                    }
+                    
                 }
 
+                return result;
             }
 
-            return new List<SocialMediaApplication.Models.User>();
+
+            return null;
         }
         public async Task AddFollowAsync(string followingId, string followerId)
         {
