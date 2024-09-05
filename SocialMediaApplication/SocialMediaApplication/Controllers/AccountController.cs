@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SocialMediaApplication.Models;
+using Firebase.Auth;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+
 
 namespace SocialMediaApplication.Services
 {
@@ -26,31 +28,50 @@ namespace SocialMediaApplication.Services
         [HttpPost]
         public async Task<IActionResult> Register(string email, string password, IFormFile profilePicture)
         {
-            var authLink = await _firebaseService.RegisterUser(email, password);
-
-            string imageUrl = null;
-
-            if (profilePicture != null)
+            try
             {
-                using var stream = profilePicture.OpenReadStream();
-                imageUrl = await _firebaseService.UploadProfilePictureAsync(stream, profilePicture.FileName);
+
+                // Proceed with registration if email does not exist
+                var authLink = await _firebaseService.RegisterUser(email, password);
+
+                string imageUrl = null;
+
+                if (profilePicture != null)
+                {
+                    using var stream = profilePicture.OpenReadStream();
+                    imageUrl = await _firebaseService.UploadProfilePictureAsync(stream, profilePicture.FileName);
+                }
+
+                var userProfile = new SocialMediaApplication.Models.User
+                {
+                    UserId = authLink.User.LocalId,
+                    Email = email,
+                    Name = email,
+                    Bio = "This is your bio. You can update it later.",
+                    ProfilePictureUrl = imageUrl ?? "~/images/logo150.png" // Fallback to default avatar if no picture uploaded
+                };
+
+                await _firebaseService.SaveUserProfileAsync(authLink.User.LocalId, userProfile);
+
+                HttpContext.Session.SetString("userId", authLink.User.LocalId);
+
+                return RedirectToAction("Index", "UserPage");
             }
-
-            var userProfile = new SocialMediaApplication.Models.User
+            catch (FirebaseAuthException ex)
             {
-                UserId = authLink.User.LocalId,
-                Email = email,
-                Name = email,
-                Bio = "This is your bio. You can update it later.",
-                ProfilePictureUrl = imageUrl ?? "~/images/logo150.png" // Fallback to default avatar if no picture uploaded
-            };
-
-            await _firebaseService.SaveUserProfileAsync(authLink.User.LocalId, userProfile);
-
-            HttpContext.Session.SetString("userId", authLink.User.LocalId);
-
-            return RedirectToAction("Profile");
+                // Handle Firebase-specific exceptions
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Register");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                // Return a 200 status code with an error message
+                ViewBag.ErrorMessage = "This email already has an account. Please Login.";
+                return View("Register");
+            }
         }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -60,10 +81,12 @@ namespace SocialMediaApplication.Services
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var authLink = await _firebaseService.LoginUser(email, password);
-            // Store userId in session or cookies
-            HttpContext.Session.SetString("userId", authLink.User.LocalId);
-            var claims = new List<Claim>
+            try
+            {
+                var authLink = await _firebaseService.LoginUser(email, password);
+                // Store userId in session or cookies
+                HttpContext.Session.SetString("userId", authLink.User.LocalId);
+                 var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, email)
     
@@ -72,7 +95,24 @@ namespace SocialMediaApplication.Services
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-            return RedirectToAction("Profile");
+                return RedirectToAction("Index", "UserPage");
+            }
+            catch (FirebaseAuthException ex)
+            {
+                // Handle Firebase-specific exceptions
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Login");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                // Return a 200 status code with an error message
+                ViewBag.ErrorMessage = "Email does not exist or the password is incorrect";
+                return View("Login");
+            }
+
+
+
         }
 
         [HttpGet]
@@ -131,7 +171,7 @@ namespace SocialMediaApplication.Services
                 imageUrl = await _firebaseService.UploadProfilePictureAsync(stream, profilePicture.FileName);
             }
 
-            var userProfile = new User
+            var userProfile = new Models.User
             {
                 UserId = userId,
                 Name = name,
@@ -155,6 +195,34 @@ namespace SocialMediaApplication.Services
 
             // Redirect to the Home/Index page
             return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(string resetEmail)
+        {
+            try
+            {
+
+                await _firebaseService.SendPasswordResetEmailAsync(resetEmail);
+
+
+                TempData["ResetMessage"] = "A password reset link has been sent to your email.";
+
+                return RedirectToAction("Login", new { email = resetEmail });
+            }
+            catch (Exception ex)
+            {
+                TempData["ResetErrorMessage"] = ex.Message;
+
+                return RedirectToAction("ResetPassword");
+            }
         }
     }
 }

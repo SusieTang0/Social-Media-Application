@@ -95,6 +95,20 @@ public class FirebaseService
     }
 
 
+    public async Task SendPasswordResetEmailAsync(string email)
+    {
+        try
+        {
+            await _authProvider.SendPasswordResetEmailAsync(email);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Failed to send password reset email. Please try again.");
+        }
+    }
+
+
+
 
 
 }

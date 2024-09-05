@@ -1,0 +1,17 @@
+ <!-- Displays a list of followers with basic information (name). -->
+
+@model IEnumerable<SocialMediaApplication.Models.UserFollow>
+
+<ul>
+    @foreach (var follower in Model)
+    {
+        <li>
+            <img src="@follower.FollowerAvatar" alt="@follower.FollowerName" width="50" height="50" />
+            @follower.FollowerName
+            <button class="btn btn-danger toggle-follow" data-user-id="@follower.FollowerId">
+                Follow
+            </button>
+        </li>
+    }
+</ul>
+

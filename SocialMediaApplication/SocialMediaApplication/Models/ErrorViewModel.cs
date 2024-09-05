@@ -1,3 +1,6 @@
+using SocialMediaApplication.Models;
+using SocialMediaApplication.Services;
+
 namespace SocialMediaApplication.Models
 {
     public class ErrorViewModel
