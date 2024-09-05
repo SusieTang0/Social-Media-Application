@@ -2,7 +2,9 @@
 using Firebase.Storage;
 using FireSharp.Interfaces;
 using FireSharp.Response;
+using Microsoft.Extensions.Hosting;
 using SocialMediaApplication.Models;
+using System.ComponentModel.Design;
 
 namespace SocialMediaApplication.Services
 {
@@ -28,7 +30,7 @@ namespace SocialMediaApplication.Services
         /*_______________Posts_______________________*/
         
         //User
-        public async Task<List<SocialMediaApplication.Models.User>> GetUsersAsync()
+        public async Task<Dictionary<string,SocialMediaApplication.Models.User>> GetUsersAsync()
         {
             FirebaseResponse response = await _firebaseClient.GetAsync("users");
 
@@ -37,10 +39,10 @@ namespace SocialMediaApplication.Services
 
             if (usersDictionary != null)
             {
-                return usersDictionary.Values.ToList();
+                return usersDictionary;
             }
 
-            return new List<SocialMediaApplication.Models.User>();
+            return null;
         }
 
         public async Task<SocialMediaApplication.Models.User> GetUserProfileAsync(string userId)
@@ -82,87 +84,53 @@ namespace SocialMediaApplication.Services
 
         // Post
 
-        public async Task AddPost(string userId, string content,string userName,string pictureUrl)
+        public async Task AddPost(string content,string authorId, string authorName, string authorAvatar)
         {
-            var post = new
+            
+            var post = new Post
             {
                 Content = content,
-                AuthorId = userId,
-                AuthorName = userName,
-                AuthorAvatar = pictureUrl,
-                CreatedTime = DateTime.UtcNow
+                AuthorId = authorId,
+                AuthorName = authorName,
+                AuthorAvatar = authorAvatar,
+                CreatedTime = DateTime.Now,
+                UpdatedTime = DateTime.Now
             };
 
-            // Push the post to Firebase
-            var response = await _firebaseClient.PushAsync("posts", post);
-        }
-
-
-
-        public async Task<List<SocialMediaApplication.Models.Post>> GetPostsAsync()
-        {
-            FirebaseResponse response = await _firebaseClient.GetAsync("posts");
-
-            
-            var postsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Post>>();
-
-            if (postsDictionary != null)
-            {
-                return postsDictionary.Values.ToList();
-            }
-
-            return new List<SocialMediaApplication.Models.Post>();
-        }
-
-        public async Task<List<SocialMediaApplication.Models.Post>> GetPostsByUserIdAsync(string userId)
-        {
-            try
-            {
-                FirebaseResponse response = await _firebaseClient.GetAsync($"posts/{userId}");
-
-                var userPostsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Post>>();
-
-                return userPostsDictionary != null ? userPostsDictionary.Values.ToList() : new List<SocialMediaApplication.Models.Post>();
-            }
-            catch (Exception ex)
-            {
-                return new List<SocialMediaApplication.Models.Post>();
-            }
-        }
-
-        public async Task<SocialMediaApplication.Models.Post> GetPostByPostIdAsync(string postId)
-        {
-            try
-            {
-                FirebaseResponse response = await _firebaseClient.GetAsync($"posts/{postId}");
-                var post = response.ResultAs<SocialMediaApplication.Models.Post>();
-                return post;
-            }
-            catch (Exception ex)
-            {
-               
-                return null;
-            }
-        }
-
-        public async Task<FirebaseResponse> SavePostAsync(string postId, SocialMediaApplication.Models.Post post)
-        {
-            if (string.IsNullOrEmpty(postId) || post == null)
+            if (post == null )
             {
                 throw new ArgumentException("Post ID and Post object cannot be null or empty.");
             }
 
+
             try
             {
-                return await _firebaseClient.SetAsync($"posts/{postId}", post);
+                var response = await _firebaseClient.PushAsync("posts", post);
+                string generatedKey = response.Result.name;
+                post.Id = generatedKey;
+                await _firebaseClient.SetAsync($"posts/{generatedKey}", post);
             }
             catch (Exception ex)
             {
                 throw new ApplicationException("Error saving the post.", ex);
             }
+
+           
         }
 
-        public async Task<FirebaseResponse> DeletePostAsync(string postId)
+        public async Task<FirebaseResponse> SavePostAsync(string id, string content)
+        {
+            var post = await GetPostByPostIdAsync(id);
+            post.Content = content;
+
+            if (post == null || string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentException("Post object or Id cannot be null or empty.");
+            }
+            return await _firebaseClient.SetAsync($"posts/{id}", post);
+        }
+
+        public async Task DeletePostAsync(string postId)
         {
             if (string.IsNullOrEmpty(postId))
             {
@@ -171,7 +139,8 @@ namespace SocialMediaApplication.Services
 
             try
             {
-                return await _firebaseClient.DeleteAsync($"posts/{postId}");
+
+                await _firebaseClient.DeleteAsync($"posts/{postId}");
             }
             catch (Exception ex)
             {
@@ -179,5 +148,116 @@ namespace SocialMediaApplication.Services
             }
         }
 
+        public async Task<Dictionary<string,SocialMediaApplication.Models.Post>> GetPostsAsync()
+        {
+            FirebaseResponse response = await _firebaseClient.GetAsync("posts");
+
+            
+            var postsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Post>>();
+
+            if (postsDictionary != null)
+            {
+                return postsDictionary;
+            }
+
+            return null;
+        }
+
+        public async Task<List<SocialMediaApplication.Models.Post>> GetAllPostsAsync()
+        {
+            var posts = new List<Post>();
+            var allPosts = await GetPostsAsync();
+
+            if (allPosts != null)
+            {
+                posts = allPosts
+                     .Select(post => new Post
+                     {
+                         Id = post.Key,
+                         AuthorId = post.Value.AuthorId,
+                         AuthorName = post.Value.AuthorName,
+                         AuthorAvatar = post.Value.AuthorAvatar,
+                         Content = post.Value.Content,
+                         CreatedTime = post.Value.CreatedTime,
+                     })
+                     .OrderByDescending(post => post.CreatedTime)
+                     .ToList();
+            }
+
+            return posts;
+        }
+
+        public async Task<SocialMediaApplication.Models.Post> GetPostByPostIdAsync(string postId)
+        {
+            if (string.IsNullOrEmpty(postId))
+            {
+                return null;
+            }
+
+            var allPosts = await GetPostsAsync();
+
+            if (allPosts != null && allPosts.TryGetValue(postId, out var post))
+            {
+                return post;
+            }
+
+            return null;
+
+        }
+
+        public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
+        {
+            var posts = new List<Post>();
+            var followedUsers = await GetFollowedIdsAsync(userId);
+            var followedIds = new HashSet<string>(followedUsers.Select(f => f.FollowedId));
+            var allPosts = await GetPostsAsync();
+
+            if (allPosts != null && followedIds.Count > 0)
+            {
+                posts = allPosts
+                    .Where(post => followedIds.Contains(userId))
+                     .Select(post => new Post
+                     {
+                         Id = post.Key,
+                         AuthorId = post.Value.AuthorId,
+                         AuthorName = post.Value.AuthorName,
+                         AuthorAvatar = post.Value.AuthorAvatar,
+                         Content = post.Value.Content,
+                         CreatedTime = post.Value.CreatedTime,
+                     })
+                     .OrderByDescending(post => post.CreatedTime)
+                     .Take(numberToShow)
+                     .ToList();
+            }
+
+            return posts;
+        }
+
+
+        public async Task<List<Post>> FindPostListAsync(string id, int numberToShow)
+        {
+            var posts = new List<Post>();
+            var allPosts = await GetPostsAsync();
+
+            if (allPosts != null)
+            {
+                posts = allPosts
+                    .Where(kvp => kvp.Value.AuthorId == id)
+                     .Select(kvp => new Post
+                     {
+                         Id = kvp.Key,
+                         AuthorId = kvp.Value.AuthorId,
+                         AuthorName = kvp.Value.AuthorName,
+                         AuthorAvatar = kvp.Value.AuthorAvatar,
+                         Content = kvp.Value.Content,
+                         CreatedTime = kvp.Value.CreatedTime
+                     })
+                     .OrderByDescending(post => post.CreatedTime)
+                     .Take(numberToShow)
+                     .ToList();
+            }
+
+            return posts;
+        }
     }
 }

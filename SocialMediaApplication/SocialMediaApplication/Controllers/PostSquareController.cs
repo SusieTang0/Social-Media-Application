@@ -14,20 +14,28 @@ namespace SocialMediaApplication.Controllers
             _postService = postService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Id)
         {
             string userId = HttpContext.Session.GetString("userId");
+
             if (string.IsNullOrEmpty(userId))
             {
                 return RedirectToAction("Login", "Account");
             }
-
-            
-
-            var posts = await _postService.GetPostsAsync();
+            if (Id == null)
+            {
+                ViewBag.Owner = await _postService.GetUserProfileAsync(userId);
+                ViewBag.IsOwner = true;
+            }
+            else
+            {
+                ViewBag.Owner = await _postService.GetUserProfileAsync(Id);
+                ViewBag.IsOwner = false;
+            }
+          
+            var posts = await _postService.GetAllPostsAsync();
             ViewBag.Users = await _postService.GetUsersAsync();
-            ViewBag.Owner = await _postService.GetUserProfileAsync(userId);
-            posts.Reverse();
+            ViewBag.User = await _postService.GetUserProfileAsync(userId);
             return View(posts);
         }
 

@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using SocialMediaApplication.Models;
 using SocialMediaApplication.Services;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SocialMediaApplication.Controllers
 {
@@ -21,15 +25,28 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> Index(string Id)
         {
             string userId = HttpContext.Session.GetString("userId");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            if(Id == null || Id == userId)
+            {
+                ViewBag.Owner = await _postService.GetUserProfileAsync(userId);
+                ViewBag.IsOwner = true;
+            }
+            else
+            {
+                ViewBag.Owner = await _postService.GetUserProfileAsync(Id);
+                ViewBag.IsOwner = false;
+            }
+            
+          
           
            
-            ViewBag.User = await _postService.GetUserProfileAsync(Id);
-            ViewBag.IsOwner = Id == userId;
-          
-            var posts = await GetPostlistsAsync(userId);
             ViewBag.Users = await _postService.GetUsersAsync();
-            ViewBag.Owner = await _postService.GetUserProfileAsync(userId);
-
+            ViewBag.User = await _postService.GetUserProfileAsync(userId);
+            var posts = await GetPostlistsAsync(userId);
             return View(posts);
         }
 
@@ -42,82 +59,94 @@ namespace SocialMediaApplication.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            User thisUser = await _postService.GetUserProfileAsync(userId);
-            await _postService.AddPost(userId, content, thisUser.Name, thisUser.ProfilePictureUrl);
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                // Handle empty content case
+                ModelState.AddModelError(string.Empty, "Content cannot be empty.");
+                return RedirectToAction("Index"); // Redirect to the appropriate action or return a view with error messages
+            }
 
-            return RedirectToAction("Index");
+            User thisUser = await _postService.GetUserProfileAsync(userId);
+            if (thisUser == null)
+            {
+                // Handle the case where the user profile cannot be retrieved
+                return NotFound("User not found.");
+            }
+
+            
+
+            try
+            {
+                await _postService.AddPost(content, userId, thisUser.Name, thisUser.ProfilePictureUrl);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception and handle errors
+                // Logger.LogError(ex, "Error creating post");
+                return StatusCode(500, "Internal server error. Please try again later.");
+            }
+
+            return RedirectToAction("Index", new { Id = userId });
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePost(string postId, string userId, string content)
+        public async Task<IActionResult> UpdatePost(string postId, string content)
         {
-            var existingPost = await _postService.GetPostByPostIdAsync(postId);
-
-            if (existingPost == null)
+            string userId = HttpContext.Session.GetString("userId");
+            if (userId == null)
             {
-                return NotFound();
+                return RedirectToAction("Login", "Account");
             }
 
-            var updatedPost = new Post
+            if (string.IsNullOrEmpty(postId) && string.IsNullOrEmpty(content))
             {
-                Id = postId,
-                Content = content,
-                AuthorId = existingPost.AuthorId,
-                AuthorName = existingPost.AuthorName,
-                AuthorAvatar = existingPost.AuthorAvatar,
-                CreatedTime = DateTime.Now
-            };
-            await _postService.SavePostAsync(postId, updatedPost);
+                // Handle the case where postId is null or empty
+                return BadRequest("Post ID cannot be null or empty.");
+            }
 
-            return RedirectToAction("Index");
+
+            await _postService.SavePostAsync(postId, content);
+
+
+
+
+            // Redirect to the index action with the correct userId
+            return RedirectToAction("Index", new { Id = userId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            string userId = HttpContext.Session.GetString("userId");
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            if (string.IsNullOrEmpty(id))
+            {
+                // Handle the error or return a view with an error message
+                return BadRequest("Post ID cannot be null or empty.");
+            }
+            
+            await _postService.DeletePostAsync(id);
+
+            return RedirectToAction("Index", new { Id = userId });
         }
 
         public async Task<PostList> GetPostlistsAsync(string id)
         {
             var thePosts = new PostList
             {
-                MyPosts = await FindPostListAsync(id, 5),
-                MyFollowedPosts = await FindFollowedPostsAsync(id, 5)
+                MyPosts = await _postService.FindPostListAsync(id, 5),
+                MyFollowedPosts = await _postService.FindFollowedPostsAsync(id, 5)
             };
 
             return thePosts;
         }
 
-        public async Task<List<Post>> FindPostListAsync(string id, int numberToShow)
-        {
-            var posts = new List<Post>();
-            var allPosts = await _postService.GetPostsAsync();
+       
 
-            if (allPosts != null)
-            {
-                posts = allPosts
-                    .Where(post => post.AuthorId == id)
-                    .OrderByDescending(post => post.CreatedTime)
-                    .Take(numberToShow)
-                    .ToList();
-            }
-            posts.Reverse();
-            return posts;
-        }
-
-        public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
-        {
-            var posts = new List<Post>();
-            var followedUsers = await _postService.GetFollowedIdsAsync(userId);
-            var followedIds = new HashSet<string>(followedUsers.Select(f => f.FollowedId));
-            var allPosts = await _postService.GetPostsAsync();
-
-            if (allPosts != null && followedIds.Count > 0)
-            {
-                posts = allPosts
-                    .Where(post => followedIds.Contains(post.AuthorId))
-                    .OrderByDescending(post => post.CreatedTime)
-                    .Take(numberToShow)
-                    .ToList();
-            }
-            posts.Reverse();
-            return posts;
-        }
+       
 
         [HttpPost]
         public async Task<IActionResult> Logout()

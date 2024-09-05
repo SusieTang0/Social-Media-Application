@@ -23,19 +23,19 @@
 
                 @if (ViewBag.IsOwner != null && (bool)ViewBag.IsOwner)
                 {
+                    <!-- Links for the profile owner -->
+                    <div class="card-body d-flex justify-content-center">
+                        <a href="/Account/Profile" class="btn btn-primary w-100" style="border-radius:10px;">Manage My Profile</a>
+                    </div>
+                }
+                else
+                {
                     <!-- Links for other users visiting the profile -->
                     <div class="card-body d-flex justify-content-center">
                         <a asp-action="Follow" asp-route-userId="@owner?.UserId" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</a>
                     </div>
                     <div class="card-body d-flex justify-content-center">
                         <a asp-action="CancelFollow" asp-route-userId="@owner?.UserId" class="btn btn-outline-danger w-100" style="border-radius:10px;">Cancel Follow</a>
-                    </div>
-                }
-                else
-                {
-                    <!-- Links for the profile owner -->
-                    <div class="card-body d-flex justify-content-center">
-                        <a href="/Account/Profile" class="btn btn-primary w-100" style="border-radius:10px;">Manage My Profile</a>
                     </div>
                 }
 
