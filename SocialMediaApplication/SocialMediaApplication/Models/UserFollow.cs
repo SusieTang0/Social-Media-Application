@@ -12,8 +12,8 @@ namespace SocialMediaApplication.Models
         public string AvatarUrl { get; set; } = string.Empty;
 
         // Followers and Following
-        public List<UserFollow> Followers { get; set; } = new List<UserFollow>();
-        public List<UserFollow> Following { get; set; } = new List<UserFollow>();
+        // public List<UserFollow> Followers { get; set; } = new List<UserFollow>();
+        // public List<UserFollow> Following { get; set; } = new List<UserFollow>();
 
         // The ID of the user who is following the current user
         public Guid FollowerId { get; set; }
