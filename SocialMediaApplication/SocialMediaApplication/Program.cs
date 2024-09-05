@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,14 +8,23 @@ using SocialMediaApplication.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add data protection services with persistent key storage
-builder.Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\keys"))
-    .SetApplicationName("SocialMediaApplication") // Use the same application name across all instances
-    .SetDefaultKeyLifetime(TimeSpan.FromDays(90)); // Adjust key lifetime as needed
+// builder.Services.AddDataProtection()
+// .PersistKeysToFileSystem(new DirectoryInfo(@"C:\keys"))
+// .SetApplicationName("SocialMediaApplication") // Use the same application name across all instances
+// .SetDefaultKeyLifetime(TimeSpan.FromDays(90)); // Adjust key lifetime as needed
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Inhect Authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
+builder.Services.AddHttpContextAccessor();
 // Register FirebaseService as a singleton
 builder.Services.AddSingleton<FirebaseService>();
 builder.Services.AddScoped<PostService>();
@@ -52,7 +63,7 @@ app.UseAuthorization();
 app.Use(async (context, next) =>
 {
     if (string.Equals(context.Request.Method, "POST", StringComparison.OrdinalIgnoreCase) &&
-        !context.Request.Path.StartsWithSegments("/api"))
+         !context.Request.Path.StartsWithSegments("/api"))
     {
         await context.RequestServices.GetRequiredService<IAntiforgery>()
             .ValidateRequestAsync(context);
@@ -62,6 +73,6 @@ app.Use(async (context, next) =>
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Follow}/{action=Follow}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

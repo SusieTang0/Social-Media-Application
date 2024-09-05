@@ -52,7 +52,13 @@ namespace SocialMediaApplication.Controllers
             {
                 await _postService.AddPost(userId, content, thisUser.Name, thisUser.ProfilePictureUrl);
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, "Internal server error. Please try again later." + ex.Message);
+            }
+
+            return RedirectToAction("Index", new { Id = userId });
         }
 
         [HttpPost]

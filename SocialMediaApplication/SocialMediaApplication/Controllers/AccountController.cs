@@ -84,40 +84,18 @@ namespace SocialMediaApplication.Services
                 var authLink = await _firebaseService.LoginUser(email, password);
                 // Store userId in session or cookies
                 HttpContext.Session.SetString("userId", authLink.User.LocalId);
-                 var claims = new List<Claim>
-=======
->>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
-            {
-                var authLink = await _firebaseService.LoginUser(email, password);
-                // Store userId in session or cookies
-                HttpContext.Session.SetString("userId", authLink.User.LocalId);
+               var claims = new List<Claim>
+               {
+                    new Claim(ClaimTypes.Name, email)
+    
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return RedirectToAction("Index", "UserPage");
             }
-            catch (FirebaseAuthException ex)
-            {
-                // Handle Firebase-specific exceptions
-                ViewBag.ErrorMessage = ex.Message;
-                return View("Login");
-            }
-            catch (Exception ex)
-            {
-                // Log the exception if needed
-                // Return a 200 status code with an error message
-                ViewBag.ErrorMessage = "Email does not exist or the password is incorrect";
-                return View("Login");
-            }
-
-
-<<<<<<< HEAD
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                return RedirectToAction("Index", "UserPage");
-            }
-            catch (FirebaseAuthException ex)
-            {
-                // Handle Firebase-specific exceptions
-                ViewBag.ErrorMessage = ex.Message;
-                return View("Login");
-            }
+           
             catch (Exception ex)
             {
                 // Log the exception if needed

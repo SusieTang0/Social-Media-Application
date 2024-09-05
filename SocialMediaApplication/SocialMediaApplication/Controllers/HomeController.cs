@@ -12,33 +12,18 @@ namespace SocialMediaApplication.Controllers
 
         private readonly ILogger<HomeController> _logger;
 
-//         public HomeController(ILogger<HomeController> logger)
-//         {
-//             _logger = logger;
-//         }
-
-<<<<<<< HEAD
-//         public IActionResult Index()
-//         {
-//             return View();
-//         }
-=======
-        public IActionResult Index()
-        {
-            string userId = HttpContext.Session.GetString("userId");
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return RedirectToAction("Home", "Account");
-            }
-            return View();
+        public HomeController(ILogger<HomeController> logger)
+         {
+             _logger = logger;
         }
->>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
-
-//         public IActionResult Privacy()
-//         {
-//             return View();
-//         }
+        public IActionResult Index()
+         {
+            return View();
+         }
+        public IActionResult Privacy()
+         {
+             return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

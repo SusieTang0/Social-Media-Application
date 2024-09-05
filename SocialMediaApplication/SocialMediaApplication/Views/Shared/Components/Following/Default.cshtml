@@ -1,18 +1,2 @@
 <!-- Displays a list of users the current user is following, focused purely on displaying the lists and are meant to be embedded as partial views wherever follower/following data is needed. 
 They are not designed to handle interactions like following/unfollowing users directly. -->
-
-@model IEnumerable<SocialMediaApplication.Models.UserFollow>
-
-<ul>
-    @foreach (var following in Model)
-    {
-        <li>
-            <img src="@following.FollowingAvatar" alt="@following.FollowingName" width="50" height="50" />
-            @following.FollowingName
-            <button class="btn btn-danger toggle-follow" data-user-id="@following.FollowingId">
-                Unfollow
-            </button>
-        </li>
-    }
-</ul>
-

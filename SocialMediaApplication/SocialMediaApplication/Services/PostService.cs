@@ -50,34 +50,46 @@ namespace SocialMediaApplication.Services
         }
 
         //Follow
-        public async Task<List<SocialMediaApplication.Models.Follow>> GetFollowedIdsAsync(string userId)
+        public async Task<List<SocialMediaApplication.Models.Follow>> GetFollowsAsync()
         {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/follows");
+            FirebaseResponse response = await _firebaseClient.GetAsync("follows");
 
 
-            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
+            var followsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
 
-            if (followedDictionary != null)
+            if (followsDictionary != null)
             {
-                return followedDictionary.Values.ToList();
+                return followsDictionary.Values.ToList();
             }
 
-            return new List<SocialMediaApplication.Models.Follow>();
+            return new List<Follow>();
         }
 
-        public async Task<List<SocialMediaApplication.Models.Follow>> GetFollowerIdsAsync(string userId)
+      
+        public async Task<Dictionary<string,SocialMediaApplication.Models.User>> GetFollowedsUserAsync(string userId)
         {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followers");
-
-
-            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
-
-            if (followedDictionary != null)
+            var users = await GetUsersAsync();
+            var result = new Dictionary<string,SocialMediaApplication.Models.User>();
+            var followings = await GetFollowsAsync();
+            
+            if (users != null && followings != null)
             {
-                return followedDictionary.Values.ToList();
+                foreach (var following in followings)
+                {
+                    if (users.TryGetValue(following.FollowerId, out var user))
+                    {
+
+                        result.Add(following.FollowerId, user);
+                      
+                    }
+                    
+                }
+
+                return result;
             }
 
-            return new List<SocialMediaApplication.Models.Follow>();
+
+            return null;
         }
 
         // Post
