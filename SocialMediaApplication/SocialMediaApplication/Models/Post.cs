@@ -19,9 +19,5 @@ namespace SocialMediaApplication.Models
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
 
-        public Dictionary<string, Comment> Comments { get; set; } = new Dictionary<string, Comment>();
-
-        public Dictionary<string, Like> Likes { get; set; } = new Dictionary<string, Like>();
-
     }
 }

@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SocialMediaApplication.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace SocialMediaApplication.Controllers
-{
+{            
     public class CommentController : Controller
     {
         private readonly FirebaseService2 _firebaseService;
@@ -17,29 +16,28 @@ namespace SocialMediaApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> AddComment(string postId, string content)
         {
-            string authorId = HttpContext.Session.GetString("userId");
-            string authorName = ViewBag.User.Name;
-            await _firebaseService.AddComment(postId, authorId, authorName, content);
-            return RedirectToAction("Index","UserPage");
+            string userId = User.Identity.Name;
+            await _firebaseService.AddComment(postId, userId, content);
+            return RedirectToAction();
         }
 
         [HttpPost]
         public async Task<IActionResult> EditComment(string postId, string commentId, string content)
         {
             await _firebaseService.EditComment(postId, commentId, content);
-            return RedirectToAction("Index", "UserPage");
+            return RedirectToAction();
         }
 
         public async Task<IActionResult> DeleteComment(string postId, string commentId)
         {
             await _firebaseService.DeleteComment(postId, commentId);
-            return RedirectToAction("Index", "UserPage");
+            return RedirectToAction();
         }
 
         public async Task<IActionResult> GetComments(string postId)
         {
             var comments = await _firebaseService.GetComments(postId);
-            return PartialView("_CommentsPartial", comments);
+            return RedirectToAction();
         }
     }
 

@@ -130,61 +130,6 @@ namespace SocialMediaApplication.Services
 
             if (followingUser == null || followerUser == null)
             {
-                Content = content,
-                AuthorId = userId,
-                AuthorName = userName,
-                AuthorAvatar = pictureUrl,
-                CreatedTime = DateTime.UtcNow
-            };
-
-            // Push the post to Firebase
-            var response = await _firebaseClient.PushAsync("posts", post);
-        }
-
-
-
-       /* public async Task<List<SocialMediaApplication.Models.Post>> GetPostsAsync()
-        {
-            FirebaseResponse response = await _firebaseClient.GetAsync("posts");
-
-            
-            var postsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Post>>();
-
-            if (postsDictionary != null)
-            {
-                return postsDictionary.Values.ToList();
-            }
-
-            return new List<SocialMediaApplication.Models.Post>();
-        }*/
-        public async Task<Dictionary<string, Post>> GetPostsAsync()
-        {
-            var response = await _firebaseClient.GetAsync("posts");
-            var posts = response.ResultAs<Dictionary<string, Post>>();
-
-            if (posts != null) 
-            {
-                foreach (var postId in posts.Keys.ToList())
-                {
-                    var post = posts[postId];
-
-                    var commentsResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments");
-                    var comments = commentsResponse.ResultAs<Dictionary<string, Comment>>();
-
-                    post.Comments = comments ?? new Dictionary<string, Comment>();
-
-                    if (post.Comments != null && post.Comments.Any())
-                    {
-                        Console.WriteLine($"Post {postId} has {post.Comments.Count} comments.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Post {postId} has no comments.");
-                    }
-                }
-            }
-            return posts;
-        }
                 throw new ArgumentException("Following and Followers cannot be null or empty.");
             }
 

@@ -25,17 +25,11 @@ public class FirebaseService2
         _firebaseStorage = new FirebaseStorage(configuration["Firebase:StorageBucket"]);
     }
 
-    public async Task<SocialMediaApplication.Models.User> GetUserProfileAsync(string userId)
-    {
-        FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/profile");
-        return response.ResultAs<SocialMediaApplication.Models.User>();
-    }
-
     /*_______________Likes_______________________*/
-    public async Task LikePost(string postId, string userId, string userName)
+    public async Task LikePost(string postId, string userId)
     {
-        var like = new{ UserId = userId, UserName = userName, LikedAt = DateTime.UtcNow};
-        var response = await _firebaseClient.PushAsync($"posts/{postId}/likes/",like);
+        var like = new{ UserId = userId, CreatedTime = DateTime.UtcNow};
+        var response = await _firebaseClient.PushAsync($"posts/{postId}/likes",like);
 
     }
 
@@ -69,11 +63,10 @@ public class FirebaseService2
 
 
     /*_______________Comments______________________*/
-    public async Task AddComment(string postId, string authorId, string authorName, string content)
+    public async Task AddComment(string postId, string userId, string content)
     {
-        var comment = new Comment{
-            AuthorId = authorId,
-            AuthorName = authorName,
+        var comment = new {
+            UserId = userId,
             PostId = postId,
             Content = content,
             CreatedTime = DateTime.UtcNow
@@ -90,24 +83,25 @@ public class FirebaseService2
         var response = await _firebaseClient.PushAsync($"posts/{postId}/comments/{commentId}",comment);
     }
 
-    public async Task DeleteComment(string postId,string commentId)
-    {   
+    public async Task DeleteComment(string postId,string userId)
+    {
+        var commentNode = await _firebaseClient.GetAsync($"posts/{postId}/comments");
+        var comments = commentNode.ResultAs<Dictionary<string,Comment>>();
+
+        var commentId = comments?.FirstOrDefault(x => x.Value.UserId == userId).Key;
+        if(commentId != null){
             await _firebaseClient.DeleteAsync($"posts/{postId}/comments/{commentId}");
+        }
     }
     public async Task<List<dynamic>> GetComments(string postId)
     {
         var response = await _firebaseClient.GetAsync($"posts/{postId}/comments");
         return response.ResultAs<List<dynamic>>();
     }
-    public async Task<Comment> GetCommentAsync(string postId, string commentId)
-    {
-        var response = await _firebaseClient.GetAsync($"posts/{postId}/comments/{commentId}");
-        return response.ResultAs<Comment>();
-    }
 
-    public async Task LikeComment( string postId, string commentId, string userId, string userName)
+    public async Task LikeComment( string postId, string commentId, string userId)
     {
-        var like = new{ UserId = userId, UserName = userName, LikedAt = DateTime.UtcNow};
+        var like = new{ UserId = userId, CreatedTime = DateTime.UtcNow};
         var response = await _firebaseClient.PushAsync($"posts/{postId}/comments/{commentId}/likes",like);
 
     }
