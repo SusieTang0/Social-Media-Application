@@ -6,8 +6,11 @@
     {
         users = new List<User>(); // or handle accordingly if ViewBag.Users is null
     }
+﻿@model IEnumerable<SocialMediaApplication.Models.Post>
+@{
+    var thisUser = ViewBag.User as SocialMediaApplication.Models.User;
+    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User> ?? new List<User>();
 }
-
 <!-- this is a list sample of all the posts -->
 @if (Model != null)
 {
@@ -85,6 +88,10 @@
             </div>
         </div>
         <!-- This is the end of the card for one post -->
+        if (post != null)
+        {
+             @Html.Partial("Components/PostCard",post)
+        }
     }
 }
 else

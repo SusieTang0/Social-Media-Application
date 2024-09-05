@@ -1,77 +1,118 @@
 ﻿@model SocialMediaApplication.Models.Post
+
 @{
-    var thisUser = ViewBag.User as SocialMediaApplication.Models.User;
-    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User>;
-    if (users == null)
-    {
-        users = new List<User>(); // or handle accordingly if ViewBag.Users is null
-    }
+    var thisUser = ViewBag.User as SocialMediaApplication.Models.User ;
+    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User> ?? new List<User>();
+    string postIdString = Model.CreatedTime.ToString("yyyyMMddHHmmss");
+    Post post = Model as SocialMediaApplication.Models.Post;
 }
-<!-- this is the card for one post-->
-<div class="card text-center mt-2">
-    <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
-        <div class="d-flex justify-content-between align-items-center">
-            @if (Model.AuthorId != thisUser.UserId)
-            {
-                <a href="OtherUserPage/{Model.AuthorId}"><img class="p-2" src="Model.AuthorAvatar" alt="Profile Picture" style="width:50px;" /></a>
-                <a class="p-2">Model.AuthorName</a>
-            }
-            else
-            {
-                <a href="UserPage"><img src="Model.AuthorAvatar" alt="Profile Picture" style="width:50px;" /></a>
-                <a class="ps-2" style="text-decoration:none;">Model.AuthorName</a>
-            }
 
+@if (Model != null)
+{
+    <div class="card text-center mt-2">
+        <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
+            <div class="d-flex justify-content-between align-items-center col-lg-4">
+                <a href="UserPage/@Model.AuthorId" style="text-decoration:none;">
 
-        </div>
-        <div>
-            @Model.CreatedTime.ToString("MM/dd/yyyy HH:mm")
-        </div>
-        @if (ViewBag.UserId == Model.AuthorId)
-        {
-            <div class="d-flex justify-content-center align-items-center">
-                <a asp-action="Unfollow" asp-route-userId="@Model.AuthorId" class="btn btn-outline-info">Unfollow</a>
+                    <img class="p-2" src="@Model.AuthorAvatar" alt="Profile Picture" style="width:50px;border-radius:50%;" />
+                    @Model.AuthorName
+                   
+                   
+                </a>
             </div>
-        }
-        else
-        {
-            <div class="d-flex justify-content-center align-items-center">
-                <a asp-action="Follow" asp-route-userId="@Model.AuthorId" class="btn btn-outline-info">Follow +</a>
+
+            <div class="card-text text-end text-secondary col-lg-4" style="font-size:small">
+                Created Time: @Model.CreatedTime.ToString("MM/dd/yyyy HH:mm")
+                <br />
+                Updated Time: @Model.UpdatedTime.ToString("MM/dd/yyyy HH:mm")
             </div>
-        }
-    </div>
-    <div class="card-body">
-        <!-- this is the content of the post-->
-        <p class="card-text text-start">@Model.Content</p>
-        <a href="#" class="btn btn-info">Go somewhere</a>
-    </div>
-    <div class="bg-white border border-top-2 py-2">
-        <!-- this is the button to Like this post-->
-        <a asp-action="Like" asp-route-postId="@Model.Id">
-            <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
-        </a>
 
-        <!-- this is the button to Dislike this post-->
-        <a asp-action="Dislike" asp-route-postId="@Model.Id">
-            <img src="images/heart-outline.svg" alt="Dislike" style="width:20px;" /> Unlike
-        </a>
+            <div class="card-text text-end col-lg-4 d-flex justify-content-end align-items-center">
+                @if (ViewBag.IsOwner && Model.AuthorId == thisUser.UserId)
+                {
+                    
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-info mx-3" data-bs-toggle="modal" data-bs-target="#updateModal@(postIdString)">
+                        Edit
+                    </button>
 
-        <!-- this is the button to edit this post-->
-        <a asp-action="Edit" asp-route-postId="@Model.Id">
-            <img src="images/edit.svg" alt="Edit" style="width:20px;" /> Edit
-        </a>
+                    <!-- Delete Button-->
+                    <form asp-action="DeletePost" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        <button type="submit" class="btn btn-close" aria-label="Close" data-bs-toggle="modal"></button>
+                    </form>
 
-        <!-- this is the button to show comments -->
-        <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
-           data-bs-toggle="collapse" href="#collapseComment@Model.Id" role="button" aria-expanded="false"
-           aria-controls="collapseComment@Model.Id">
-            Comments
-        </a>
-        <!-- this is the component to show comments and add & edit comments -->
-        <div class="collapse mt-2" id="collapseComment@Model.Id">
-            @Html.Partial("Components/_CommentSection", Model.Comments)
+                    <!-- Update Modal -->
+                    <div class="modal fade" id="updateModal@(postIdString)" tabindex="-1" aria-labelledby="updateModal@(postIdString)" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <img src="@thisUser.ProfilePictureUrl" alt="Profile Picture" style="width:50px;border-radius:50%;" />
+                                        <h3 class="px-3">Edit Post</h3>
+                                    </div>
+                                    <button type="button" class="col-md-1 justify-content-end btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form asp-action="UpdatePost" method="post">
+                                    <input type="hidden" name="postId" value="@Model.Id" />
+                                    <div class="modal-body p-4">
+                                        <textarea class="form-control border rounded-25" name="content" placeholder="Enter your updated content here">@Model.Content</textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary rounded-pill" type="submit">Save changes</button>
+                                        <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+                    @if (ViewBag.UserId == Model.AuthorId)
+                    {
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a asp-action="Unfollow" asp-route-userId="@Model.AuthorId" class="btn btn-outline-info">Unfollow</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a asp-action="Follow" asp-route-userId="@Model.AuthorId" class="btn btn-outline-info">Follow +</a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="card-body">
+            <p class="card-text text-start">@Model.Content</p>
+        </div>
+
+        <div class="bg-white border border-top-2 py-2">
+            <a asp-action="Like" asp-route-postId="@Model.Id" class="mx-3" style="text-decoration:none;">
+                <img src="~/images/heart.svg" alt="Like" style="width:20px;" /> Like
+            </a>
+
+            <a asp-action="Dislike" asp-route-postId="@Model.Id" class="mx-3" style="text-decoration:none;">
+                <img src="~/images/heart-outline.svg" alt="Dislike" style="width:20px;" /> Unlike
+            </a>
+
+            <!-- Comments Toggle Button -->
+            <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2 mx-3"
+               data-bs-toggle="collapse" href="#collapseComment@(postIdString)" role="button" aria-expanded="false"
+               aria-controls="collapseComment@(postIdString)" style="text-decoration:none;">
+                Comments
+            </a>
+
+            <!-- Comments Section -->
+            <div class="collapse mt-2" id="collapseComment@(postIdString)">
+                @Html.Partial("Components/Comments", Model.Comments)
+            </div>
         </div>
     </div>
-</div>
-<!-- This is the end of the card for one post -->
-    }
+}
+else
+{
+    <p>Post is not available.</p>
+}

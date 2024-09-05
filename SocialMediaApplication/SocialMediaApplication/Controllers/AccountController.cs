@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SocialMediaApplication.Models;
 using Firebase.Auth;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace SocialMediaApplication.Services
 {
@@ -77,28 +80,19 @@ namespace SocialMediaApplication.Services
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            try
+            var authLink = await _firebaseService.LoginUser(email, password);
+            // Store userId in session or cookies
+            HttpContext.Session.SetString("userId", authLink.User.LocalId);
+            var claims = new List<Claim>
             {
-                var authLink = await _firebaseService.LoginUser(email, password);
-                // Store userId in session or cookies
-                HttpContext.Session.SetString("userId", authLink.User.LocalId);
-                return RedirectToAction("Index", "UserPage");
-            }
-            catch (FirebaseAuthException ex)
-            {
-                // Handle Firebase-specific exceptions
-                ViewBag.ErrorMessage = ex.Message;
-                return View("Login");
-            }
-            catch (Exception ex)
-            {
-                // Log the exception if needed
-                // Return a 200 status code with an error message
-                ViewBag.ErrorMessage = "Email does not exist or the password is incorrect";
-                return View("Login");
-            }
+                new Claim(ClaimTypes.Name, email)
+    
+            };
 
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            return RedirectToAction("Profile");
         }
 
         [HttpGet]
@@ -171,13 +165,13 @@ namespace SocialMediaApplication.Services
         }
 
         [HttpPost]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            // Clear the user session
+            // Clear the session
             HttpContext.Session.Clear();
 
-            // Optionally, you can sign out the user if using ASP.NET Core Identity or other authentication schemes
-            // await HttpContext.SignOutAsync(); // Uncomment if needed
+            // Sign out the user from the authentication system
+            await HttpContext.SignOutAsync();
 
             // Redirect to the Home/Index page
             return RedirectToAction("Index", "Home");
