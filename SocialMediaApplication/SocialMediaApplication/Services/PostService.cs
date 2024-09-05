@@ -86,6 +86,11 @@ namespace SocialMediaApplication.Services
         {
             var post = new
             {
+<<<<<<< HEAD
+                throw new ArgumentException("Following and Followers cannot be null or empty.");
+            }
+
+=======
                 Content = content,
                 AuthorId = userId,
                 AuthorName = userName,
@@ -117,8 +122,31 @@ namespace SocialMediaApplication.Services
         {
             var response = await _firebaseClient.GetAsync("posts");
             var posts = response.ResultAs<Dictionary<string, Post>>();
+
+            if (posts != null) 
+            {
+                foreach (var postId in posts.Keys.ToList())
+                {
+                    var post = posts[postId];
+
+                    var commentsResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments");
+                    var comments = commentsResponse.ResultAs<Dictionary<string, Comment>>();
+
+                    post.Comments = comments ?? new Dictionary<string, Comment>();
+
+                    if (post.Comments != null && post.Comments.Any())
+                    {
+                        Console.WriteLine($"Post {postId} has {post.Comments.Count} comments.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Post {postId} has no comments.");
+                    }
+                }
+            }
             return posts;
         }
+>>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
 
         public async Task<List<SocialMediaApplication.Models.Post>> GetPostsByUserIdAsync(string userId)
         {

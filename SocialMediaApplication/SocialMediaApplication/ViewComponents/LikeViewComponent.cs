@@ -12,23 +12,5 @@ namespace SocialMediaApplication.ViewComponents
         {
             _firebaseService = firebaseService;
         }
-
-        public async Task<IViewComponentResult> InvokeAsync(string postId)
-        {
-            var likes = await _firebaseService.ShowPostLikes(postId);
-            var likesCount = await _firebaseService.ShowPostLikesCount(postId);
-            var model = new LikeViewModel
-            {
-                Likes = likes,
-                LikesCount = likesCount
-            };
-            return View(model);
-        }
-
-        public class LikeViewModel
-        {
-            public List<Like> Likes {get;set;}
-            public int LikesCount {get;set;}
-        }
     }
 }

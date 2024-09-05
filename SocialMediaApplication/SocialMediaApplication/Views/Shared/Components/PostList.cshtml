@@ -1,7 +1,18 @@
+<<<<<<< HEAD
+﻿@model IEnumerable<SocialMediaApplication.Models.Post>
+@{
+    var thisUser = ViewBag.User as SocialMediaApplication.Models.User;
+    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User> ?? new List<User>();
+=======
 @model IEnumerable<SocialMediaApplication.Models.Post>
 
 @{
-   
+    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User>;
+    if (users == null)
+    {
+        users = new List<User>(); // or handle accordingly if ViewBag.Users is null
+    }
+>>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
 }
 
 <!-- this is a list sample of all the posts -->
@@ -9,6 +20,12 @@
 {
     @foreach (var post in Model)
     {
+<<<<<<< HEAD
+        if (post != null)
+        {
+             @Html.Partial("Components/PostCard",post)
+        }
+=======
         <!-- this is the card for one post-->
         <div class="card text-center mt-2">
             <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
@@ -48,9 +65,15 @@
             </div>
             <div class="bg-white border border-top-2 py-2">
                 <!-- this is the button to Like this post-->
-                <a asp-action="Like" asp-route-postId="@post.Id">
+                <a asp-action="LikePost" asp-controller="Like" asp-route-postId="@post.Id">
                     <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
                 </a>
+                <form asp-action="LikePost" asp-controller="Like" method="post">
+                    <input type="hidden" name="postId" value="@post.Id"/>
+                    <button type="submit">
+                        <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
+                    </button>
+                </form>
 
                 <!-- this is the button to Dislike this post-->
                 <a asp-action="Dislike" asp-route-postId="@post.Id">
@@ -75,6 +98,7 @@
             </div>
         </div>
         <!-- This is the end of the card for one post -->
+>>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
     }
 }
 else

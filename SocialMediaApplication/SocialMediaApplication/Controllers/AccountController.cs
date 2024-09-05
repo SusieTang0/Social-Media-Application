@@ -85,10 +85,6 @@ namespace SocialMediaApplication.Services
                 // Store userId in session or cookies
                 HttpContext.Session.SetString("userId", authLink.User.LocalId);
                  var claims = new List<Claim>
-            var authLink = await _firebaseService.LoginUser(email, password);
-            // Store userId in session or cookies
-            HttpContext.Session.SetString("userId", authLink.User.LocalId);
-            var claims = new List<Claim>
 =======
 >>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
             {
@@ -132,11 +128,6 @@ namespace SocialMediaApplication.Services
 
 
 
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-            return RedirectToAction("Profile");
 =======
 >>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
         }
