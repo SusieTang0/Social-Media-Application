@@ -1,104 +1,21 @@
-<<<<<<< HEAD
-﻿@model IEnumerable<SocialMediaApplication.Models.Post>
+@model IEnumerable<SocialMediaApplication.Models.Post>
 @{
     var thisUser = ViewBag.User as SocialMediaApplication.Models.User;
     List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User> ?? new List<User>();
-=======
-@model IEnumerable<SocialMediaApplication.Models.Post>
-
-@{
-    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User>;
-    if (users == null)
-    {
-        users = new List<User>(); // or handle accordingly if ViewBag.Users is null
-    }
->>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
 }
+
 
 <!-- this is a list sample of all the posts -->
 @if (Model != null)
 {
     @foreach (var post in Model)
     {
-<<<<<<< HEAD
+
         if (post != null)
         {
              @Html.Partial("Components/PostCard",post)
         }
-=======
-        <!-- this is the card for one post-->
-        <div class="card text-center mt-2">
-            <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
-                <div class="d-flex justify-content-between align-items-center">
-                    @if (users != null)
-                    {
-                        foreach (var user in users)
-                        {
-                            if (!string.IsNullOrEmpty(user.UserId) && user.UserId.Equals(post.AuthorId))
-                            {
-                                <div><img src="@user.ProfilePictureUrl" alt="Profile Picture" style="width:50px;" /></div>
-                                <div class="ps-2">@user.Name</div>
-                            }
-                        }
-                    }
-                </div>
-                <div>
-                    @post.CreatedTime.ToString("f")
-                </div>
-                @if (ViewBag.UserId == post.AuthorId)
-                {
-                    <div class="d-flex justify-content-center align-items-center">
-                        <a asp-action="Unfollow" asp-route-userId="@post.AuthorId" class="btn btn-outline-info">Unfollow</a>
-                    </div>
-                }
-                else
-                {
-                    <div class="d-flex justify-content-center align-items-center">
-                        <a asp-action="Follow" asp-route-userId="@post.AuthorId" class="btn btn-outline-info">Follow +</a>
-                    </div>
-                }
-            </div>
-            <div class="card-body">
-                <!-- this is the content of the post-->
-                <p class="card-text text-start">@post.Content</p>
-                <a href="#" class="btn btn-info">Go somewhere</a>
-            </div>
-            <div class="bg-white border border-top-2 py-2">
-                <!-- this is the button to Like this post-->
-                <a asp-action="LikePost" asp-controller="Like" asp-route-postId="@post.Id">
-                    <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
-                </a>
-                <form asp-action="LikePost" asp-controller="Like" method="post">
-                    <input type="hidden" name="postId" value="@post.Id"/>
-                    <button type="submit">
-                        <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
-                    </button>
-                </form>
 
-                <!-- this is the button to Dislike this post-->
-                <a asp-action="Dislike" asp-route-postId="@post.Id">
-                    <img src="images/heart-outline.svg" alt="Dislike" style="width:20px;" /> Unlike
-                </a>
-
-                <!-- this is the button to edit this post-->
-                <a asp-action="Edit" asp-route-postId="@post.Id">
-                    <img src="images/edit.svg" alt="Edit" style="width:20px;" /> Edit
-                </a>
-
-                <!-- this is the button to show comments -->
-                <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
-                   data-bs-toggle="collapse" href="#collapseComment@post.Id" role="button" aria-expanded="false"
-                   aria-controls="collapseComment@post.Id">
-                    Comments
-                </a>
-                <!-- this is the component to show comments and add & edit comments -->
-                <div class="collapse mt-2" id="collapseComment@post.Id">
-                    @await Html.PartialAsync("Components/_CommentSection", post)
-                </div>
-            </div>
-        </div>
-        <!-- This is the end of the card for one post -->
->>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
     }
 }
 else
