@@ -1,0 +1,51 @@
+﻿@model SocialMediaApplication.Models.Comment
+
+
+
+<!-- this is the button to Like this comment-->
+<div class="mt-2">
+    <div class="row p-1 d-flex justify-content-between">
+        <div class="col-md-2">
+            <img src="images/icon-logo.png" alt="Alternate Text" style="width:50px;" />
+        </div>
+        <div class="col-md-10">
+            <div class="row py-2 border border-bottom-1 rounded-top-2">
+                <div class="col-md-4  text-start">
+                    UserName
+                </div>
+                <div class="col-md-4  text-start">
+                    TimeStamp
+                </div>
+                <div class="col-md-2">
+                    <!-- this is the button to Like this comment-->
+                    <a asp-action="Like">
+                        <img src="images/heart.svg" alt="Alternate Text"
+                                style="width:20px;text-decoration-line:none;" />
+                    </a>
+
+                    <!-- this is the button to Unlike this comment-->
+                    <a asp-action="Dislike">
+                        <img src="images/heart-outline.svg"
+                                alt="Alternate Text"
+                                style="width:20px;text-decoration-line:none;" />
+                    </a>
+                </div>
+                <div class="col-md-1">
+
+                    <!-- this is the button to Edit user's' own comment-->
+                    <a asp-action="Like">
+                        <img src="images/edit.svg" alt="Alternate Text"
+                                style="width:20px;text-decoration-line:none;" />
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <!-- this is the button to Delete user's' own comment-->
+                    <a type="button" class="btn-close"></a>
+                </div>
+            </div>
+            <div class="row py-2 text-start border border-1 rounded-bottom-2">
+                <p>This is the comments content sample</p>
+            </div>
+        </div>
+    </div>
+</div>
