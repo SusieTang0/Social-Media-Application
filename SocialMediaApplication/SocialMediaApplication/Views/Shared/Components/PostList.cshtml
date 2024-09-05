@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<SocialMediaApplication.Models.Post>
-
 @{
-   
+    var thisUser = ViewBag.User as SocialMediaApplication.Models.User;
+    List<User> users = ViewBag.Users as List<SocialMediaApplication.Models.User> ?? new List<User>();
 }
-
 <!-- this is a list sample of all the posts -->
 @if (Model != null)
 {
     @foreach (var post in Model)
     {
-       @Html.Partial("Components/PostCard",post)
+        if (post != null)
+        {
+             @Html.Partial("Components/PostCard",post)
+        }
     }
 }
 else

@@ -8,7 +8,7 @@
             style="width: 100px; height: 100px;" />
     }
     <p>@Model.Bio</p>
-    <a href="@Url.Action("EditProfile")" class="btn btn-secondary">Edit Profile</a>
-    <a href="@Url.Action("Login")" class="btn btn-danger">Logout</a>
+    <a href="@Url.Action("EditProfile")" class="btn btn-primary" style="border-radius:10px;">Edit Profile</a>
+    <a class="btn btn-success" asp-controller="UserPage" asp-action="Index" style="border-radius:10px;">Back to HomePage</a>
 
 </div>
