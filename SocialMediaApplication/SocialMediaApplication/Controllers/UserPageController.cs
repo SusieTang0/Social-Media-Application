@@ -81,9 +81,8 @@ namespace SocialMediaApplication.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception and handle errors
-                // Logger.LogError(ex, "Error creating post");
-                return StatusCode(500, "Internal server error. Please try again later.");
+                
+                return StatusCode(500, "Internal server error. Please try again later." + ex.Message);
             }
 
             return RedirectToAction("Index", new { Id = userId });

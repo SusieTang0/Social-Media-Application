@@ -86,23 +86,18 @@ namespace SocialMediaApplication.Services
                 var authLink = await _firebaseService.LoginUser(email, password);
                 // Store userId in session or cookies
                 HttpContext.Session.SetString("userId", authLink.User.LocalId);
-                 var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, email)
+               var claims = new List<Claim>
+               {
+                    new Claim(ClaimTypes.Name, email)
     
-            };
+                };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return RedirectToAction("Index", "UserPage");
             }
-            catch (FirebaseAuthException ex)
-            {
-                // Handle Firebase-specific exceptions
-                ViewBag.ErrorMessage = ex.Message;
-                return View("Login");
-            }
+           
             catch (Exception ex)
             {
                 // Log the exception if needed
