@@ -13,16 +13,28 @@ namespace SocialMediaApplication.Services.FollowService
 
         public UserService()
         {
+           // hardcode
+            var userId1 = Guid.NewGuid();
+            var userId2 = Guid.NewGuid();
+            var userId3 = Guid.NewGuid();
+            var userId4 = Guid.NewGuid();
+
             _users = new List<UserFollow>
             {
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Alice", AvatarUrl = "/avatars/femail1.jpg" },
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Bob", AvatarUrl = "/avatars/male1.jpg" },
-             /* new UserFollow { UserId = Guid.NewGuid(), UserName = "Bob", AvatarUrl = "/SocialMediaApplication/SocialMediaApplication/wwwroot/avatars/male1.jpg" },*/
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Charlie", AvatarUrl = "/avatars/male2.jpg" },
-                new UserFollow { UserId = Guid.NewGuid(), UserName = "Diana", AvatarUrl = "/avatars/female2.jpg" }
+                new UserFollow { UserId = userId1, UserName = "Alice", AvatarUrl = "/avatars/female1.jpg", Following = new List<UserFollow>(), Followers = new List<UserFollow>() },
+                new UserFollow { UserId = userId2, UserName = "Bob", AvatarUrl = "/avatars/male1.jpg", Following = new List<UserFollow>(), Followers = new List<UserFollow>() },
+                new UserFollow { UserId = userId3, UserName = "Charlie", AvatarUrl = "/avatars/male2.jpg", Following = new List<UserFollow>(), Followers = new List<UserFollow>() },
+                new UserFollow { UserId = userId4, UserName = "Diana", AvatarUrl = "/avatars/female2.jpg", Following = new List<UserFollow>(), Followers = new List<UserFollow>() }
             };
+
            // Set the current user (for example purposes)
             _currentUser = _users.First();
+            _currentUser.Following.Add(_users[1]); // Example: current user follows Bob
+            _users[1].Followers.Add(_currentUser); // Bob is followed by current user
+
+            // Add additional followers for testing
+            _users[2].Following.Add(_currentUser); // Charlie follows current user
+            _currentUser.Followers.Add(_users[2]); // Current user is followed by Charlie
         }
 
          public async Task<UserFollow> GetCurrentUserAsync()

@@ -23,13 +23,6 @@ namespace SocialMediaApplication.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        // public IActionResult FollowPage()
-        // {
-        //     var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
-        //     ViewBag.RequestVerificationToken = tokens.RequestToken;
-        //     return View("FollowPage");
-        // }
-
         public async Task<IActionResult> FollowPage()
         {
             var tokens = _antiforgery.GetAndStoreTokens(HttpContext);

@@ -13,11 +13,11 @@
         @foreach (var user in Model.Users)
         {
             <li>
-                <img src="@user.FollowerAvatar" alt="@user.FollowerName" width="50" height="50" />
-
-                @* <img src="@Url.Content(user.FollowerAvatar)" alt="@user.FollowerName" width="50" height="50" />*@
-                @user.FollowerName
-                <button class="btn btn-primary toggle-follow" data-user-id="@user.FollowerId">
+              
+                <img src="@user.FollowingAvatar" alt="@user.FollowingName" width="50" height="50" />
+               
+                @user.FollowingName
+                <button class="btn btn-primary toggle-follow" data-user-id="@user.FollowingId">
                     Follow
                 </button>
             </li>
@@ -31,17 +31,8 @@
 <h2>Your Followers:</h2>
 @if (Model.CurrentUser?.Followers != null && Model.CurrentUser.Followers.Any())
 {
-    <!-- @await Component.InvokeAsync("FollowerViewComponent", new { userId = Model.CurrentUser.UserId }) -->
-
-    <ul>
-        @foreach (var follower in Model.CurrentUser.Followers)
-        {
-            <li>
-                <img src="@follower.FollowerAvatar" alt="@follower.FollowerName" width="50" height="50" />
-                @follower.FollowerName
-            </li>
-        }
-    </ul>
+    @await Component.InvokeAsync("Follower", new { userId = Model.CurrentUser.UserId })
+  
 }else
 {
     <p>You have no followers.</p>
@@ -49,26 +40,15 @@
 
 <h2>People You Follow:</h2>
 @if (Model.CurrentUser?.Following != null && Model.CurrentUser.Following.Any())
-{
-    <!-- @await Component.InvokeAsync("FollowingViewComponent", new { userId = Model.CurrentUser.UserId }) -->
-
-    <ul>
-        @foreach (var following in Model.CurrentUser.Following)
-        {   
-            <li>
-                <img src="@following.FollowingAvatar" alt="@following.FollowingName" width="50" height="50" />
-                @following.FollowingName
-                <button class="btn btn-danger toggle-follow" data-user-id="@following.FollowingId">
-                    Unfollow
-                </button>
-            </li>
-        }
-    </ul>
+{ 
+    @await Component.InvokeAsync("Following", new { userId = Model.CurrentUser.UserId })
+ 
 }else
 {
     <p>You are not following anyone.</p>
 }
 
+@Html.AntiForgeryToken()
 @section Scripts {
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -76,11 +56,15 @@
             buttons.forEach(button => {
                 button.addEventListener("click", function () {
                     const userId = this.getAttribute("data-user-id");
+                     // Retrieve the anti-forgery token from the hidden input
+                    const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
                     fetch('/Follow/ToggleFollow', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'RequestVerificationToken': '@ViewBag.RequestVerificationToken'
+                            //'RequestVerificationToken': '@ViewBag.RequestVerificationToken'
+                            'RequestVerificationToken': token
                         },
                         body: JSON.stringify({ targetUserId: userId })
                     })

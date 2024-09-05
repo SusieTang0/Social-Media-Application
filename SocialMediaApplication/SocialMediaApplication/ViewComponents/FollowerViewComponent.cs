@@ -24,8 +24,7 @@ namespace SocialMediaApplication.ViewComponents
                 {
                     followers = new List<UserFollow>(); // Ensure the list is never null
                 }
-                return View(followers);
-                        return View(followers);
-                    }
-                }
+                return View(followers);                 
+        }
+    }
 }

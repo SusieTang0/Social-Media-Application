@@ -1,9 +1,18 @@
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialMediaApplication.Services.FollowService;
+using Microsoft.AspNetCore.DataProtection;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add data protection services with persistent key storage
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\keys"))
+    .SetApplicationName("SocialMediaApplication") // Use the same application name across all instances
+    .SetDefaultKeyLifetime(TimeSpan.FromDays(90)); // Adjust key lifetime as needed
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -29,6 +38,17 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.Use(async (context, next) =>
+{
+    if (string.Equals(context.Request.Method, "POST", StringComparison.OrdinalIgnoreCase) &&
+        !context.Request.Path.StartsWithSegments("/api"))
+    {
+        await context.RequestServices.GetRequiredService<IAntiforgery>()
+            .ValidateRequestAsync(context);
+    }
+    await next();
+});
 
 app.MapControllerRoute(
     name: "default",

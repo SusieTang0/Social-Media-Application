@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SocialMediaApplication.Models;
 using SocialMediaApplication.Services.FollowService;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 namespace SocialMediaApplication.ViewComponents
 {
