@@ -90,6 +90,7 @@ public class FirebaseService
     public async Task<FirebaseResponse> SaveUserProfileAsync(string userId, SocialMediaApplication.Models.User userProfile)
     {
         // This saves the user profile in the specified path within the Firebase Realtime Database
+        
         return await _firebaseClient.SetAsync($"users/{userId}/profile", userProfile);
     }
 
