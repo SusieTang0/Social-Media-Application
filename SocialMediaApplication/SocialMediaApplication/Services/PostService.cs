@@ -70,10 +70,10 @@ namespace SocialMediaApplication.Services
         }
 
       
-        public async Task<Dictionary<string,SocialMediaApplication.Models.User>> GetFollowedsUserAsync(string userId)
+        public async Task<List<SocialMediaApplication.Models.User>> GetFollowedsUserAsync(string userId)
         {
             var users = await GetUsersAsync();
-            var result = new Dictionary<string,SocialMediaApplication.Models.User>();
+            var result = new List<SocialMediaApplication.Models.User>();
             var followings = await GetFollowsAsync();
             
             if (users != null && followings != null)
@@ -82,19 +82,54 @@ namespace SocialMediaApplication.Services
                 {
                     if (users.TryGetValue(following.FollowerId, out var user))
                     {
-
-                        result.Add(following.FollowerId, user);
-                      
+                      result.Add(user);
                     }
-                    
                 }
-
                 return result;
             }
-
-
-            return null;
+            return new List<Models.User>();
         }
+
+        public async Task<HashSet<string>> GetFollowedIdsSetAsync(string userId)
+        {
+            var users = await GetUsersAsync();
+            var result = new HashSet<string>();
+            var followings = await GetFollowsAsync();
+            
+            if (users != null && followings != null)
+            {
+                foreach (var following in followings)
+                {
+                    if (users.TryGetValue(following.FollowedId, out var user))
+                    {
+                      result.Add(following.FollowedId);
+                    }
+                }
+                return result;
+            }
+            return new HashSet<string>();
+        }
+
+        public async Task<List<SocialMediaApplication.Models.User>> GetFollowersUserAsync(string userId)
+        {
+            var users = await GetUsersAsync();
+            var result = new List<SocialMediaApplication.Models.User>();
+            var followings = await GetFollowsAsync();
+            
+            if (users != null && followings != null)
+            {
+                foreach (var following in followings)
+                {
+                    if (users.TryGetValue(following.FollowedId, out var user))
+                    {
+                      result.Add(user);
+                    }
+                }
+                return result;
+            }
+            return new List<Models.User>();
+        }
+
         public async Task AddFollowAsync(string followingId, string followerId)
         {
             var followingUser = await GetUserProfileAsync(followingId);

@@ -1,0 +1,36 @@
+ @model SocialMediaApplication.Models.User
+ @{
+    var thisUser = ViewBag.User as SocialMediaApplication.Models.User;
+    HashSet<string> follows = ViewBag.Follows;
+}
+@if(Model != null){
+ <!-- Profile Card -->
+<div class="col-lg-3 col-md-4">
+    <!-- User's Profile Card -->
+    <div class="card px-2 py-3">
+        <div class="card-img-top p-2 d-flex justify-content-center">
+            <img src="@Model.ProfilePictureUrl" alt="Profile Picture" style="width:200px;border-radius:50%;" />
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center">@Model.Name</h5>
+            <p class="card-text">@Model.Bio</p>
+        </div>
+            @if()
+            <!-- Links for other users visiting the profile -->
+            <div class="card-body d-flex justify-content-center">
+                <a asp-action="Follow" asp-route-userId="@Model.UserId" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</a>
+            </div>
+            <div class="card-body d-flex justify-content-center">
+                <a asp-action="CancelFollow" asp-route-userId="@Model.UserId" class="btn btn-outline-danger w-100" style="border-radius:10px;">Cancel Follow</a>
+            </div>
+        <!-- Back to Homepage -->
+        <div class="col-md-12 d-flex justify-content-center mt-3"></div>
+
+        
+    </div>
+</div>
+}
+else
+{
+    <p>No posts available.</p>
+}

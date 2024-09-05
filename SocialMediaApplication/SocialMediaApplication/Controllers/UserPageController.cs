@@ -41,9 +41,7 @@ namespace SocialMediaApplication.Controllers
                 ViewBag.IsOwner = false;
             }
             
-          
-          
-           
+            ViewBag.Follows = await _postService.GetFollowedIdsSetAsync(userId);
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
             var posts = await GetPostlistsAsync(userId);
