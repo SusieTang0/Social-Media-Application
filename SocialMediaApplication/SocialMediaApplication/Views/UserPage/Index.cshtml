@@ -3,41 +3,10 @@
 @{
     ViewData["Title"] = "User Page";
     var user = ViewBag.User as SocialMediaApplication.Models.User;
-    var owner = ViewBag.Owner as SocialMediaApplication.Models.User;
 }
 
-@if (Model != null)
-{
-    <div class="row">
-        <!-- Profile Card -->
-        <div class="col-lg-3 col-md-4">
-            <!-- User Profile Card -->
-            <div class="card px-2 py-3">
-                <div class="card-img-top p-2 d-flex justify-content-center">
-                    <img src="@owner?.ProfilePictureUrl" alt="Profile Picture" style="width:200px;border-radius:50%;" />
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title text-center">@owner?.Name</h5>
-                    <p class="card-text">@owner?.Bio</p>
-                </div>
 
-                @if (ViewBag.IsOwner != null && (bool)ViewBag.IsOwner)
-                {
-                    <!-- Links for the profile owner -->
-                    <div class="card-body d-flex justify-content-center">
-                        <a href="/Account/Profile" class="btn btn-primary w-100" style="border-radius:10px;">Manage My Profile</a>
-                    </div>
-                }
-                else
-                {
-                    <!-- Links for other users visiting the profile -->
-                    <div class="card-body d-flex justify-content-center">
-                        <a asp-action="Follow" asp-route-userId="@owner?.UserId" class="btn btn-info w-100" style="border-radius:10px;">Follow Me</a>
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <a asp-action="CancelFollow" asp-route-userId="@owner?.UserId" class="btn btn-outline-danger w-100" style="border-radius:10px;">Cancel Follow</a>
-                    </div>
-                }
+<div class="row">
 
     <!-- Profile Card -->
     <div class="col-lg-3 col-md-4">
@@ -163,6 +132,7 @@
 
     </div>
 </div>
+<<<<<<< HEAD
                 <!-- Back to Homepage -->
                 <div class="col-md-12 d-flex justify-content-center mt-3"></div>
 
@@ -236,3 +206,5 @@ else
     <p>No data available.</p>
 }
 
+=======
+>>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)

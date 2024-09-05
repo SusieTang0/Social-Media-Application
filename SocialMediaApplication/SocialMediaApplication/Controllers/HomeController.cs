@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using SocialMediaApplication.Models;
 using System.Diagnostics;
@@ -18,10 +17,23 @@ namespace SocialMediaApplication.Controllers
 //             _logger = logger;
 //         }
 
+<<<<<<< HEAD
 //         public IActionResult Index()
 //         {
 //             return View();
 //         }
+=======
+        public IActionResult Index()
+        {
+            string userId = HttpContext.Session.GetString("userId");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Home", "Account");
+            }
+            return View();
+        }
+>>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
 
 //         public IActionResult Privacy()
 //         {
@@ -45,17 +57,5 @@ namespace SocialMediaApplication.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            // Clear the session
-            HttpContext.Session.Clear();
-
-            // Sign out the user from the authentication system
-            await HttpContext.SignOutAsync();
-
-            // Redirect to the Home/Index page
-            return RedirectToAction("Index", "Home");
-        }
     }
 }
