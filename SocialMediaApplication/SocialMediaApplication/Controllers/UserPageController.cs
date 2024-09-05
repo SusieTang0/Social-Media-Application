@@ -138,7 +138,7 @@ namespace SocialMediaApplication.Controllers
             var thePosts = new PostList
             {
                 MyPosts = await _postService.FindPostListAsync(id, 5),
-                MyFollowedPosts = await _postService.FindFollowedPostsAsync(id, 5)
+                MyFollowedPosts = new List<Post>(),//await _postService.FindFollowedPostsAsync(id, 5)
             };
 
             return thePosts;

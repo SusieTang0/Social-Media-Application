@@ -4,6 +4,7 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using Microsoft.Extensions.Hosting;
 using SocialMediaApplication.Models;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 
 namespace SocialMediaApplication.Services
@@ -51,35 +52,187 @@ namespace SocialMediaApplication.Services
             return response.ResultAs<SocialMediaApplication.Models.User>();
         }
 
+
         //Follow
-        public async Task<List<SocialMediaApplication.Models.Follow>> GetFollowedIdsAsync(string userId)
+        public async Task<List<SocialMediaApplication.Models.User>> GetFollowedIdsAsync(string userId)
         {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/follows");
-
-
-            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
-
+            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followings");
+            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
+            var users = await GetUsersAsync();
+            var allFollowings = followedDictionary.Values.ToList();
+            var followings = new List<Models.User>();
             if (followedDictionary != null)
             {
-                return followedDictionary.Values.ToList();
+                if (users != null && allFollowings != null)
+                {
+                    foreach (var following in allFollowings)
+                    {
+                        if (users.TryGetValue(following.UserId, out var user))
+                        {
+                            var theUser = new SocialMediaApplication.Models.User
+                            {
+                                UserId = following.UserId,
+                                Name = user.Name,
+                                Email = user.Email,
+                                ProfilePictureUrl = user.ProfilePictureUrl,
+                                Bio = user.Bio,
+                                Password = ""
+                            };
+
+                            followings.Add(theUser);
+
+                        }
+                        await _firebaseClient.SetAsync($"users/{userId}/followers/{following.UserId}", following);
+                    }
+
+                    return followings;
+                }
+
+
             }
 
-            return new List<SocialMediaApplication.Models.Follow>();
+            return new List<SocialMediaApplication.Models.User>();
+        }
+        public async Task<List<SocialMediaApplication.Models.User>> GetFollowedsAsync(string userId)
+        {
+            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followings");
+            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
+            var users = await GetUsersAsync();
+            var followings = followedDictionary.Values.ToList();
+            if (followedDictionary != null)
+            {
+                if (users != null && followings != null)
+                {
+                    foreach (var following in followings)
+                    {
+                        if (users.TryGetValue(following.UserId, out var user))
+                        {
+                            following.Name = user.Name;
+                            following.Email = user.Email;
+                            following.ProfilePictureUrl = user.ProfilePictureUrl;
+                            following.Bio = user.Bio;
+                            following.Password = "";
+                        }
+                        await _firebaseClient.SetAsync($"users/{userId}/followers/{following.UserId}", following);
+                    }
+
+                    return followings;
+                }
+
+            }
+
+            return new List<SocialMediaApplication.Models.User>();
+        }
+        public async Task AddFollowAsync(string followingId, string followerId)
+        {
+            var followingUser = await GetUserProfileAsync(followingId);
+            var followerUser = await GetUserProfileAsync(followerId);
+
+            if (followingUser == null || followerUser == null)
+            {
+                throw new ArgumentException("Following and Followers cannot be null or empty.");
+            }
+
+
+            try
+            {
+                FirebaseResponse response = await _firebaseClient.GetAsync($"users/{followerId}/followings");
+                var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
+                var isChanged = false;
+                foreach(var follow in followedDictionary)
+                {
+                    if (follow.Value.Equals(followingUser))
+                    {
+                        await _firebaseClient.SetAsync($"users/{followerId}/followings/{follow.Key}", followingUser);
+                        isChanged = true;
+                        break;
+                    }
+                }
+
+                if (!isChanged)
+                {
+                    await _firebaseClient.PushAsync($"users/{followerId}/followings", followingUser);
+                    await _firebaseClient.PushAsync($"users/{followingId}/followers", followerUser);
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error saving the post.", ex);
+            }
         }
 
-        public async Task<List<SocialMediaApplication.Models.Follow>> GetFollowerIdsAsync(string userId)
+        public async Task DeleteFollowingAsync(string followingId, string followerId)
         {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followers");
-
-
-            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
-
-            if (followedDictionary != null)
+            if (string.IsNullOrEmpty(followingId) || string.IsNullOrEmpty(followerId))
             {
-                return followedDictionary.Values.ToList();
+                throw new ArgumentException("Post ID cannot be null or empty.");
             }
 
-            return new List<SocialMediaApplication.Models.Follow>();
+
+            try
+            {
+                FirebaseResponse response = await _firebaseClient.GetAsync($"users/{followerId}/followings");
+                var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
+               
+                foreach (var follow in followedDictionary)
+                {
+                    if (follow.Value.UserId.Equals(followingId) )
+                    {
+                        await _firebaseClient.DeleteAsync($"users/{followerId}/followings/{follow.Key}");
+                       
+                        break;
+                    }
+                }
+               
+                FirebaseResponse followerResponse = await _firebaseClient.GetAsync($"users/{followingId}/followers");
+                var followerDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
+                foreach (var follow in followerDictionary)
+                {
+                    if (follow.Value.UserId.Equals(followerId))
+                    {
+                        await _firebaseClient.DeleteAsync($"users/{followingId}/followers/{follow.Key}");
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error saving the post.", ex);
+            }
+
+        }
+
+
+        public async Task<List<SocialMediaApplication.Models.User>> GetFollowerIdsAsync(string userId)
+        {
+            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followers");
+            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>> ();
+            var users = await GetUsersAsync();
+            var followers = followedDictionary.Values.ToList();
+            if (followedDictionary != null)
+            {
+                if (users != null && followers != null)
+                {
+                    foreach (var follower in followers)
+                    {
+                        if(users.TryGetValue(follower.UserId,out var user))
+                        {
+                            follower.Name = user.Name;
+                            follower.Email = user.Email;
+                            follower.ProfilePictureUrl = user.ProfilePictureUrl;
+                            follower.Bio = user.Bio;
+                            follower.Password = "";
+                        }
+                        await _firebaseClient.SetAsync($"users/{userId}/followers/{follower.UserId}", follower);
+                    }
+                    
+                    return followers;
+                }
+                
+            }
+
+            return new List<SocialMediaApplication.Models.User>();
         }
 
         // Post
@@ -205,11 +358,12 @@ namespace SocialMediaApplication.Services
 
         }
 
+        /*
         public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
         {
             var posts = new List<Post>();
-            var followedUsers = await GetFollowedIdsAsync(userId);
-            var followedIds = new HashSet<string>(followedUsers.Select(f => f.FollowedId));
+            var followedUsers = await _firebaseClient.GetAsync($"follows");
+            var followedIds = new HashSet<string>(followedUsers.Select(f => f.UserId));
             var allPosts = await GetPostsAsync();
 
             if (allPosts != null && followedIds.Count > 0)
@@ -231,7 +385,7 @@ namespace SocialMediaApplication.Services
             }
 
             return posts;
-        }
+        }*/
 
 
         public async Task<List<Post>> FindPostListAsync(string id, int numberToShow)
