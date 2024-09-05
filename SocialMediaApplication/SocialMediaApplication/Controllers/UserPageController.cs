@@ -115,23 +115,24 @@ namespace SocialMediaApplication.Controllers
         {
             var posts = new List<Post>();
 
-            // Fetch posts from the service
             var postsDict = await _postService.GetPostsAsync();
 
-            // Convert dictionary to a list of posts and filter by authorId
             if (postsDict != null)
             {
                 var filteredPosts = postsDict
                     .Where(kvp => kvp.Value.AuthorId == authorId)
                     .Select(kvp => new Post
                     {
-                        Id = kvp.Key,  // Assuming key is the post ID
+                        Id = kvp.Key, 
                         AuthorId = kvp.Value.AuthorId,
+                        AuthorName = kvp.Value.AuthorName,
+                        AuthorAvatar = kvp.Value.AuthorAvatar,
                         Content = kvp.Value.Content,
-                        CreatedTime = kvp.Value.CreatedTime
+                        CreatedTime = kvp.Value.CreatedTime,
+                        Comments = kvp.Value.Comments
                     })
-                    .OrderByDescending(post => post.CreatedTime)  // Sort by creation time descending
-                    .Take(numberToShow)  // Take the specified number of posts
+                    .OrderByDescending(post => post.CreatedTime) 
+                    .Take(numberToShow)  
                     .ToList();
 
                 posts.AddRange(filteredPosts);
@@ -190,8 +191,11 @@ namespace SocialMediaApplication.Controllers
                     {
                         Id = kvp.Key,
                         AuthorId = kvp.Value.AuthorId,
+                        AuthorName = kvp.Value.AuthorName,
+                        AuthorAvatar = kvp.Value.AuthorAvatar,
                         Content = kvp.Value.Content,
-                        CreatedTime = kvp.Value.CreatedTime
+                        CreatedTime = kvp.Value.CreatedTime,
+                        Comments = kvp.Value.Comments
                     })
                     .Where(post => followedIds.Contains(post.AuthorId))
                     .OrderByDescending(post => post.CreatedTime) // Sort posts by creation time

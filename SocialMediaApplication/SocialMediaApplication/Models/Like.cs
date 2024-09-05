@@ -6,6 +6,7 @@ namespace SocialMediaApplication.Models
         public string? PostId { get; set; }
         public string? CommentId { get; set; }
         public required string UserId { get; set; }
-        public DateTime CreatedTime { get; set; }
+        public string UserName { get; set; }
+        public DateTime LikedAt { get; set; }
     }
 }
