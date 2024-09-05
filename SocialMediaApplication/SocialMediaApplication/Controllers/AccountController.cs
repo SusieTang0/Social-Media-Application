@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SocialMediaApplication.Models;
 using Firebase.Auth;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 
 namespace SocialMediaApplication.Services
@@ -79,7 +82,6 @@ namespace SocialMediaApplication.Services
         public async Task<IActionResult> Login(string email, string password)
         {
             try
-<<<<<<< HEAD
             {
                 var authLink = await _firebaseService.LoginUser(email, password);
                 // Store userId in session or cookies
@@ -106,8 +108,6 @@ namespace SocialMediaApplication.Services
 
 
 
-=======
->>>>>>> parent of 1356deb (Merge remote-tracking branch 'origin/shuting' into Shawnelle)
         }
 
         [HttpGet]
@@ -180,13 +180,13 @@ namespace SocialMediaApplication.Services
         }
 
         [HttpPost]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            // Clear the user session
+            // Clear the session
             HttpContext.Session.Clear();
 
-            // Optionally, you can sign out the user if using ASP.NET Core Identity or other authentication schemes
-            // await HttpContext.SignOutAsync(); // Uncomment if needed
+            // Sign out the user from the authentication system
+            await HttpContext.SignOutAsync();
 
             // Redirect to the Home/Index page
             return RedirectToAction("Index", "Home");

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using SocialMediaApplication.Models;
 using System.Diagnostics;
@@ -12,18 +13,20 @@ namespace SocialMediaApplication.Controllers
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+         public HomeController(ILogger<HomeController> logger)
          {
              _logger = logger;
-        }
-        public IActionResult Index()
-         {
-            return View();
          }
-        public IActionResult Privacy()
+
+         public IActionResult Index()
          {
              return View();
-        }
+         }
+
+         public IActionResult Privacy()
+         {
+             return View();
+         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -42,5 +45,17 @@ namespace SocialMediaApplication.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            // Clear the session
+            HttpContext.Session.Clear();
+
+            // Sign out the user from the authentication system
+            await HttpContext.SignOutAsync();
+
+            // Redirect to the Home/Index page
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
