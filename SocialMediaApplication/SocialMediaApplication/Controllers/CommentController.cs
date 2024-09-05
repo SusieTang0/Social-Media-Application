@@ -17,10 +17,13 @@ namespace SocialMediaApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> AddComment(string postId, string content)
         {
+            if (string.IsNullOrEmpty(postId))
+            {
+                return BadRequest("Post Id is missing");
+            }
             string authorId = HttpContext.Session.GetString("userId");
-            string authorName = ViewBag.User.Name;
-            await _firebaseService.AddComment(postId, authorId, authorName, content);
-            return RedirectToAction("Index","UserPage");
+            await _firebaseService.AddComment(postId, authorId, content);
+            return RedirectToAction("Index", "UserPage", new { id = postId });
         }
 
         [HttpPost]

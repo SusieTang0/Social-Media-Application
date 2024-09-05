@@ -28,11 +28,8 @@ namespace SocialMediaApplication.Controllers
             {
                 Id = p.Key,
                 AuthorId = p.Value.AuthorId,
-                AuthorName = p.Value.AuthorName,
-                AuthorAvatar = p.Value.AuthorAvatar,
                 Content = p.Value.Content,
                 CreatedTime = p.Value.CreatedTime,
-                Comments = p.Value.Comments
             }).ToList();
 
             ViewBag.Users = await _postService.GetUsersAsync();

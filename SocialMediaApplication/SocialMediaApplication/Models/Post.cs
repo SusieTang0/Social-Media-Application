@@ -8,11 +8,13 @@ namespace SocialMediaApplication.Models
         public required string AuthorName { get; set; }
         public required string AuthorAvatar { get; set; }
        
+        public List<Comment> Comments { get; set; }
+        public List<Like> Likes { get; set; }
         public DateTime CreatedTime { get; set; }
 
-        public Dictionary<string, Comment> Comments { get; set; } = new Dictionary<string, Comment>();
+        public Dictionary<string,Comment> Comments { get; set; }
 
-        public Dictionary<string, Like> Likes { get; set; } = new Dictionary<string, Like>();
+        public List<Like> Likes { get; set; } = new List<Like>();
 
     }
 }

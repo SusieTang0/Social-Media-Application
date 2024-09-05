@@ -1,14 +1,14 @@
 ﻿@model SocialMediaApplication.Models.Post
 
 @{
-
+    
 }
-
 <!-- Form to Add Comment-->
 <div class="card card-body">
     <div class="text-center row px-2">
         <form asp-action="AddComment" asp-controller="Comment" method="post">
             <input type="hidden" name="postId" value="@Model.Id"/>
+            <p>POST ID: @Model.Id</p>
             <div class="row d-flex justify-content-between align-items-center py-2">
                 <div class="col-md-2 justify-content-center">
                     <img src="images/icon-logo.png" alt="Alternate Text" style="width:30px;" />
@@ -25,12 +25,9 @@
             </div>
         </form>
     </div>
-    <!-- Display Comments -->
-    <div class="card card-body mt-3">
-        @if (Model.Comments != null && Model.Comments.Count > 0)
-        {
-            foreach (var comment in Model.Comments.Values)
-            {
+
+
+    <!-- this is the button to Like this comment-->
     <div class="mt-2">
         <div class="row p-1 d-flex justify-content-between">
             <div class="col-md-2">
@@ -39,10 +36,10 @@
             <div class="col-md-10">
                 <div class="row py-2 border border-bottom-1 rounded-top-2">
                     <div class="col-md-4  text-start">
-                                @comment.AuthorName
+                        UserName
                     </div>
                     <div class="col-md-4  text-start">
-                                @comment.CreatedTime.ToString("f")
+                        TimeStamp
                     </div>
                     <div class="col-md-2">
                         <!-- this is the button to Like this comment-->
@@ -72,16 +69,9 @@
                     </div>
                 </div>
                 <div class="row py-2 text-start border border-1 rounded-bottom-2">
-                            <p>@comment.Content</p>
+                    <p>This is the comments content sample</p>
                 </div>
             </div>
         </div>
     </div>
-
-        }
-    }
-    else
-    {
-    <p>No comments yet.</p>
-    }
 </div>
