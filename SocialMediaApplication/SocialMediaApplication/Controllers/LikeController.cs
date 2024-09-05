@@ -16,28 +16,32 @@ namespace SocialMediaApplication.Controllers
 
         [HttpPost]
         public async Task<IActionResult> LikePost(string postId){
-            string userId = User.Identity.Name;
-            await _firebaseService.LikePost(postId, userId);
-            return RedirectToAction("PostDetails",new {postId});
+            string userId = HttpContext.Session.GetString("userId");
+            var user = await _firebaseService.GetUserProfileAsync(userId);
+            string userName = user.Name;
+            await _firebaseService.LikePost(postId, userId, userName);
+            return RedirectToAction("Index", "UserPage");
         }
 
          [HttpPost]
         public async Task<IActionResult> UnlikePost(string postId){
-            string userId = User.Identity.Name;
+            string userId = HttpContext.Session.GetString("userId");
             await _firebaseService.UnlikePost(postId, userId);
             return RedirectToAction("PostDetails",new {postId});
         }
 
         [HttpPost]
         public async Task<IActionResult> LikeComment(string postId, string commentId){
-            string userId = User.Identity.Name;
-            await _firebaseService.LikeComment(postId, commentId, userId);
+            string userId = HttpContext.Session.GetString("userId");
+            var user = await _firebaseService.GetUserProfileAsync(userId);
+            string userName = user.Name;
+            await _firebaseService.LikeComment(postId, commentId, userId,userName);
             return RedirectToAction("PostDetails",new {postId});
         }
 
         [HttpPost]
         public async Task<IActionResult> UnlikeComment(string postId, string commentId){
-            string userId = User.Identity.Name;
+            string userId = HttpContext.Session.GetString("userId");
             await _firebaseService.UnlikeComment(postId, commentId, userId);
             return RedirectToAction("PostDetails",new {postId});
         }

@@ -18,9 +18,24 @@ namespace SocialMediaApplication.Controllers
         {
             string userId = HttpContext.Session.GetString("userId");
 
-            if (string.IsNullOrEmpty(userId))
+            /*if (string.IsNullOrEmpty(userId))
             {
                 return RedirectToAction("Login", "Account");
+            }*/
+
+            //List<Post> posts = await _postService.GetPostsAsync();
+            var postsWithIds = await _postService.GetPostsAsync();
+            var posts = postsWithIds.Select(p => new Post
+            {
+                Id = p.Key,
+                AuthorId = p.Value.AuthorId,
+                AuthorName = p.Value.AuthorName,
+                AuthorAvatar = p.Value.AuthorAvatar,
+                Content = p.Value.Content,
+                CreatedTime = p.Value.CreatedTime,
+                Comments = p.Value.Comments
+            }).ToList();
+
             }
             if (Id == null)
             {
