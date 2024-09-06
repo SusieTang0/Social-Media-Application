@@ -99,7 +99,7 @@
                 <!-- this is the button to Unlike this post-->
                 <form asp-action="UnlikePost" asp-controller="Like" method="post">
                     <input type="hidden" name="postId" value="@Model.Id" />
-                    <button type="submit">
+                    <button type="submit" class="btn btn-link">
                         <img src="images/heart-outline.svg" alt="Unlike" style="width:20px;" /> Unlike
                     </button>
                 </form>
@@ -109,7 +109,7 @@
                 <!-- this is the button to Like this post-->
                 <form asp-action="LikePost" asp-controller="Like" method="post">
                     <input type="hidden" name="postId" value="@Model.Id" />
-                    <button type="submit">
+                    <button type="submit" class="btn btn-link">
                         <img src="images/heart.svg" alt="Like" style="width:20px;" /> Like
                     </button>
                 </form>
@@ -144,9 +144,16 @@
                 Comments @post.Comments.Count
             </a>
 
+            @{
+                var commentViewModel = new CommentViewModel
+                {
+                    PostId = Model.Id,
+                    Comments = Model.Comments
+                };
+        }
             <!-- Comments Section -->
             <div class="collapse mt-2" id="collapseComment@(postIdString)">
-                @Html.Partial("Components/Comments", Model.Comments.Values.ToList())
+                @Html.Partial("Components/Comments", commentViewModel)
             </div>
         </div>
     </div>

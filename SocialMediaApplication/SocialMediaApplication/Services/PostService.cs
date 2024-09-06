@@ -314,11 +314,12 @@ namespace SocialMediaApplication.Services
                     foreach (var commentId in post.Comments.Keys.ToList())
                     {
                         var comment = post.Comments[commentId];
+                        //Console.WriteLine($"CommentId: {commentId}");
 
                         var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{commentId}/likes");
                         var clikes = clikesResponse.ResultAs<Dictionary<string, Like>>();
 
-                        comment.Likes = likes ?? new Dictionary<string, Like>();
+                        comment.Likes = clikes ?? new Dictionary<string, Like>();
                     }
                 }
             }
@@ -340,6 +341,8 @@ namespace SocialMediaApplication.Services
                          AuthorName = post.Value.AuthorName,
                          AuthorAvatar = post.Value.AuthorAvatar,
                          Content = post.Value.Content,
+                         Comments = post.Value.Comments,
+                         Likes = post.Value.Likes,
                          CreatedTime = post.Value.CreatedTime,
                      })
                      .OrderByDescending(post => post.CreatedTime)

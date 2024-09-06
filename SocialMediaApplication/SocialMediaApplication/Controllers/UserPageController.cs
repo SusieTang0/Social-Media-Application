@@ -42,19 +42,7 @@ namespace SocialMediaApplication.Controllers
                 ViewBag.IsOwner = false;
             }
 
-            var postsWithIds = await _postService.GetPostsAsync();
-            var posts = postsWithIds.Select(p => new Post
-            {
-                Id = p.Key,
-                AuthorId = p.Value.AuthorId,
-                AuthorName = p.Value.AuthorName,
-                AuthorAvatar = p.Value.AuthorAvatar,
-                Content = p.Value.Content,
-                CreatedTime = p.Value.CreatedTime,
-                Comments = p.Value.Comments,
-                Likes = p.Value.Likes
-            }).ToList();
-
+            var posts = await _postService.GetAllPostsAsync();
 
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);

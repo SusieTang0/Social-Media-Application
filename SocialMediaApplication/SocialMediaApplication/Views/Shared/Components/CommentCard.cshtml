@@ -1,6 +1,9 @@
-﻿@model SocialMediaApplication.Models.Comment
+﻿@model Tuple<string, SocialMediaApplication.Models.Comment>
 
-
+@{
+    var commentId = Model.Item1;
+    var comment = Model.Item2;
+}
 
 <!-- this is the button to Like this comment-->
 <div class="mt-2">
@@ -11,47 +14,48 @@
         <div class="col-md-10">
             <div class="row py-2 border border-bottom-1 rounded-top-2">
                 <div class="col-md-4  text-start">
-                    @Model.AuthorName
+                    @comment.AuthorName
+                    @comment.Likes.Count
                 </div>
                 <div class="col-md-4  text-start">
-                    @Model.CreatedTime.ToString("f")
+                    @comment.CreatedTime.ToString("f")
                 </div>
                 <div class="col-md-4">
                     @{
-                        var Liked = Model.Likes != null && Model.Likes.Any(l => l.Value.UserId == ViewBag.UserId);
+                        var liked = comment.Likes != null && comment.Likes.Any(l => l.Value.UserId == ViewBag.UserId);
                     }
-                    @if (Liked)
+                    @if (liked)
     {
-      <!-- this is the button to Unlike this comment-->
+      <!-- UnlikeComment-->
                     <form asp-action="UnlikeComment" asp-controller="Like" method="post">
-                        <input type="hidden" name="postId" value="@Model.PostId" />
-                           <input type="hidden" name="commentId" value="@Model.Id" />
+                            <input type="hidden" name="postId" value="@comment.PostId" />
+                            <input type="hidden" name="commentId" value="@commentId" />
                         <button type="submit" class="btn btn-link">
                             <img src="images/heart-outline.svg" alt="Unlike" style="width:20px;" />
                         </button>
                     </form>
     }else
     {
- <!-- this is the button to Like this comment-->
+ <!-- Like Comment-->
                     <form asp-action="LikeComment" asp-controller="Like" method="post">
-                        <input type="hidden" name="postId" value="@Model.PostId" />
-                            <input type="hidden" name="commentId" value="@Model.Id" />
+                            <input type="hidden" name="postId" value="@comment.PostId" />
+                            <input type="hidden" name="commentId" value="@commentId" />
                             <button type="submit" class="btn btn-link">
                             <img src="images/heart.svg" alt="Like" style="width:20px;" />
                         </button>
                     </form>
     }
                     <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
-                       data-bs-toggle="collapse" href="#collapseLike@post.Id" role="button" aria-expanded="false"
-                       aria-controls="collapseLike@post.Id">
-                        Likes @Model.Likes.Count
+                       data-bs-toggle="collapse" href="#collapseLike@commentId" role="button" aria-expanded="false"
+                       aria-controls="collapseLike@commentId">
+                        Likes @comment.Likes.Count
                     </a>
-                    <div class="collapse mt-2" id="collapseLike@post.Id">
-                        @if (Model.Likes != null && Model.Likes.Count > 0)
+                    <div class="collapse mt-2" id="collapseLike@commentId">
+                        @if (comment.Likes != null && comment.Likes.Count > 0)
     {
                         <div>
                             <ul class="list-unstyled">
-                                    @foreach (var like in Model.Likes.Values)
+                                    @foreach (var like in comment.Likes.Values)
         {
                                 <li>@like.UserName</li>
         }
@@ -79,7 +83,7 @@
                 </div>
             </div>
             <div class="row py-2 text-start border border-1 rounded-bottom-2">
-                <p>@Model.Content</p>
+            <p>@comment.Content</p>
             </div>
         </div>
     </div>
