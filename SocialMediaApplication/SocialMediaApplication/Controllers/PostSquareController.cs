@@ -26,16 +26,7 @@ namespace SocialMediaApplication.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            if (Id == null)
-            {
-                ViewBag.Owner = await _postService.GetUserProfileAsync(userId);
-                ViewBag.IsOwner = true;
-            }
-            else
-            {
-                ViewBag.Owner = await _postService.GetUserProfileAsync(Id);
-                ViewBag.IsOwner = false;
-            }
+
 
             var postsWithIds = await _postService.GetPostsAsync();
             var posts = postsWithIds.Select(p => new Post
@@ -46,12 +37,14 @@ namespace SocialMediaApplication.Controllers
                 AuthorAvatar = p.Value.AuthorAvatar,
                 Content = p.Value.Content,
                 CreatedTime = p.Value.CreatedTime,
+                UpdatedTime = p.Value.UpdatedTime,
                 Comments = p.Value.Comments,
                 Likes = p.Value.Likes
             }).ToList();
-            ViewBag.Page = "PostSquare";
+       
+            ViewBag.IsOwner = true;
+
             ViewBag.Users = await _postService.GetUsersAsync();
-            ViewBag.User = await _postService.GetUserProfileAsync(userId);
             return View(posts);
         }
 

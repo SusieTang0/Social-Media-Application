@@ -100,7 +100,7 @@ namespace SocialMediaApplication.Services
             {
                 foreach (var following in followings)
                 {
-                    if (users.TryGetValue(following.FollowedId, out var user))
+                    if (users.TryGetValue(following.FollowerId, out var user))
                     {
                       result.Add(following.FollowedId);
                     }
@@ -439,7 +439,7 @@ namespace SocialMediaApplication.Services
             var thePosts = new PostList
             {
                 MyPosts = await FindPostListAsync(id, 5),
-                MyFollowedPosts = await FindFollowedPostsAsync(id, 3),//await _postService.FindFollowedPostsAsync(id, 5)
+                MyFollowedPosts = await FindFollowedPostsAsync(id, 2),//await _postService.FindFollowedPostsAsync(id, 5)
             };
 
             return thePosts;

@@ -14,11 +14,12 @@
     {
         thisuserId = thisUser.UserId;
         thisownerId = thisOwner.UserId;
+        if (follows != null)
+        {
+            isFollow = follows.Contains(thisuserId);
+        }
     }
-    if (follows != null && follows.Contains(thisUser.UserId))
-    {
-        isFollow = true;
-    }
+    
 }
 
 @if (Model != null)
@@ -84,11 +85,11 @@
                   <div class="card-body d-flex justify-content-center">
                     @if (isFollow != null)
                     {
-                        if (isFollow ==true)
+                        if (isFollow)
                         {
                             <div class="card-body d-flex justify-content-center">
                                 <form asp-action="Unfollowing" method="post">
-                                    <input type="hidden" name="ownerId" id="unfollowOwnerId" value="@thisownerId" />
+                                        <input type="hidden" name="ownerId" id="unfollowOwnerId" value="@authorId" />
                                         <input type="hidden" name="userId" id="unfollowUserId" value="@thisuserId" />
                                     <button type="submit" class="btn btn-outline-info w-100" style="border-radius:10px;">Unfollow</button>
                                 </form>
@@ -99,7 +100,7 @@
                             <!-- Links for other users visiting the profile -->
                             <div class="card-body d-flex justify-content-center">
                                 <form asp-action="Following" method="post">
-                                        <input type="hidden" name="ownerId" id="followOwnerId" value="@thisownerId" />
+                                        <input type="hidden" name="ownerId" id="followOwnerId" value="@authorId" />
                                         <input type="hidden" name="userId" id="followUserId" value="@thisuserId" />
                                     <button type="submit" class="btn btn-info w-100" style="border-radius:10px;">Follow +</button>
                                 </form>
