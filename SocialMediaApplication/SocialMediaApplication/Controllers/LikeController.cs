@@ -9,7 +9,7 @@ namespace SocialMediaApplication.Controllers
     {
         private readonly FirebaseService2 _firebaseService;
 
-         public LikeController(FirebaseService2 firebaseService)
+        public LikeController(FirebaseService2 firebaseService)
         {
             _firebaseService = firebaseService;
         }

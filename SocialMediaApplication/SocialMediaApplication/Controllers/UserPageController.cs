@@ -22,7 +22,7 @@ namespace SocialMediaApplication.Controllers
             _postService = postService;
         }
         [Authorize]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Id)
         {
             string userId = HttpContext.Session.GetString("userId");
 

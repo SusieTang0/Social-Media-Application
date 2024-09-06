@@ -19,7 +19,7 @@
     <div class="card text-center mt-2">
         <div class="card-header d-flex justify-content-between align-items-center py-2" style="height:70px;">
             <div class="d-flex justify-content-between align-items-center col-lg-4">
-                <a href="UserPage/@Model.AuthorId" style="text-decoration:none;">
+                <a href="OtherPages/@Model.AuthorId" style="text-decoration:none;">
 
                     <img class="p-2" src="@Model.AuthorAvatar" alt="Profile Picture" style="width:50px;border-radius:50%;" />
                     @Model.AuthorName
@@ -91,7 +91,7 @@
                         {
                             <!-- Links for other users visiting the profile -->
                             <div class="card-body d-flex justify-content-center">
-                                <form asp-action="Following" method="post">
+                                <form asp-action="Following"  method="post">
                                     <input type="hidden" name="ownerId" id="ownerId" value="@thisOwner.UserId" />
                                     <input type="hidden" name="userId" id="userId" value="@thisUser.UserId" />
                                     <button type="submit" class="btn btn-info w-100" style="border-radius:10px;">Follow +</button>
@@ -109,14 +109,59 @@
             <p class="card-text text-start">@Model.Content</p>
         </div>
 
-        <div class="bg-white border border-top-2 py-2">
-            <a asp-action="Like" asp-route-postId="@Model.Id" class="mx-3" style="text-decoration:none;">
-                <img src="~/images/heart.svg" alt="Like" style="width:20px;" /> Like
-            </a>
-
-            <a asp-action="Dislike" asp-route-postId="@Model.Id" class="mx-3" style="text-decoration:none;">
-                <img src="~/images/heart-outline.svg" alt="Dislike" style="width:20px;" /> Unlike
-            </a>
+        <div class="bg-white border border-top-2 py-2 d-flex justify-content-center align-items-center">
+            @{
+                var Liked = Model.Likes != null && Model.Likes.Any(l => l.Value.UserId == ViewBag.UserId);
+            }
+            <div>
+            @if (Liked)
+            {
+                <!-- this is the button to Unlike this post-->
+                <form asp-action="UnlikePost" asp-controller="Like" method="post">
+                    <input type="hidden" name="postId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-outline-light mx-3" style="border:none;">
+                        <img src="~/images/heart-outline.svg" alt="Unlike" style="width:20px;" /> Unlike
+                    </button>
+                </form>
+            }
+            else
+            {
+                <!-- this is the button to Like this post-->
+                <form asp-action="LikePost" asp-controller="Like" method="post">
+                    <input type="hidden" name="postId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-outline-light mx-3" style="border:none;">
+                        <img src="~/images/heart.svg" alt="Like" style="width:20px;" /> Like
+                    </button>
+                </form>
+            }
+            </div>
+            <!-- this is the button to show likes -->
+            <!-- this is the button to show likes -->
+            <div>
+                <!-- this is the button to show likes -->
+                <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
+                   data-bs-toggle="collapse" href="#collapseLike@post.Id" role="button" aria-expanded="false"
+                   aria-controls="collapseLike@post.Id">
+                    Likes @post.Likes.Count
+                </a>
+                <div class="collapse mt-2" id="collapseLike@post.Id">
+                    @if (post.Likes != null && post.Likes.Count > 0)
+                    {
+                        <div>
+                            <ul class="list-unstyled">
+                                @foreach (var like in post.Likes.Values)
+                                {
+                                    <li>@like.UserName</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>No likes yet.</p>
+                    }
+                </div>
+            </div>
 
             <!-- Comments Toggle Button -->
             <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2 mx-3"
@@ -127,7 +172,7 @@
 
             <!-- Comments Section -->
             <div class="collapse mt-2" id="collapseComment@(postIdString)">
-                @Html.Partial("Components/Comments", Model.Comments)
+                @Html.Partial("Components/Comments", Model.Comments.Values.ToList())
             </div>
         </div>
     </div>

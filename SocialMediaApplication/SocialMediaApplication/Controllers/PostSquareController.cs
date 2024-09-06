@@ -17,6 +17,7 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> Index(string Id)
         {
             string userId = HttpContext.Session.GetString("userId");
+            ViewBag.UserId = userId;
 
             if (string.IsNullOrEmpty(userId))
             {
@@ -32,8 +33,19 @@ namespace SocialMediaApplication.Controllers
                 ViewBag.Owner = await _postService.GetUserProfileAsync(Id);
                 ViewBag.IsOwner = false;
             }
-          
-            var posts = await _postService.GetAllPostsAsync();
+
+            var postsWithIds = await _postService.GetPostsAsync();
+            var posts = postsWithIds.Select(p => new Post
+            {
+                Id = p.Key,
+                AuthorId = p.Value.AuthorId,
+                AuthorName = p.Value.AuthorName,
+                AuthorAvatar = p.Value.AuthorAvatar,
+                Content = p.Value.Content,
+                CreatedTime = p.Value.CreatedTime,
+                Comments = p.Value.Comments,
+                Likes = p.Value.Likes
+            }).ToList();
 
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
@@ -52,6 +64,50 @@ namespace SocialMediaApplication.Controllers
 
             // Redirect to the Home/Index page
             return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpPost("following")]
+        public async Task Following(string ownerId, string userId)
+        {
+            if (string.IsNullOrEmpty(ownerId) || string.IsNullOrEmpty(userId))
+            {
+                // Log details or add additional debugging here
+                throw new ApplicationException("Owner ID and User ID cannot be null or empty.");
+            }
+
+            try
+            {
+                await _postService.AddFollowAsync(ownerId, userId);
+            }
+            catch (ArgumentException ex)
+            {
+                // Log the exception or handle it accordingly
+                throw new ApplicationException("Follow error." + ex.Message);
+            }
+
+        }
+
+        [HttpPost("unfollowing")]
+        public async Task<IActionResult> Unfollowing(string ownerId, string userId)
+        {
+            if (string.IsNullOrEmpty(ownerId) || string.IsNullOrEmpty(userId))
+            {
+                // Log details or add additional debugging here
+                return BadRequest("Owner ID and User ID cannot be null or empty.");
+            }
+
+            try
+            {
+                await _postService.DeleteFollowingAsync(ownerId, userId);
+            }
+            catch (ArgumentException ex)
+            {
+                // Log the exception or handle it accordingly
+                return BadRequest(ex.Message);
+            }
+
+            return RedirectToAction("Index", new { id = ownerId });
         }
     }
 }

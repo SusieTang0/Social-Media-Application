@@ -1,6 +1,6 @@
-namespace SocialMediaApplication.Models
+﻿namespace SocialMediaApplication.Models
 {
-    public class Comment
+    public class CommentData
     {
         public string Id { get; set; }
         public required string PostId { get; set; }

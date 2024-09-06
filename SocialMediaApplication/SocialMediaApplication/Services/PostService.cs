@@ -298,23 +298,24 @@ namespace SocialMediaApplication.Services
                     var commentsResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments");
                     var comments = commentsResponse.ResultAs<Dictionary<string, Comment>>();
 
-                    post.Comments = comments.Values.ToList() ?? new List<Comment>();
+                    post.Comments = comments ?? new Dictionary<string, Comment>();
 
 
                     //Fetch likes for posts
                     var likesResponse = await _firebaseClient.GetAsync($"posts/{postId}/likes");
                     var likes = likesResponse.ResultAs<Dictionary<string, Like>>();
 
-                    post.Likes = likes.Values.ToList() ?? new List< Like>();
+                    post.Likes = likes ?? new Dictionary<string, Like>();
 
                     //Fetch likes for comments
-                    foreach (var comment in post.Comments)
-                    {  
+                    foreach (var commentId in post.Comments.Keys.ToList())
+                    {
+                        var comment = post.Comments[commentId];
 
-                        var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{comment.Id}/likes");
+                        var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{commentId}/likes");
                         var clikes = clikesResponse.ResultAs<Dictionary<string, Like>>();
 
-                        comment.Likes = likes.Values.ToList() ?? new List< Like>();
+                        comment.Likes = likes ?? new Dictionary<string, Like>();
                     }
                 }
             }
@@ -323,39 +324,26 @@ namespace SocialMediaApplication.Services
 
         public async Task<List<SocialMediaApplication.Models.Post>> GetAllPostsAsync()
         {
-            var response = await _firebaseClient.GetAsync("posts");
-            var posts = response.ResultAs<Dictionary<string, Post>>();
+            var posts = new List<Post>();
+            var allPosts = await GetPostsAsync();
 
-            if (posts != null)
+            if (allPosts != null)
             {
-                foreach (var postId in posts.Keys.ToList())
-                {
-                    var post = posts[postId];
-
-                    var commentsResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments");
-                    var comments = commentsResponse.ResultAs<Dictionary<string, Comment>>();
-
-                    post.Comments = comments.Values.ToList() ?? new List<Comment>();
-
-
-                    //Fetch likes for posts
-                    var likesResponse = await _firebaseClient.GetAsync($"posts/{postId}/likes");
-                    var likes = likesResponse.ResultAs<Dictionary<string, Like>>();
-
-                    post.Likes = likes.Values.ToList() ?? new List<Like>();
-
-                    //Fetch likes for comments
-                    foreach (var comment in post.Comments)
-                    {
-
-                        var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{comment.Id}/likes");
-                        var clikes = clikesResponse.ResultAs<Dictionary<string, Like>>();
-
-                        comment.Likes = likes.Values.ToList() ?? new List<Like>();
-                    }
-                }
+                posts = allPosts
+                     .Select(post => new Post
+                     {
+                         Id = post.Key,
+                         AuthorId = post.Value.AuthorId,
+                         AuthorName = post.Value.AuthorName,
+                         AuthorAvatar = post.Value.AuthorAvatar,
+                         Content = post.Value.Content,
+                         CreatedTime = post.Value.CreatedTime,
+                     })
+                     .OrderByDescending(post => post.CreatedTime)
+                     .ToList();
             }
-            return posts.Values.ToList();
+
+            return posts;
 
         }
 

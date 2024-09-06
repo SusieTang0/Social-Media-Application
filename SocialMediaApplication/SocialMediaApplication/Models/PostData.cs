@@ -1,9 +1,10 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SocialMediaApplication.Models
 {
-    public class Post
+    public class PostData
     {
+
         public string Id { get; set; }
         [Required]
         public string Content { get; set; }
@@ -18,6 +19,5 @@ namespace SocialMediaApplication.Models
         public Dictionary<string, Like> Likes { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
-
     }
 }

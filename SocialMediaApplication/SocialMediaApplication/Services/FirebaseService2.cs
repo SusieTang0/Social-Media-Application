@@ -3,7 +3,6 @@ using Firebase.Auth;
 using Firebase.Storage;
 using FireSharp.Interfaces;
 using FireSharp.Response;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.ObjectPool;
 using SocialMediaApplication.Models;
 
@@ -41,10 +40,11 @@ public class FirebaseService2
     public async Task UnlikePost(string postId, string userId)
     {
         var likeNode = await _firebaseClient.GetAsync($"posts/{postId}/likes");
-        var likes = likeNode.ResultAs<Dictionary<string,Like>>();
+        var likes = likeNode.ResultAs<Dictionary<string, Like>>();
 
         var likeId = likes?.FirstOrDefault(x => x.Value.UserId == userId).Key;
-        if(likeId != null){
+        if (likeId != null)
+        {
             await _firebaseClient.DeleteAsync($"posts/{postId}/likes/{likeId}");
         }
 
@@ -52,7 +52,7 @@ public class FirebaseService2
     public async Task<List<Like>> ShowPostLikes(string postId)
     {
         var response = await _firebaseClient.GetAsync($"posts/{postId}/likes");
-        var likes = response.ResultAs<Dictionary<string,Like>>();
+        var likes = response.ResultAs<Dictionary<string, Like>>();
 
         return likes?.Values.ToList() ?? new List<Like>();
     }
@@ -60,7 +60,7 @@ public class FirebaseService2
     public async Task<int> ShowPostLikesCount(string postId)
     {
         var response = await _firebaseClient.GetAsync($"posts/{postId}/likes");
-        var likes = response.ResultAs<Dictionary<string,Like>>();
+        var likes = response.ResultAs<Dictionary<string, Like>>();
 
         return likes?.Count ?? 0;
 
@@ -79,28 +79,26 @@ public class FirebaseService2
             CreatedTime = DateTime.UtcNow
         };
         var response = await _firebaseClient.PushAsync($"posts/{postId}/comments", comment);
-        string generatedKey = response.Result.name;
-        comment.Id = generatedKey;
-        await _firebaseClient.SetAsync($"posts/{generatedKey}", comment);
     }
 
     public async Task EditComment(string postId, string content, string commentId)
     {
-
-        var comment = new {
+        var comment = new
+        {
             Content = content,
             UpdatedTime = DateTime.UtcNow
         };
-        var response = await _firebaseClient.PushAsync($"posts/{postId}/comments/{commentId}",comment);
+        var response = await _firebaseClient.PushAsync($"posts/{postId}/comments/{commentId}", comment);
     }
 
-    public async Task DeleteComment(string postId,string userId)
+    public async Task DeleteComment(string postId, string userId)
     {
         var commentNode = await _firebaseClient.GetAsync($"posts/{postId}/comments");
-        var comments = commentNode.ResultAs<Dictionary<string,Comment>>();
+        var comments = commentNode.ResultAs<Dictionary<string, Comment>>();
 
         var commentId = comments?.FirstOrDefault(x => x.Value.AuthorId == userId).Key;
-        if(commentId != null){
+        if (commentId != null)
+        {
             await _firebaseClient.DeleteAsync($"posts/{postId}/comments/{commentId}");
         }
     }
@@ -117,13 +115,14 @@ public class FirebaseService2
 
     }
 
-    public async Task UnlikeComment( string postId, string commentId, string userId)
+    public async Task UnlikeComment(string postId, string commentId, string userId)
     {
         var likeNode = await _firebaseClient.GetAsync($"posts/{postId}/comments/{commentId}/likes");
-        var likes = likeNode.ResultAs<Dictionary<string,Like>>();
+        var likes = likeNode.ResultAs<Dictionary<string, Like>>();
 
         var likeId = likes?.FirstOrDefault(x => x.Value.UserId == userId).Key;
-        if(likeId != null){
+        if (likeId != null)
+        {
             await _firebaseClient.DeleteAsync($"posts/{postId}/comments/{commentId}/likes/{likeId}");
         }
 
@@ -131,7 +130,7 @@ public class FirebaseService2
     public async Task<List<Like>> ShowCommentLikes(string postId, string commentId)
     {
         var response = await _firebaseClient.GetAsync($"posts/{postId}/comments/{commentId}/likes");
-        var likes = response.ResultAs<Dictionary<string,Like>>();
+        var likes = response.ResultAs<Dictionary<string, Like>>();
 
         return likes?.Values.ToList() ?? new List<Like>();
     }
