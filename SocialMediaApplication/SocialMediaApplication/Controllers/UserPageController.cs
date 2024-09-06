@@ -22,7 +22,7 @@ namespace SocialMediaApplication.Controllers
             _postService = postService;
         }
         [Authorize]
-        public async Task<IActionResult> Index(string Id)
+        public async Task<IActionResult> Index()
         {
             string userId = HttpContext.Session.GetString("userId");
 
@@ -30,21 +30,14 @@ namespace SocialMediaApplication.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            if(Id == null || Id == userId)
-            {
-                ViewBag.Owner = await _postService.GetUserProfileAsync(userId);
-                ViewBag.IsOwner = true;
-            }
-            else
-            {
-                ViewBag.Owner = await _postService.GetUserProfileAsync(Id);
-                ViewBag.IsOwner = false;
-            }
-            
+
+            ViewBag.IsOwner = true;
+            ViewBag.Owner = await _postService.GetUserProfileAsync(userId);
             ViewBag.Follows = await _postService.GetFollowedIdsSetAsync(userId);
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
-            var posts = await GetPostlistsAsync(userId);
+
+            var posts = await _postService.GetPostlistsAsync(userId);
             return View(posts);
         }
 
@@ -130,17 +123,7 @@ namespace SocialMediaApplication.Controllers
             return RedirectToAction("Index", new { Id = userId });
         }
 
-        public async Task<PostList> GetPostlistsAsync(string id)
-        {
-            var thePosts = new PostList
-            {
-                MyPosts = await _postService.FindPostListAsync(id, 5),
-                MyFollowedPosts = new List<Post>(),//await _postService.FindFollowedPostsAsync(id, 5)
-            };
-
-            return thePosts;
-        }
-
+       
        
 
        

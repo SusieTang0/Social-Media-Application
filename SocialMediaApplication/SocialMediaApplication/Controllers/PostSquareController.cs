@@ -34,6 +34,7 @@ namespace SocialMediaApplication.Controllers
             }
           
             var posts = await _postService.GetAllPostsAsync();
+
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
             return View(posts);

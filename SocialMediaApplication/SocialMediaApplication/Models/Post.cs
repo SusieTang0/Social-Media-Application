@@ -14,8 +14,8 @@ namespace SocialMediaApplication.Models
         [Required]
         public string AuthorAvatar { get; set; }
        
-        public Dictionary<string, Comment> Comments { get; set; }
-        public Dictionary<string, Like> Likes { get; set; }
+        public List<Comment> Comments { get; set; }
+        public List<Like> Likes { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
 

@@ -110,6 +110,26 @@ namespace SocialMediaApplication.Services
             return new HashSet<string>();
         }
 
+        public async Task<HashSet<string>> GetFollowerIdsSetAsync(string userId)
+        {
+            var users = await GetUsersAsync();
+            var result = new HashSet<string>();
+            var followings = await GetFollowsAsync();
+
+            if (users != null && followings != null)
+            {
+                foreach (var following in followings)
+                {
+                    if (users.TryGetValue(following.FollowedId, out var user))
+                    {
+                        result.Add(following.FollowerId);
+                    }
+                }
+                return result;
+            }
+            return new HashSet<string>();
+        }
+
         public async Task<List<SocialMediaApplication.Models.User>> GetFollowersUserAsync(string userId)
         {
             var users = await GetUsersAsync();
@@ -130,44 +150,35 @@ namespace SocialMediaApplication.Services
             return new List<Models.User>();
         }
 
-        public async Task AddFollowAsync(string followingId, string followerId)
+         public async Task AddFollowAsync(string followingId, string followerId)
         {
-            var followingUser = await GetUserProfileAsync(followingId);
-            var followerUser = await GetUserProfileAsync(followerId);
+          var follow = new Follow
+                  {
+                      FollowedId = followingId,
+                      FollowerId = followerId,
+                     
+                      CreatedTime = DateTime.Now,
+                  };
 
-            if (followingUser == null || followerUser == null)
+            if (follow == null )
             {
-                throw new ArgumentException("Following and Followers cannot be null or empty.");
+                throw new ArgumentException("Following Id and Follower Id cannot be null or empty.");
             }
 
 
             try
             {
-                FirebaseResponse response = await _firebaseClient.GetAsync($"users/{followerId}/followings");
-                var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
-                var isChanged = false;
-                foreach(var follow in followedDictionary)
-                {
-                    if (follow.Value.Equals(followingUser))
-                    {
-                        await _firebaseClient.SetAsync($"users/{followerId}/followings/{follow.Key}", followingUser);
-                        isChanged = true;
-                        break;
-                    }
-                }
-
-                if (!isChanged)
-                {
-                    await _firebaseClient.PushAsync($"users/{followerId}/followings", followingUser);
-                    await _firebaseClient.PushAsync($"users/{followingId}/followers", followerUser);
-                }
-               
+                var response = await _firebaseClient.PushAsync("follows", follow);
+                string generatedKey = response.Result.name;
+                follow.Id = generatedKey;
+                await _firebaseClient.SetAsync($"follows/{generatedKey}", follow);
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error saving the post.", ex);
+                throw new ApplicationException("Error saving the follow.", ex);
             }
         }
+
 
         public async Task DeleteFollowingAsync(string followingId, string followerId)
         {
@@ -179,29 +190,24 @@ namespace SocialMediaApplication.Services
 
             try
             {
-                FirebaseResponse response = await _firebaseClient.GetAsync($"users/{followerId}/followings");
-                var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
+                FirebaseResponse response = await _firebaseClient.GetAsync($"follows/");
+                var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
                
                 foreach (var follow in followedDictionary)
                 {
-                    if (follow.Value.UserId.Equals(followingId) )
+                    var followKey = follow.Key;
+                    if (follow.Value.FollowedId.Equals(followingId) && follow.Value.FollowerId.Equals(followerId) )
                     {
-                        await _firebaseClient.DeleteAsync($"users/{followerId}/followings/{follow.Key}");
+                        if(followKey != null)
+                        {
+                            await _firebaseClient.DeleteAsync($"follows/{followKey}");
+
+                            break;
+                        }
                        
-                        break;
                     }
                 }
                
-                FirebaseResponse followerResponse = await _firebaseClient.GetAsync($"users/{followingId}/followers");
-                var followerDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>>();
-                foreach (var follow in followerDictionary)
-                {
-                    if (follow.Value.UserId.Equals(followerId))
-                    {
-                        await _firebaseClient.DeleteAsync($"users/{followingId}/followers/{follow.Key}");
-                        break;
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -211,36 +217,6 @@ namespace SocialMediaApplication.Services
         }
 
 
-        public async Task<List<SocialMediaApplication.Models.User>> GetFollowerIdsAsync(string userId)
-        {
-            FirebaseResponse response = await _firebaseClient.GetAsync($"users/{userId}/followers");
-            var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.User>> ();
-            var users = await GetUsersAsync();
-            var followers = followedDictionary.Values.ToList();
-            if (followedDictionary != null)
-            {
-                if (users != null && followers != null)
-                {
-                    foreach (var follower in followers)
-                    {
-                        if(users.TryGetValue(follower.UserId,out var user))
-                        {
-                            follower.Name = user.Name;
-                            follower.Email = user.Email;
-                            follower.ProfilePictureUrl = user.ProfilePictureUrl;
-                            follower.Bio = user.Bio;
-                            follower.Password = "";
-                        }
-                        await _firebaseClient.SetAsync($"users/{userId}/followers/{follower.UserId}", follower);
-                    }
-                    
-                    return followers;
-                }
-                
-            }
-
-            return new List<SocialMediaApplication.Models.User>();
-        }
 
         // Post
 
@@ -310,41 +286,77 @@ namespace SocialMediaApplication.Services
 
         public async Task<Dictionary<string,SocialMediaApplication.Models.Post>> GetPostsAsync()
         {
-            FirebaseResponse response = await _firebaseClient.GetAsync("posts");
+            var response = await _firebaseClient.GetAsync("posts");
+            var posts = response.ResultAs<Dictionary<string, Post>>();
 
-            
-            var postsDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Post>>();
-
-            if (postsDictionary != null)
+            if (posts != null)
             {
-                return postsDictionary;
-            }
+                foreach (var postId in posts.Keys.ToList())
+                {
+                    var post = posts[postId];
 
-            return null;
+                    var commentsResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments");
+                    var comments = commentsResponse.ResultAs<Dictionary<string, Comment>>();
+
+                    post.Comments = comments.Values.ToList() ?? new List<Comment>();
+
+
+                    //Fetch likes for posts
+                    var likesResponse = await _firebaseClient.GetAsync($"posts/{postId}/likes");
+                    var likes = likesResponse.ResultAs<Dictionary<string, Like>>();
+
+                    post.Likes = likes.Values.ToList() ?? new List< Like>();
+
+                    //Fetch likes for comments
+                    foreach (var comment in post.Comments)
+                    {  
+
+                        var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{comment.Id}/likes");
+                        var clikes = clikesResponse.ResultAs<Dictionary<string, Like>>();
+
+                        comment.Likes = likes.Values.ToList() ?? new List< Like>();
+                    }
+                }
+            }
+            return posts;
         }
 
         public async Task<List<SocialMediaApplication.Models.Post>> GetAllPostsAsync()
         {
-            var posts = new List<Post>();
-            var allPosts = await GetPostsAsync();
+            var response = await _firebaseClient.GetAsync("posts");
+            var posts = response.ResultAs<Dictionary<string, Post>>();
 
-            if (allPosts != null)
+            if (posts != null)
             {
-                posts = allPosts
-                     .Select(post => new Post
-                     {
-                         Id = post.Key,
-                         AuthorId = post.Value.AuthorId,
-                         AuthorName = post.Value.AuthorName,
-                         AuthorAvatar = post.Value.AuthorAvatar,
-                         Content = post.Value.Content,
-                         CreatedTime = post.Value.CreatedTime,
-                     })
-                     .OrderByDescending(post => post.CreatedTime)
-                     .ToList();
-            }
+                foreach (var postId in posts.Keys.ToList())
+                {
+                    var post = posts[postId];
 
-            return posts;
+                    var commentsResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments");
+                    var comments = commentsResponse.ResultAs<Dictionary<string, Comment>>();
+
+                    post.Comments = comments.Values.ToList() ?? new List<Comment>();
+
+
+                    //Fetch likes for posts
+                    var likesResponse = await _firebaseClient.GetAsync($"posts/{postId}/likes");
+                    var likes = likesResponse.ResultAs<Dictionary<string, Like>>();
+
+                    post.Likes = likes.Values.ToList() ?? new List<Like>();
+
+                    //Fetch likes for comments
+                    foreach (var comment in post.Comments)
+                    {
+
+                        var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{comment.Id}/likes");
+                        var clikes = clikesResponse.ResultAs<Dictionary<string, Like>>();
+
+                        comment.Likes = likes.Values.ToList() ?? new List<Like>();
+                    }
+                }
+            }
+            return posts.Values.ToList();
+
         }
 
         public async Task<SocialMediaApplication.Models.Post> GetPostByPostIdAsync(string postId)
@@ -365,12 +377,11 @@ namespace SocialMediaApplication.Services
 
         }
 
-        /*
+      
         public async Task<List<Post>> FindFollowedPostsAsync(string userId, int numberToShow)
         {
             var posts = new List<Post>();
-            var followedUsers = await _firebaseClient.GetAsync($"follows");
-            var followedIds = new HashSet<string>(followedUsers.Select(f => f.UserId));
+            var followedIds = await GetFollowedIdsSetAsync(userId);
             var allPosts = await GetPostsAsync();
 
             if (allPosts != null && followedIds.Count > 0)
@@ -392,7 +403,7 @@ namespace SocialMediaApplication.Services
             }
 
             return posts;
-        }*/
+        }
 
 
         public async Task<List<Post>> FindPostListAsync(string id, int numberToShow)
@@ -411,7 +422,9 @@ namespace SocialMediaApplication.Services
                          AuthorName = kvp.Value.AuthorName,
                          AuthorAvatar = kvp.Value.AuthorAvatar,
                          Content = kvp.Value.Content,
-                         CreatedTime = kvp.Value.CreatedTime
+                         CreatedTime = kvp.Value.CreatedTime,
+                         Comments = kvp.Value.Comments,
+                          Likes = kvp.Value.Likes
                      })
                      .OrderByDescending(post => post.CreatedTime)
                      .Take(numberToShow)
@@ -420,5 +433,17 @@ namespace SocialMediaApplication.Services
 
             return posts;
         }
+
+        public async Task<PostList> GetPostlistsAsync(string id)
+        {
+            var thePosts = new PostList
+            {
+                MyPosts = await FindPostListAsync(id, 5),
+                MyFollowedPosts = await FindFollowedPostsAsync(id, 3),//await _postService.FindFollowedPostsAsync(id, 5)
+            };
+
+            return thePosts;
+        }
+
     }
 }

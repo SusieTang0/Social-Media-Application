@@ -11,41 +11,77 @@
         <div class="col-md-10">
             <div class="row py-2 border border-bottom-1 rounded-top-2">
                 <div class="col-md-4  text-start">
-                    UserName
+                    @Model.AuthorName
                 </div>
                 <div class="col-md-4  text-start">
-                    TimeStamp
+                    @Model.CreatedTime.ToString("f")
                 </div>
-                <div class="col-md-2">
-                    <!-- this is the button to Like this comment-->
-                    <a asp-action="Like">
-                        <img src="images/heart.svg" alt="Alternate Text"
-                                style="width:20px;text-decoration-line:none;" />
+                <div class="col-md-4">
+                    @{
+                        var Liked = Model.Likes != null && Model.Likes.Any(l => l.Value.UserId == ViewBag.UserId);
+                    }
+                    @if (Liked)
+                    {
+                        <!-- this is the button to Unlike this comment-->
+                        <form asp-action="UnlikeComment" asp-controller="Like" method="post">
+                            <input type="hidden" name="postId" value="@Model.PostId" />
+                            <input type="hidden" name="commentId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-link">
+                                <img src="images/heart-outline.svg" alt="Unlike" style="width:20px;" />
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <!-- this is the button to Like this comment-->
+                        <form asp-action="LikeComment" asp-controller="Like" method="post">
+                            <input type="hidden" name="postId" value="@Model.PostId" />
+                            <input type="hidden" name="commentId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-link">
+                                <img src="images/heart.svg" alt="Like" style="width:20px;" />
+                            </button>
+                        </form>
+                    }
+                    <a class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2"
+                       data-bs-toggle="collapse" href="#collapseLike@post.Id" role="button" aria-expanded="false"
+                       aria-controls="collapseLike@post.Id">
+                        Likes @Model.Likes.Count
                     </a>
-
-                    <!-- this is the button to Unlike this comment-->
-                    <a asp-action="Dislike">
-                        <img src="images/heart-outline.svg"
-                                alt="Alternate Text"
-                                style="width:20px;text-decoration-line:none;" />
-                    </a>
-                </div>
-                <div class="col-md-1">
-
-                    <!-- this is the button to Edit user's' own comment-->
-                    <a asp-action="Like">
-                        <img src="images/edit.svg" alt="Alternate Text"
-                                style="width:20px;text-decoration-line:none;" />
-                    </a>
-                </div>
-                <div class="col-md-1">
-                    <!-- this is the button to Delete user's' own comment-->
-                    <a type="button" class="btn-close"></a>
+                    <div class="collapse mt-2" id="collapseLike@post.Id">
+                        @if (Model.Likes != null && Model.Likes.Count > 0)
+                        {
+                            <div>
+                                <ul class="list-unstyled">
+                                    @foreach (var like in Model.Likes.Values)
+                                    {
+                                        <li>@like.UserName</li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>No likes yet.</p>
+                        }
+                    </div>
                 </div>
             </div>
-            <div class="row py-2 text-start border border-1 rounded-bottom-2">
-                <p>This is the comments content sample</p>
+            <div class="col-md-1">
+
+                <!-- this is the button to Edit user's' own comment-->
+                <a asp-action="Like">
+                    <img src="images/edit.svg" alt="Alternate Text"
+                         style="width:20px;text-decoration-line:none;" />
+                </a>
+            </div>
+            <div class="col-md-1">
+                <!-- this is the button to Delete user's' own comment-->
+                <a type="button" class="btn-close"></a>
             </div>
         </div>
+        <div class="row py-2 text-start border border-1 rounded-bottom-2">
+            <p>@Model.Content</p>
+        </div>
     </div>
+</div>
 </div>

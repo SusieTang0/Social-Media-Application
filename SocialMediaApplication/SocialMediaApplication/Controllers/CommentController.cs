@@ -16,28 +16,30 @@ namespace SocialMediaApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> AddComment(string postId, string content)
         {
-            string userId = User.Identity.Name;
-            await _firebaseService.AddComment(postId, userId, content);
-            return RedirectToAction();
+            string authorId = HttpContext.Session.GetString("userId");
+            var author = await _firebaseService.GetUserProfileAsync(authorId);
+            string authorName = author.Name;
+            await _firebaseService.AddComment(postId, authorId, authorName, content);
+            return RedirectToAction("Index", "UserPage");
         }
 
         [HttpPost]
         public async Task<IActionResult> EditComment(string postId, string commentId, string content)
         {
             await _firebaseService.EditComment(postId, commentId, content);
-            return RedirectToAction();
+            return RedirectToAction("Index", "UserPage");
         }
 
         public async Task<IActionResult> DeleteComment(string postId, string commentId)
         {
             await _firebaseService.DeleteComment(postId, commentId);
-            return RedirectToAction();
+            return RedirectToAction("Index", "UserPage");
         }
 
         public async Task<IActionResult> GetComments(string postId)
         {
             var comments = await _firebaseService.GetComments(postId);
-            return RedirectToAction();
+            return PartialView("_CommentsPartial", comments);
         }
     }
 
