@@ -1,0 +1,22 @@
+@model SocialMediaApplication.Models.FollowsList
+
+<div class="container">
+    <h2 class="text-center">People I Follow</h2>
+    
+    @if (Model.MyFollows != null && Model.MyFollows.Any())
+    {
+        <ul class="list-group">
+            @foreach (var follows in Model.MyFollows)
+            {
+                <li class="list-group-item d-flex align-items-center">
+                    
+                    <span class="ml-3">@follows.FollowsName</span>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>You are not following anyone yet.</p>
+    }
+</div>
