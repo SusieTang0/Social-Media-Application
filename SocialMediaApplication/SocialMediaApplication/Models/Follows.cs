@@ -4,7 +4,7 @@ namespace SocialMediaApplication.Models
     {
         public string FollowsId { get; set; } 
         public string FollowsName { get; set; }
-       // public string FollowsAvatar { get; set; }
+       public string FollowsAvatar { get; set; }
         
 
     }

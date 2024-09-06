@@ -14,10 +14,10 @@ namespace SocialMediaApplication.Controllers
                 MyFollows = new List<Follows>
 
                 {
-                    // new Follows { FollowsId = "1", FollowsName = "Alice", FollowsAvatar = "alice.jpg" },
-                    // new Follows { FollowsId = "2", FollowsName = "Bob", FollowsAvatar = "bob.jpg" }
-                    new Follows { FollowsId = "1", FollowsName = "Alice" },
-                    new Follows { FollowsId = "2", FollowsName = "Bob" }
+                    new Follows { FollowsId = "1", FollowsName = "Alice", FollowsAvatar = "alice.jpg" },
+                    new Follows { FollowsId = "2", FollowsName = "Anna", FollowsAvatar = "anna.jpg" }
+                    // new Follows { FollowsId = "1", FollowsName = "Alice" },
+                    // new Follows { FollowsId = "2", FollowsName = "Bob" }
                 }
             };
             
@@ -31,10 +31,10 @@ namespace SocialMediaApplication.Controllers
             {
                 MyFollowers = new List<Follower>
                 {
-                    // new Follower { FollowerId = "1", FollowerName = "Charlie", FollowerAvatar = "charlie.jpg" },
-                    // new Follower { FollowerId = "2", FollowerName = "Dave", FollowerAvatar = "dave.jpg" }
-                    new Follower { FollowerId = "1", FollowerName = "Charlie" },
-                    new Follower { FollowerId = "2", FollowerName = "Dave" }
+                    new Follower { FollowerId = "1", FollowerName = "Bob", FollowerAvatar = "bob.jpg" },
+                    new Follower { FollowerId = "2", FollowerName = "Dave", FollowerAvatar = "dave.jpg" }
+                    // new Follower { FollowerId = "1", FollowerName = "Charlie" },
+                    // new Follower { FollowerId = "2", FollowerName = "Dave" }
                 }
             };
             
