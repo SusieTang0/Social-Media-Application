@@ -152,11 +152,15 @@ namespace SocialMediaApplication.Services
 
          public async Task AddFollowAsync(string followingId, string followerId)
         {
-          var follow = new Follow
+            if (string.IsNullOrEmpty(followingId) || string.IsNullOrEmpty(followerId))
+            {
+                throw new ArgumentException("Following Id and Follower Id cannot be null or empty.");
+            }
+
+            var follow = new Follow
                   {
                       FollowedId = followingId,
                       FollowerId = followerId,
-                     
                       CreatedTime = DateTime.Now,
                   };
 
@@ -180,7 +184,7 @@ namespace SocialMediaApplication.Services
         }
 
 
-        public async Task DeleteFollowingAsync(string followingId, string followerId)
+        public async Task DeleteFollowAsync(string followingId, string followerId)
         {
             if (string.IsNullOrEmpty(followingId) || string.IsNullOrEmpty(followerId))
             {
@@ -190,13 +194,13 @@ namespace SocialMediaApplication.Services
 
             try
             {
-                FirebaseResponse response = await _firebaseClient.GetAsync($"follows/");
+                FirebaseResponse response = await _firebaseClient.GetAsync("follows");
                 var followedDictionary = response.ResultAs<Dictionary<string, SocialMediaApplication.Models.Follow>>();
                
-                foreach (var follow in followedDictionary)
+                foreach (var follow in followedDictionary.Values)
                 {
-                    var followKey = follow.Key;
-                    if (follow.Value.FollowedId.Equals(followingId) && follow.Value.FollowerId.Equals(followerId) )
+                    var followKey = follow.Id;
+                    if ((follow.FollowedId== followingId) && (follow.FollowerId==followerId ))
                     {
                         if(followKey != null)
                         {
@@ -211,7 +215,7 @@ namespace SocialMediaApplication.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error saving the post.", ex);
+                throw new ApplicationException("Error saving the follow.", ex);
             }
 
         }
@@ -256,9 +260,16 @@ namespace SocialMediaApplication.Services
 
         public async Task<FirebaseResponse> SavePostAsync(string id, string content)
         {
-            var post = await GetPostByPostIdAsync(id);
-            post.Content = content;
-
+            var theOne = await GetPostByPostIdAsync(id);
+            var post = new Post
+            {
+                Content = content,
+                AuthorId = theOne.AuthorId,
+                AuthorName = theOne.AuthorName,
+                AuthorAvatar = theOne.AuthorAvatar,
+                CreatedTime = theOne.CreatedTime,
+                UpdatedTime = DateTime.Now
+            };
             if (post == null || string.IsNullOrEmpty(id))
             {
                 throw new ArgumentException("Post object or Id cannot be null or empty.");
@@ -338,6 +349,7 @@ namespace SocialMediaApplication.Services
                          AuthorAvatar = post.Value.AuthorAvatar,
                          Content = post.Value.Content,
                          CreatedTime = post.Value.CreatedTime,
+                         UpdatedTime = post.Value.UpdatedTime,
                      })
                      .OrderByDescending(post => post.CreatedTime)
                      .ToList();

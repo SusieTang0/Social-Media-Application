@@ -21,7 +21,7 @@ namespace SocialMediaApplication.Controllers
         {
             _postService = postService;
         }
-        [Authorize]
+        
         public async Task<IActionResult> Index(string Id)
         {
             string userId = HttpContext.Session.GetString("userId");
@@ -36,7 +36,7 @@ namespace SocialMediaApplication.Controllers
             ViewBag.Follows = await _postService.GetFollowedIdsSetAsync(userId);
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
-
+            ViewBag.Page = "UserPage";
             var posts = await _postService.GetPostlistsAsync(userId);
             return View(posts);
         }

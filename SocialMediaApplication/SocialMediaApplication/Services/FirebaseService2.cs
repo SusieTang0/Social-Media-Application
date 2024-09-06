@@ -68,12 +68,13 @@ public class FirebaseService2
 
 
     /*_______________Comments______________________*/
-    public async Task AddComment(string postId, string authorId, string authorName, string content)
+    public async Task AddComment(string postId, string authorId, string authorName, string authorAvatar, string content)
     {
         var comment = new Comment
         {
             AuthorId = authorId,
             AuthorName = authorName,
+            AuthorAvatar= authorAvatar,
             PostId = postId,
             Content = content,
             CreatedTime = DateTime.UtcNow

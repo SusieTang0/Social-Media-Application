@@ -70,12 +70,12 @@ namespace SocialMediaApplication.Controllers
 
 
         [HttpPost("following")]
-        public async Task Following(string ownerId, string userId)
+        public async Task<IActionResult> Following(string ownerId, string userId)
         {
             if (string.IsNullOrEmpty(ownerId) || string.IsNullOrEmpty(userId))
             {
                 // Log details or add additional debugging here
-                throw new ApplicationException("Owner ID and User ID cannot be null or empty.");
+                return BadRequest("Owner ID and User ID cannot be null or empty.");
             }
 
             try
@@ -85,10 +85,12 @@ namespace SocialMediaApplication.Controllers
             catch (ArgumentException ex)
             {
                 // Log the exception or handle it accordingly
-                throw new ApplicationException("Follow error." +ex.Message);
+                return BadRequest(ex.Message);
             }
-           
+
+            return RedirectToAction("Index", new { id = ownerId });
         }
+
 
         [HttpPost("unfollowing")]
         public async Task<IActionResult> Unfollowing(string ownerId, string userId)
@@ -101,7 +103,7 @@ namespace SocialMediaApplication.Controllers
 
             try
             {
-                await _postService.DeleteFollowingAsync(ownerId, userId);
+                await _postService.DeleteFollowAsync(ownerId, userId);
             }
             catch (ArgumentException ex)
             {

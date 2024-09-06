@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SocialMediaApplication.Models;
+using Firebase.Auth;
 
 namespace SocialMediaApplication.Controllers
 {            
@@ -19,26 +20,36 @@ namespace SocialMediaApplication.Controllers
             string authorId = HttpContext.Session.GetString("userId");
             var author = await _firebaseService.GetUserProfileAsync(authorId);
             string authorName = author.Name;
-            await _firebaseService.AddComment(postId, authorId, authorName, content);
-            return RedirectToAction("Index", "UserPage");
+            string authorAvatar = author.ProfilePictureUrl;
+            await _firebaseService.AddComment(postId, authorId, authorName, authorAvatar, content);
+           
+            return RedirectToAction("Index", "UserPage", new { Id = authorId });
         }
 
         [HttpPost]
         public async Task<IActionResult> EditComment(string postId, string commentId, string content)
         {
+            string authorId = HttpContext.Session.GetString("userId");
             await _firebaseService.EditComment(postId, commentId, content);
-            return RedirectToAction("Index", "UserPage");
+            string page = ViewBag.page;
+            
+            return RedirectToAction("Index", "UserPage", new { Id = authorId });
         }
 
         public async Task<IActionResult> DeleteComment(string postId, string commentId)
         {
+            string authorId = HttpContext.Session.GetString("userId");
             await _firebaseService.DeleteComment(postId, commentId);
-            return RedirectToAction("Index", "UserPage");
+            string page = ViewBag.page;
+           
+            return RedirectToAction("Index", "UserPage", new { Id = authorId });
         }
 
         public async Task<IActionResult> GetComments(string postId)
         {
             var comments = await _firebaseService.GetComments(postId);
+            string page = ViewBag.page;
+            
             return PartialView("_CommentsPartial", comments);
         }
     }

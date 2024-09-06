@@ -19,8 +19,12 @@ namespace SocialMediaApplication.Controllers
         {
             string userId = HttpContext.Session.GetString("userId");
             var user = await _firebaseService.GetUserProfileAsync(userId);
-            string userName = user.Name;
-            await _firebaseService.LikePost(postId, userId, userName);
+            if(user != null)
+            {
+                string userName = user.Name;
+                await _firebaseService.LikePost(postId, userId, userName);
+            }
+            
             return RedirectToAction("Index", "UserPage");
         }
 
@@ -29,6 +33,8 @@ namespace SocialMediaApplication.Controllers
         {
             string userId = HttpContext.Session.GetString("userId");
             await _firebaseService.UnlikePost(postId, userId);
+
+            
             return RedirectToAction("Index", "UserPage");
         }
 
@@ -37,8 +43,13 @@ namespace SocialMediaApplication.Controllers
         {
             string userId = HttpContext.Session.GetString("userId");
             var user = await _firebaseService.GetUserProfileAsync(userId);
-            string userName = user.Name;
-            await _firebaseService.LikeComment(postId, commentId, userId, userName);
+         
+            if (user != null)
+            {
+                string userName = user.Name;
+                await _firebaseService.LikeComment(postId, commentId, userId, userName);
+            }
+ 
             return RedirectToAction("Index", "UserPage");
         }
 
@@ -47,6 +58,8 @@ namespace SocialMediaApplication.Controllers
         {
             string userId = HttpContext.Session.GetString("userId");
             await _firebaseService.UnlikeComment(postId, commentId, userId);
+     
+            
             return RedirectToAction("Index", "UserPage");
         }
     }

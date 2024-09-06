@@ -6,6 +6,13 @@
     var thisOwner = ViewBag.Owner as SocialMediaApplication.Models.User;
     HashSet<string> follows = ViewBag.Follows;
     var isFollow = false;
+    string thisuserId = "";
+    string thisownerId = "";
+    if(thisUser !=null && thisOwner != null)
+    {
+        thisuserId = thisUser.UserId;
+        thisownerId = thisOwner.UserId;
+    }
     if (follows != null && follows.Contains(thisUser.UserId))
     {
         isFollow = true;
@@ -26,36 +33,33 @@
                     <h5 class="card-title text-center">@thisOwner?.Name</h5>
                     <p class="card-text">@thisOwner?.Bio</p>
                 </div>
-                @if (isFollow != null && thisOwner != null && thisUser != null)
+       
+                @if (isFollow != null)
                 {
-                    @if (thisOwner.UserId != null && thisUser.UserId != null)
+                    if (!isFollow)
                     {
-                        if (isFollow)
-                        {
-                            <div class="card-body d-flex justify-content-center">
-                                <form asp-action="Unfollowing" method="post">
-                                    <input type="hidden" name="ownerId" id="ownerId" value="@thisOwner.UserId" />
-                                    <input type="hidden" name="userId" id="userId" value="@thisUser.UserId" />
-                                    <button type="submit" class="btn btn-info w-100" style="border-radius:10px;">Unfollow</button>
-                                </form>
-                            </div>
-                        }
-                        else
-                        {
-                            <!-- Links for other users visiting the profile -->
-                            <div class="card-body d-flex justify-content-center">
-                                <form asp-action="Following" method="post">
-                                    <input type="hidden" name="ownerId" id="ownerId" value="@thisOwner.UserId" />
-                                    <input type="hidden" name="userId" id="userId" value="@thisUser.UserId" />
-                                    <button type="submit" class="btn btn-info w-100" style="border-radius:10px;">Follow +</button>
-                                </form>
-
-                            </div>
-                        }
+                        <div class="card-body d-flex justify-content-center">
+                            <form asp-action="Unfollowing" method="post">
+                                <input type="hidden" name="ownerId" id="ownerId" value="@thisownerId" />
+                                <input type="hidden" name="userId" id="userId" value="@thisuserId" />
+                                <button type="submit" class="btn btn-outline-info w-100" style="border-radius:10px;">Unfollow</button>
+                            </form>
+                        </div>
                     }
-                   
-                   
+                    else
+                    {
+                        <!-- Links for other users visiting the profile -->
+                        <div class="card-body d-flex justify-content-center">
+                            <form asp-action="Following" method="post">
+                                <input type="hidden" name="ownerId" id="ownerId" value="@thisownerId" />
+                                <input type="hidden" name="userId" id="userId" value="@thisuserId" />
+                                <button type="submit" class="btn btn-info w-100" style="border-radius:10px;">Follow +</button>
+                            </form>
+
+                        </div>
+                    }
                 }
+             
                 <!-- Back to Homepage -->
                 <div class="col-md-12 d-flex justify-content-center mt-3"></div>
 

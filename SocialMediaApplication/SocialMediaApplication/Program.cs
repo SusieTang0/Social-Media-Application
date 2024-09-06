@@ -20,6 +20,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddHttpContextAccessor();
 // Register FirebaseService as a singleton
 builder.Services.AddSingleton<FirebaseService>();
+builder.Services.AddSingleton<FirebaseService2>();
+
 builder.Services.AddScoped<PostService>();
 
 // Add session support (if needed)

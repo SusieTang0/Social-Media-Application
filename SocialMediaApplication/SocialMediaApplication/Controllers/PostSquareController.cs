@@ -8,12 +8,15 @@ namespace SocialMediaApplication.Controllers
     public class PostSquareController : Controller
     {
         private readonly PostService _postService;
+        private readonly FirebaseService2 _firebaseService;
 
-        public PostSquareController(PostService postService)
+        public PostSquareController(PostService postService, FirebaseService2 firebaseService)
         {
             _postService = postService;
+            _firebaseService = firebaseService;
         }
 
+        
         public async Task<IActionResult> Index(string Id)
         {
             string userId = HttpContext.Session.GetString("userId");
@@ -46,7 +49,7 @@ namespace SocialMediaApplication.Controllers
                 Comments = p.Value.Comments,
                 Likes = p.Value.Likes
             }).ToList();
-
+            ViewBag.Page = "PostSquare";
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
             return View(posts);
@@ -67,13 +70,14 @@ namespace SocialMediaApplication.Controllers
         }
 
 
-        [HttpPost("following")]
-        public async Task Following(string ownerId, string userId)
+       
+        [HttpPost("square-following")]
+        public async Task<IActionResult> Following(string ownerId, string userId)
         {
             if (string.IsNullOrEmpty(ownerId) || string.IsNullOrEmpty(userId))
             {
                 // Log details or add additional debugging here
-                throw new ApplicationException("Owner ID and User ID cannot be null or empty.");
+                throw new ArgumentException("Owner ID and User ID cannot be null or empty.");
             }
 
             try
@@ -83,12 +87,18 @@ namespace SocialMediaApplication.Controllers
             catch (ArgumentException ex)
             {
                 // Log the exception or handle it accordingly
-                throw new ApplicationException("Follow error." + ex.Message);
+                throw new ApplicationException("Follow error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions
+                throw new ApplicationException("An unexpected error occurred: " + ex.Message);
             }
 
+            return RedirectToAction("Index", new { id = ownerId });
         }
 
-        [HttpPost("unfollowing")]
+        [HttpPost("square-unfollowing")]
         public async Task<IActionResult> Unfollowing(string ownerId, string userId)
         {
             if (string.IsNullOrEmpty(ownerId) || string.IsNullOrEmpty(userId))
@@ -99,7 +109,7 @@ namespace SocialMediaApplication.Controllers
 
             try
             {
-                await _postService.DeleteFollowingAsync(ownerId, userId);
+                await _postService.DeleteFollowAsync(ownerId, userId);
             }
             catch (ArgumentException ex)
             {
@@ -108,6 +118,50 @@ namespace SocialMediaApplication.Controllers
             }
 
             return RedirectToAction("Index", new { id = ownerId });
+        }
+       
+        [HttpPost]
+        public async Task<IActionResult> LikePost(string postId)
+        {
+            string userId = HttpContext.Session.GetString("userId");
+            var user = await _firebaseService.GetUserProfileAsync(userId);
+            string userName = user.Name;
+            await _firebaseService.LikePost(postId, userId, userName);
+            string page = ViewBag.page;
+
+            return RedirectToAction("Index", "UserPage");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UnlikePost(string postId)
+        {
+            string userId = HttpContext.Session.GetString("userId");
+            await _firebaseService.UnlikePost(postId, userId);
+            string page = ViewBag.page;
+
+            return RedirectToAction("Index", "UserPage");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LikeComment(string postId, string commentId)
+        {
+            string userId = HttpContext.Session.GetString("userId");
+            var user = await _firebaseService.GetUserProfileAsync(userId);
+            string userName = user.Name;
+            await _firebaseService.LikeComment(postId, commentId, userId, userName);
+            string page = ViewBag.page;
+
+            return RedirectToAction("Index", "UserPage");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UnlikeComment(string postId, string commentId)
+        {
+            string userId = HttpContext.Session.GetString("userId");
+            await _firebaseService.UnlikeComment(postId, commentId, userId);
+            string page = ViewBag.page;
+
+            return RedirectToAction("Index", "UserPage");
         }
     }
 }

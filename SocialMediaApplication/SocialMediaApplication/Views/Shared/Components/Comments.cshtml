@@ -23,23 +23,22 @@
             </div>
         </form>
     </div>
-
-    <div>
-        @if (Model != null)
-        {
-            @foreach (var comment in Model)
-            {
-                @Html.Partial("Components/CommentCard", comment)
-            }
-        }else
-        {
-            <p>No comments available.</p>
-        }
-
-    </div>
-   
-   
 </div>
+<div class="card card-body">
+    @if (Model != null)
+    {
+        @foreach (var comment in Model)
+        {
+            @Html.Partial("Components/CommentCard", comment)
+        }
+    }else
+    {
+        <p>No comments available.</p>
+    }
+
+</div>
+   
+
 
 
 
