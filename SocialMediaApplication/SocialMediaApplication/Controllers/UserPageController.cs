@@ -25,6 +25,7 @@ namespace SocialMediaApplication.Controllers
         public async Task<IActionResult> Index(string Id)
         {
             string userId = HttpContext.Session.GetString("userId");
+            ViewBag.UserId = userId;
 
             if (string.IsNullOrEmpty(userId))
             {
@@ -40,14 +41,25 @@ namespace SocialMediaApplication.Controllers
                 ViewBag.Owner = await _postService.GetUserProfileAsync(Id);
                 ViewBag.IsOwner = false;
             }
-            
-          
-          
-           
+
+            var postsWithIds = await _postService.GetPostsAsync();
+            var posts = postsWithIds.Select(p => new Post
+            {
+                Id = p.Key,
+                AuthorId = p.Value.AuthorId,
+                AuthorName = p.Value.AuthorName,
+                AuthorAvatar = p.Value.AuthorAvatar,
+                Content = p.Value.Content,
+                CreatedTime = p.Value.CreatedTime,
+                Comments = p.Value.Comments,
+                Likes = p.Value.Likes
+            }).ToList();
+
+
             ViewBag.Users = await _postService.GetUsersAsync();
             ViewBag.User = await _postService.GetUserProfileAsync(userId);
-            var posts = await GetPostlistsAsync(userId);
-            return View(posts);
+            var postList = new PostList { MyFollowedPosts = posts };
+            return View(postList);
         }
 
         [HttpPost]

@@ -272,8 +272,8 @@ namespace SocialMediaApplication.Services
                 throw new ApplicationException("Error deleting the post.", ex);
             }
         }
-
-        public async Task<Dictionary<string,SocialMediaApplication.Models.Post>> GetPostsAsync()
+        //Shawnelle
+        /*public async Task<Dictionary<string,SocialMediaApplication.Models.Post>> GetPostsAsync()
         {
             FirebaseResponse response = await _firebaseClient.GetAsync("posts");
 
@@ -286,6 +286,43 @@ namespace SocialMediaApplication.Services
             }
 
             return null;
+        }*/
+        public async Task<Dictionary<string, Post>> GetPostsAsync()
+        {
+            var response = await _firebaseClient.GetAsync("posts");
+            var posts = response.ResultAs<Dictionary<string, Post>>();
+
+            if (posts != null)
+            {
+                foreach (var postId in posts.Keys.ToList())
+                {
+                    var post = posts[postId];
+
+                    var commentsResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments");
+                    var comments = commentsResponse.ResultAs<Dictionary<string, Comment>>();
+
+                    post.Comments = comments ?? new Dictionary<string, Comment>();
+
+
+                    //Fetch likes for posts
+                    var likesResponse = await _firebaseClient.GetAsync($"posts/{postId}/likes");
+                    var likes = likesResponse.ResultAs<Dictionary<string, Like>>();
+
+                    post.Likes = likes ?? new Dictionary<string, Like>();
+
+                    //Fetch likes for comments
+                    foreach (var commentId in post.Comments.Keys.ToList())
+                    {
+                        var comment = post.Comments[commentId];
+
+                        var clikesResponse = await _firebaseClient.GetAsync($"posts/{postId}/comments/{commentId}/likes");
+                        var clikes = clikesResponse.ResultAs<Dictionary<string, Like>>();
+
+                        comment.Likes = likes ?? new Dictionary<string, Like>();
+                    }
+                }
+            }
+            return posts;
         }
 
         public async Task<List<SocialMediaApplication.Models.Post>> GetAllPostsAsync()
