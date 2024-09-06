@@ -31,7 +31,7 @@ namespace SocialMediaApplication.Services
             try
             {
 
-                // Proceed with registration if email does not exist
+
                 var authLink = await _firebaseService.RegisterUser(email, password);
 
                 string imageUrl = null;
@@ -48,7 +48,7 @@ namespace SocialMediaApplication.Services
                     Email = email,
                     Name = email,
                     Bio = "This is your bio. You can update it later.",
-                    ProfilePictureUrl = imageUrl ?? "~/images/logo150.png" // Fallback to default avatar if no picture uploaded
+                    ProfilePictureUrl = imageUrl ?? "~/images/logo150.png"
                 };
 
                 await _firebaseService.SaveUserProfileAsync(authLink.User.LocalId, userProfile);
@@ -59,14 +59,13 @@ namespace SocialMediaApplication.Services
             }
             catch (FirebaseAuthException ex)
             {
-                // Handle Firebase-specific exceptions
+
                 ViewBag.ErrorMessage = ex.Message;
                 return View("Register");
             }
             catch (Exception ex)
             {
-                // Log the exception if needed
-                // Return a 200 status code with an error message
+
                 ViewBag.ErrorMessage = "This email already has an account. Please Login.";
                 return View("Register");
             }
@@ -84,12 +83,12 @@ namespace SocialMediaApplication.Services
             try
             {
                 var authLink = await _firebaseService.LoginUser(email, password);
-                // Store userId in session or cookies
+
                 HttpContext.Session.SetString("userId", authLink.User.LocalId);
-               var claims = new List<Claim>
+                var claims = new List<Claim>
                {
                     new Claim(ClaimTypes.Name, email)
-    
+
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -97,11 +96,10 @@ namespace SocialMediaApplication.Services
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return RedirectToAction("Index", "UserPage");
             }
-           
+
             catch (Exception ex)
             {
-                // Log the exception if needed
-                // Return a 200 status code with an error message
+
                 ViewBag.ErrorMessage = "Email does not exist or the password is incorrect";
                 return View("Login");
             }
@@ -119,11 +117,11 @@ namespace SocialMediaApplication.Services
                 return RedirectToAction("Login");
             }
 
-            // Retrieve the user profile from the database, not the Firebase.Auth.User object
+
             var profile = await _firebaseService.GetUserProfileAsync(userId);
             if (profile == null)
             {
-                // Handle the case where the profile is not found
+
                 return RedirectToAction("Error");
             }
 
@@ -139,14 +137,14 @@ namespace SocialMediaApplication.Services
                 return RedirectToAction("Login");
             }
 
-            // Retrieve the user profile to populate the form
+
             var profile = await _firebaseService.GetUserProfileAsync(userId);
             if (profile == null)
             {
                 return RedirectToAction("Error");
             }
 
-            return View(profile); // Return the view with the user profile data
+            return View(profile);
         }
 
         [HttpPost("Account/UpdateProfile")]
@@ -182,13 +180,13 @@ namespace SocialMediaApplication.Services
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            // Clear the session
+
             HttpContext.Session.Clear();
 
-            // Sign out the user from the authentication system
+
             await HttpContext.SignOutAsync();
 
-            // Redirect to the Home/Index page
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -205,17 +203,23 @@ namespace SocialMediaApplication.Services
             try
             {
 
-                await _firebaseService.SendPasswordResetEmailAsync(resetEmail);
+                var userExists = await _firebaseService.CheckIfUserExists(resetEmail);
+
+                if (!userExists)
+                {
+                    TempData["ResetErrorMessage"] = "This email does not exist. Please create an account.";
+                    return RedirectToAction("ResetPassword");
+                }
 
 
-                TempData["ResetMessage"] = "A password reset link has been sent to your email.";
+                TempData["ResetMessage"] = "A password reset link would be sent to your email (simulation).";
+
 
                 return RedirectToAction("Login", new { email = resetEmail });
             }
             catch (Exception ex)
             {
-                TempData["ResetErrorMessage"] = ex.Message;
-
+                TempData["ResetErrorMessage"] = "Failed to process your request. Please try again.";
                 return RedirectToAction("ResetPassword");
             }
         }

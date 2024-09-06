@@ -76,7 +76,7 @@ public class FirebaseService
         }
         catch (FirebaseStorageException ex)
         {
-            // Handle the exception (e.g., log the error, show a user-friendly message)
+
             throw new Exception("Failed to upload profile picture. Please try again.");
         }
     }
@@ -89,8 +89,8 @@ public class FirebaseService
 
     public async Task<FirebaseResponse> SaveUserProfileAsync(string userId, SocialMediaApplication.Models.User userProfile)
     {
-        // This saves the user profile in the specified path within the Firebase Realtime Database
-        
+
+
         return await _firebaseClient.SetAsync($"users/{userId}/profile", userProfile);
     }
 
@@ -104,6 +104,32 @@ public class FirebaseService
         catch (Exception ex)
         {
             throw new Exception("Failed to send password reset email. Please try again.");
+        }
+    }
+
+    public async Task<bool> CheckIfUserExists(string email)
+    {
+        try
+        {
+
+            await _authProvider.SignInWithEmailAndPasswordAsync(email, "dummyPassword");
+
+            return true;
+        }
+        catch (FirebaseAuthException ex)
+        {
+
+            if (ex.Message.Contains("EMAIL_NOT_FOUND"))
+            {
+                return false;
+            }
+
+            if (ex.Message.Contains("INVALID_PASSWORD"))
+            {
+                return true;
+            }
+
+            throw new Exception("An error occurred while checking the email.");
         }
     }
 
